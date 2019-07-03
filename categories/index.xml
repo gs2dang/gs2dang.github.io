@@ -1,14 +1,77 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories on Even - A super concise theme for Hugo</title>
+    <title>Categories on 기록 저장소</title>
     <link>https://gs2dang.github.io/categories/</link>
-    <description>Recent content in Categories on Even - A super concise theme for Hugo</description>
+    <description>Recent content in Categories on 기록 저장소</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     
 	<atom:link href="https://gs2dang.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Django</title>
+      <link>https://gs2dang.github.io/categories/django/</link>
+      <pubDate>Fri, 28 Jun 2019 14:37:47 +0900</pubDate>
+      
+      <guid>https://gs2dang.github.io/categories/django/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Pagination</title>
+      <link>https://gs2dang.github.io/categories/pagination/</link>
+      <pubDate>Fri, 28 Jun 2019 14:37:47 +0900</pubDate>
+      
+      <guid>https://gs2dang.github.io/categories/pagination/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Travis CI</title>
+      <link>https://gs2dang.github.io/categories/travis-ci/</link>
+      <pubDate>Thu, 13 Jun 2019 07:38:40 +0900</pubDate>
+      
+      <guid>https://gs2dang.github.io/categories/travis-ci/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>WYSIWYG</title>
+      <link>https://gs2dang.github.io/categories/wysiwyg/</link>
+      <pubDate>Fri, 17 May 2019 17:28:48 +0900</pubDate>
+      
+      <guid>https://gs2dang.github.io/categories/wysiwyg/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hugo</title>
+      <link>https://gs2dang.github.io/categories/hugo/</link>
+      <pubDate>Fri, 17 May 2019 17:28:48 +0900</pubDate>
+      
+      <guid>https://gs2dang.github.io/categories/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>설정</title>
+      <link>https://gs2dang.github.io/categories/%EC%84%A4%EC%A0%95/</link>
+      <pubDate>Thu, 13 Jun 2019 07:38:40 +0900</pubDate>
+      
+      <guid>https://gs2dang.github.io/categories/%EC%84%A4%EC%A0%95/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>페이지네이션</title>
+      <link>https://gs2dang.github.io/categories/%ED%8E%98%EC%9D%B4%EC%A7%80%EB%84%A4%EC%9D%B4%EC%85%98/</link>
+      <pubDate>Fri, 28 Jun 2019 14:37:47 +0900</pubDate>
+      
+      <guid>https://gs2dang.github.io/categories/%ED%8E%98%EC%9D%B4%EC%A7%80%EB%84%A4%EC%9D%B4%EC%85%98/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>설정 on 기록 저장소</title>
+    <link>https://gs2dang.github.io/categories/%EC%84%A4%EC%A0%95/</link>
+    <description>Recent content in 설정 on 기록 저장소</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 13 Jun 2019 07:38:40 +0900</lastBuildDate>
+    
+	<atom:link href="https://gs2dang.github.io/categories/%EC%84%A4%EC%A0%95/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Travis CI를 이용해 자동화 배포를 하자</title>
+      <link>https://gs2dang.github.io/post/travisci/</link>
+      <pubDate>Thu, 13 Jun 2019 07:38:40 +0900</pubDate>
+      
+      <guid>https://gs2dang.github.io/post/travisci/</guid>
+      <description>TravisCI로 Docker를 빌드/푸시 그리고 AWS ECS에 배포를 위한 코드만 간단하게 작성했습니다. 개념과 Git Push 이후의 흐름 그리고 상세한 내용들은 배우</description>
+    </item>
+    
+    <item>
+      <title>Djagno-CKEditor 적용하기</title>
+      <link>https://gs2dang.github.io/post/wysiwyg/</link>
+      <pubDate>Fri, 17 May 2019 17:28:48 +0900</pubDate>
+      
+      <guid>https://gs2dang.github.io/post/wysiwyg/</guid>
+      <description>에디터 적용하면서 바로 정리한 것이 아니며, 간단 기록용으로 작성했기에 잘못된 정보가 있을 수도 있습니다. 위즈윅 에디터를 다시 적용하게 된다면 내용 추가 및 수정하</description>
+    </item>
+    
+  </channel>
+</rss>

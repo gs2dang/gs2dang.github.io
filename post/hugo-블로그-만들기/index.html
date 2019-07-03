@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Hugo 블로그 만들기 - 기록 저장소</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gs2dang" /><meta name="description" content="1. 블로그 시작 정리한 내용을 마크다운에 작성 후 내 컴퓨터에 저장하거나 에버노트 또는 노션과 같은 서비스에 정리할 수 있다. 하지만 이렇게 하면 나만 본다고 대충 정리하" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.53 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://gs2dang.github.io/post/hugo-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EB%A7%8C%EB%93%A4%EA%B8%B0/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Hugo 블로그 만들기" />
+<meta property="og:description" content="1. 블로그 시작 정리한 내용을 마크다운에 작성 후 내 컴퓨터에 저장하거나 에버노트 또는 노션과 같은 서비스에 정리할 수 있다. 하지만 이렇게 하면 나만 본다고 대충 정리하" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gs2dang.github.io/post/hugo-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EB%A7%8C%EB%93%A4%EA%B8%B0/" /><meta property="article:published_time" content="2019-05-17T17:28:48&#43;09:00"/>
+<meta property="article:modified_time" content="2019-05-17T17:28:48&#43;09:00"/>
+
+<meta itemprop="name" content="Hugo 블로그 만들기">
+<meta itemprop="description" content="1. 블로그 시작 정리한 내용을 마크다운에 작성 후 내 컴퓨터에 저장하거나 에버노트 또는 노션과 같은 서비스에 정리할 수 있다. 하지만 이렇게 하면 나만 본다고 대충 정리하">
+
+
+<meta itemprop="datePublished" content="2019-05-17T17:28:48&#43;09:00" />
+<meta itemprop="dateModified" content="2019-05-17T17:28:48&#43;09:00" />
+<meta itemprop="wordCount" content="1877">
+
+
+
+<meta itemprop="keywords" content="hugo,blog," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Hugo 블로그 만들기"/>
+<meta name="twitter:description" content="1. 블로그 시작 정리한 내용을 마크다운에 작성 후 내 컴퓨터에 저장하거나 에버노트 또는 노션과 같은 서비스에 정리할 수 있다. 하지만 이렇게 하면 나만 본다고 대충 정리하"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Even</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Even</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Hugo 블로그 만들기</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-05-17 </span>
+        <div class="post-category">
+            <a href="/categories/hugo/"> hugo </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#1-블로그-시작">1. 블로그 시작</a>
+<ul>
+<li><a href="#1-1-hugo를-선택한-이유">1.1 Hugo를 선택한 이유</a></li>
+</ul></li>
+<li><a href="#2-시작하기">2. 시작하기</a>
+<ul>
+<li><a href="#2-1-설치">2.1 설치</a></li>
+<li><a href="#2-2-새-블로그-만들기">2.2 새 블로그 만들기</a></li>
+<li><a href="#2-3-테마-추가">2.3 테마 추가</a></li>
+<li><a href="#2-4-config-toml설정">2.4 config.toml설정</a></li>
+<li><a href="#2-5-로컬-서버-접속">2.5 로컬 서버 접속</a></li>
+</ul></li>
+<li><a href="#3-github-연결">3. GitHub 연결</a>
+<ul>
+<li><a href="#3-1-github-저장소-만들기">3.1 Github 저장소 만들기</a></li>
+<li><a href="#3-2-remote와-submodule-설정">3.2 Remote와 Submodule 설정</a></li>
+<li><a href="#3-3-baseurl-바꾸기">3.3 baseURL 바꾸기</a></li>
+<li><a href="#3-4-add-commit-push">3.4 Add/Commit/Push</a></li>
+<li><a href="#3-5-접속">3.5 접속</a></li>
+</ul></li>
+<li><a href="#4-후기">4. 후기</a></li>
+<li><a href="#5-참고">5. 참고</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h2 id="1-블로그-시작">1. 블로그 시작</h2>
+
+<hr />
+
+<p>정리한 내용을 마크다운에 작성 후 내 컴퓨터에 저장하거나 에버노트 또는 노션과 같은 서비스에 정리할 수 있다. 하지만 이렇게 하면 나만 본다고 대충 정리하게 되고 나중에는 &ldquo;음&hellip; 왜 이렇게 적혀있지?&ldquo;처럼 내가 정리한 것도 잘 몰라보는 경우가 있다. 그래서 보기 쉬운 글을 적기 위해 블로그를 시작하기로 했다.</p>
+
+<h3 id="1-1-hugo를-선택한-이유">1.1 Hugo를 선택한 이유</h3>
+
+<p>큰 이유는 없다. 이전에 잠깐 사용한 Jekyll 블로그는 Ruby 의존성 패키지, 버전 관리 등 설치해야 할 것이 너무 많다. 그게 너무 귀찮아서 Hugo를 선택하게 됐다.</p>
+
+<p><br></p>
+
+<h2 id="2-시작하기">2. 시작하기</h2>
+
+<hr />
+
+<h3 id="2-1-설치">2.1 설치</h3>
+
+<blockquote>
+<p>There is lots of talk about “Hugo being written in Go”, but you don’t need to install Go to enjoy Hugo. Just grab a precompiled binary!</p>
+</blockquote>
+
+<p><a href="https://gohugo.io/getting-started/installing/">Install Hugo</a> 맨 위에 있는 글이다. Go를 설치할 필요가 없다고 한다. Jekyll 보다 간단한 것을 확인할 수 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma"># https://gohugo.io/getting-started/installing/#debian-and-ubuntu
+
+❯ sudo apt-get install hugo
+
+❯ hugo version  
+Hugo Static Site Generator v0.40.1 linux/amd64 BuildDate: 2018-04-25T17:16:11Z</pre></td></tr></table>
+</div>
+</div>
+<p>2019-5-15 기준으로 ubuntu 18.04 환경에 Hugo를 설치하면 0.40.1 버전이 설치된다. 테마가 요구하는 버전이 0.40.1보다 높다면 <a href="https://github.com/gohugoio/hugo/releases">Hugo release page</a>를 참조하여 아래 방법을 사용하면 된다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma"># https://hostadvice.com/how-to/how-to-install-hugo-on-ubuntu-18-04/
+
+❯ wget https://github.com/gohugoio/hugo/releases/download/v0.53/hugo_0.53_Linux-64bit.deb
+
+❯ sudo dpkg -i hugo_0.53_Linux-64bit.deb
+
+❯ hugo version
+Hugo Static Site Generator v0.53-8FC339DC2529FF77E494A1C12CD1FF9FBCB880A4 linux/amd64 BuildDate: 2018-12-24T08:26:10Z</pre></td></tr></table>
+</div>
+</div>
+<h3 id="2-2-새-블로그-만들기">2.2 새 블로그 만들기</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">~/
+❯ mkdir BLOG
+❯ cd BLOG
+
+~/BLOG
+❯ hugo new site &lt;site_name&gt;       
+Congratulations! Your new Hugo site is created in /home/feynman/BLOG/hugo-blog.
+
+Just a few more steps and you&#39;re ready to go:
+
+1. Download a theme into the same-named folder.
+   Choose a theme from https://themes.gohugo.io/, or
+   create your own with the &#34;hugo new theme &lt;THEMENAME&gt;&#34; command.
+2. Perhaps you want to add some content. You can add single files
+   with &#34;hugo new &lt;SECTIONNAME&gt;/&lt;FILENAME&gt;.&lt;FORMAT&gt;&#34;.
+3. Start the built-in live server via &#34;hugo server&#34;.
+
+Visit https://gohugo.io/ for quickstart guide and full documentation.
+
+❯ cd &lt;site_name&gt;
+
+~/BLOG/hugo-blog
+.
+├── archetypes
+│   └── default.md
+├── config.toml
+├── content
+├── data
+├── layouts
+├── static
+└── themes</pre></td></tr></table>
+</div>
+</div>
+<h3 id="2-3-테마-추가">2.3 테마 추가</h3>
+
+<p><a href="https://themes.gohugo.io/">Hugo Themes</a>에 가면 다양한 테마를 볼 수 있다. 그리고 어떻게 테마를 적용하는지도 정리되어 있다. 여기서는 <a href="https://themes.gohugo.io/hugo-theme-even/">Even</a> 테마를 따라해 본다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">❯ git init
+❯ git submodule add https://github.com/olOwOlo/hugo-theme-even themes/even
+
+~/BLOG/hugo-blog
+.
+├── archetypes
+│   └── default.md
+├── config.toml
+├── content
+├── data
+├── layouts
+├── static
+└── themes
+    └── even
+        ├── archetypes
+        │   └── default.md
+        ├── CHANGELOG.md
+        ...생략</pre></td></tr></table>
+</div>
+</div>
+<h3 id="2-4-config-toml설정">2.4 config.toml설정</h3>
+
+<p><code>exampleSite</code> 폴더에서 <code>config.toml</code> 파일을 복사한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">❯ cp themes/even/exampleSite/config.toml config.toml</pre></td></tr></table>
+</div>
+</div>
+<h3 id="2-5-로컬-서버-접속">2.5 로컬 서버 접속</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">❯ hugo server -D              
+
+                   | EN  
++------------------+----+
+  Pages            |  8  
+  Paginator pages  |  0  
+  Non-page files   |  0  
+  Static files     | 40  
+  Processed images |  0  
+  Aliases          |  1  
+  Sitemaps         |  1  
+  Cleaned          |  0  
+
+Total in 9 ms
+Watching for changes in /home/feynman/BLOG/hugo-blog/{content,data,layouts,static,themes}
+Watching for config changes in /home/feynman/BLOG/hugo-blog/config.toml
+Environment: &#34;development&#34;
+Serving pages from memory
+Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
+Web Server is available at http://localhost:1313/ (bind address 127.0.0.1)
+Press Ctrl+C to stop</pre></td></tr></table>
+</div>
+</div>
+<p><br></p>
+
+<h2 id="3-github-연결">3. GitHub 연결</h2>
+
+<hr />
+
+<h3 id="3-1-github-저장소-만들기">3.1 Github 저장소 만들기</h3>
+
+<ul>
+<li><code>&lt;YOUR-PROJECT&gt;</code> 저장소
+
+<ul>
+<li>Hugo 콘텐츠와 소스 파일들을 포함한 저장소</li>
+</ul></li>
+<li><code>&lt;USERNAME&gt;.github.io</code> 저장소</li>
+<li>Hugo 웹 사이트의 렌더링된 버전을 포함한 저장소</li>
+</ul>
+
+<h3 id="3-2-remote와-submodule-설정">3.2 Remote와 Submodule 설정</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">~/BLOG/hugo-blog
+❯ git remote add origin https://github.com/&lt;USERNAME&gt;/&lt;USER-PROJECT&gt;.git
+❯ git submodule add -b master https://github.com/&lt;USERNAME&gt;/&lt;USERNAME&gt;.github.io.git public
+
+.
+├── archetypes
+│   └── default.md
+├── config.toml
+├── content
+├── data
+├── layouts
+├── public # 새로 생겼다.
+├── resources
+│   └── _gen
+│       ├── assets
+│       └── images
+├── static
+└── themes
+    └── even
+    ├─
+    ...</pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">Cloning into &#39;/home/feynman/BLOG/hugo-blog/public&#39;...
+warning: You appear to have cloned an empty repository.
+fatal: &#39;origin/master&#39; is not a commit and a branch &#39;master&#39; cannot be created from it
+Unable to checkout submodule &#39;public&#39;</pre></td></tr></table>
+</div>
+</div>
+<p>위 두 번째 명령어를 실행하면 위 경고문이 나타나는데 그냥 넘어가고 아래 명령어를 실행하자.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">❯ hugo
+
+                   | EN  
++------------------+----+
+  Pages            |  8  
+  Paginator pages  |  0  
+  Non-page files   |  0  
+  Static files     | 40  
+  Processed images |  0  
+  Aliases          |  1  
+  Sitemaps         |  1  
+  Cleaned          |  0  
+
+Total in 11 ms</pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">~/BLOG/hugo-blog
+❯ git remote -v
+origin	https://github.com/&lt;USERNAME&gt;/&lt;YOUR-PROJECT&gt;.git (fetch)
+origin	https://github.com/&lt;USERNAME&gt;/&lt;YOUR-PROJECT&gt;.git (push)
+
+~/BLOG/hugo-blog/public
+❯ git remote -v
+origin	https://github.com/&lt;USERNAME&gt;/&lt;USERNAME&gt;.github.io.git (fetch)
+origin	https://github.com/&lt;USERNAME&gt;/&lt;USERNAME&gt;.github.io.git (push)</pre></td></tr></table>
+</div>
+</div>
+<h3 id="3-3-baseurl-바꾸기">3.3 baseURL 바꾸기</h3>
+
+<p><code>config.toml</code>파일을 열어서 baseURL을 바꾼다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">baseURL = &#34;https://&lt;USERNAME&gt;.github.io/&#34;</pre></td></tr></table>
+</div>
+</div>
+<h3 id="3-4-add-commit-push">3.4 Add/Commit/Push</h3>
+
+<p><code>blog</code> 폴더와 <code>public</code> 폴더 각각 add/commit/push를 해줘야 한다. 먼저 <code>blog</code> 폴더에 <code>.gitignore</code> 파일을 만들어서 <code>public</code> 폴더가 <code>&lt;YOUR-PROJECT&gt;</code> 저장소로 푸시되지 않도록 한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">~/BLOG/hugo-blog
+❯ vim .gitignore
+public/</pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">~/BLOG/hugo-blog
+❯ hugo -t &lt;theme-name&gt;
+                   | EN  
++------------------+----+
+  Pages            |  8  
+  Paginator pages  |  0  
+  Non-page files   |  0  
+  Static files     | 40  
+  Processed images |  0  
+  Aliases          |  1  
+  Sitemaps         |  1  
+  Cleaned          |  0  
+
+Total in 6 ms
+
+❯ cd public
+
+~/BLOG/hugo-blog/public
+❯ git add .
+❯ git commit -m &#34;커밋 메시지&#34;
+❯ git push origin master
+
+❯ cd ..
+
+~/BLOG/hugo-blog
+❯ git add .
+❯ git commit -m &#34;커밋 메시지&#34;
+❯ git push origin master</pre></td></tr></table>
+</div>
+</div>
+<p>포스트 작성 후 Github에 배포를 하려면 위 과정을 해줘야 한다. 매번 이 과정을 반복하는 게 귀찮으니 업로드를 자동화하자. 먼저 Root 디렉터리인 <code>blog</code>에서 <code>deploy.sh</code> 스크립트를 만들다. 그리고 <code>hugo -t &lt;theme_name&gt;</code> 부분을 수정하고 모든 내용을 파일에 붙여넣는다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">~/BLOG/hugo-blog
+❯ vim deploy.sh</pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma"><span class="cp">#!/bin/bash
+</span><span class="cp"></span>
+<span class="nb">echo</span> -e <span class="s2">&#34;\033[0;32mDeploying updates to GitHub...\033[0m&#34;</span>
+
+<span class="c1"># Build the project.</span>
+hugo -t &lt;theme_name&gt;
+
+<span class="c1"># Go To Public folder</span>
+<span class="nb">cd</span> public
+
+<span class="c1"># Add changes to git.</span>
+git add .
+
+<span class="c1"># Commit changes.</span>
+<span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;rebuilding site `date`&#34;</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$#</span> -eq <span class="m">1</span> <span class="o">]</span>
+  <span class="k">then</span> <span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span>
+<span class="k">fi</span>
+git commit -m <span class="s2">&#34;</span><span class="nv">$msg</span><span class="s2">&#34;</span>
+
+<span class="c1"># Push source and build repos.</span>
+git push origin master
+
+<span class="c1"># Come Back up to the Project Root</span>
+<span class="nb">cd</span> ..
+
+<span class="c1"># blog 저장소 Commit &amp; Push</span>
+git add .
+
+<span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;rebuilding site `date`&#34;</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$#</span> -eq <span class="m">1</span> <span class="o">]</span>
+  <span class="k">then</span> <span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span>
+<span class="k">fi</span>
+git commit -m <span class="s2">&#34;</span><span class="nv">$msg</span><span class="s2">&#34;</span>
+
+git push origin master</pre></td></tr></table>
+</div>
+</div>
+<p>위 내용을 입력 후 저장하면 다음에는 아래 명령어를 입력하자.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">❯ chmod +x deploy.sh</pre></td></tr></table>
+</div>
+</div>
+<p>이제  <code>./deploy.sh</code>  명령어를 입력하면 아까처럼 번거로운 작업 없이 배포를 할 수 있다.</p>
+
+<h3 id="3-5-접속">3.5 접속</h3>
+
+<p>웹 브라우저에 <code>&lt;USERNAME&gt;.github.io</code> 을 입력하면 잘 나오는 것을 확인할 수 있다.</p>
+
+<p><br></p>
+
+<h2 id="4-후기">4. 후기</h2>
+
+<hr />
+
+<ul>
+<li>배포하는데 왜이리 오래걸리고 힘들었을까?</li>
+<li>Jekyll이 훨씬 더 쉬운 것 같다.</li>
+</ul>
+
+<p><br></p>
+
+<h2 id="5-참고">5. 참고</h2>
+
+<hr />
+
+<ul>
+<li><a href="https://inside.getambassador.com/creating-and-deploying-your-first-hugo-site-to-github-pages-1e1f496cf88d">Creating and deploying your first Hugo site to Github pages</a></li>
+<li><a href="https://github.com/Integerous/Integerous.github.io">Hugo로 Github.io 블로그 만들기</a></li>
+<li><a href="https://byungkyu-ju.github.io/blog/20171227_github-hugo-blog-운영하기/">GITHUB-HUGO BLOG 운영하기</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gs2dang</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-05-17
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/hugo/">hugo</a>
+          <a href="/tags/blog/">blog</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/wysiwyg/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Djagno-CKEditor 적용하기</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+  <a href="https://gs2dang.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">gs2dang</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Djagno-CKEditor 적용하기 - 기록 저장소</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gs2dang" /><meta name="description" content="에디터 적용하면서 바로 정리한 것이 아니며, 간단 기록용으로 작성했기에 잘못된 정보가 있을 수도 있습니다. 위즈윅 에디터를 다시 적용하게 된다면 내용 추가 및 수정하" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.53 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://gs2dang.github.io/post/wysiwyg/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Djagno-CKEditor 적용하기" />
+<meta property="og:description" content="에디터 적용하면서 바로 정리한 것이 아니며, 간단 기록용으로 작성했기에 잘못된 정보가 있을 수도 있습니다. 위즈윅 에디터를 다시 적용하게 된다면 내용 추가 및 수정하" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gs2dang.github.io/post/wysiwyg/" /><meta property="article:published_time" content="2019-05-17T17:28:48&#43;09:00"/>
+<meta property="article:modified_time" content="2019-05-17T17:28:48&#43;09:00"/>
+
+<meta itemprop="name" content="Djagno-CKEditor 적용하기">
+<meta itemprop="description" content="에디터 적용하면서 바로 정리한 것이 아니며, 간단 기록용으로 작성했기에 잘못된 정보가 있을 수도 있습니다. 위즈윅 에디터를 다시 적용하게 된다면 내용 추가 및 수정하">
+
+
+<meta itemprop="datePublished" content="2019-05-17T17:28:48&#43;09:00" />
+<meta itemprop="dateModified" content="2019-05-17T17:28:48&#43;09:00" />
+<meta itemprop="wordCount" content="1807">
+
+
+
+<meta itemprop="keywords" content="WYSIWYG,설정," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Djagno-CKEditor 적용하기"/>
+<meta name="twitter:description" content="에디터 적용하면서 바로 정리한 것이 아니며, 간단 기록용으로 작성했기에 잘못된 정보가 있을 수도 있습니다. 위즈윅 에디터를 다시 적용하게 된다면 내용 추가 및 수정하"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Even</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Even</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Djagno-CKEditor 적용하기</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-05-17 </span>
+        <div class="post-category">
+            <a href="/categories/wysiwyg/"> WYSIWYG </a>
+            <a href="/categories/%EC%84%A4%EC%A0%95/"> 설정 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#위즈윅-에디터란">위즈윅 에디터란?</a></li>
+<li><a href="#시작">시작</a>
+<ul>
+<li><a href="#설치">설치</a></li>
+<li><a href="#설정">설정</a></li>
+<li><a href="#기존-코드">기존 코드</a></li>
+<li><a href="#수정-코드">수정 코드</a></li>
+<li><a href="#문제-발생-및-해결법">문제 발생 및 해결법</a></li>
+</ul></li>
+<li><a href="#파일-업로드">파일 업로드</a>
+<ul>
+<li><a href="#코드-추가">코드 추가</a></li>
+<li><a href="#admin-유저만-되는-문제-및-해결">Admin 유저만 되는 문제 및 해결</a></li>
+<li><a href="#staticfiles-불러오지-못할-때">StaticFiles 불러오지 못할 때</a></li>
+</ul></li>
+<li><a href="#참고">참고</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<blockquote>
+<p>에디터 적용하면서 바로 정리한 것이 아니며, 간단 기록용으로 작성했기에 잘못된 정보가 있을 수도 있습니다.</p>
+
+<p>위즈윅 에디터를 다시 적용하게 된다면 내용 추가 및 수정하도록 하겠습니다.</p>
+</blockquote>
+
+<h2 id="위즈윅-에디터란">위즈윅 에디터란?</h2>
+
+<hr />
+
+<p>위지윅(WYSIWYG)은 <strong>W</strong>hat <strong>Y</strong>ou <strong>S</strong>ee <strong>I</strong>s <strong>W</strong>hat <strong>Y</strong>ou <strong>G</strong>et 준말이다. 사용자가 문서를 작성할 때 입력한 문자, 표, 이미지 등의 출력물들이 화면에 그대로 나오게 해주는 것을 말한다.</p>
+
+<blockquote>
+<p>출처: <a href="https://ko.wikipedia.org/wiki/위지위그">위키피디아</a></p>
+</blockquote>
+
+<p><br></p>
+
+<h2 id="시작">시작</h2>
+
+<hr />
+
+<p>구글에 &ldquo;장고 위지윅 에디터&rdquo;를 입력하면 여러 개의 에디터가 나온다. 그중에서 <code>Django-CKEditor</code>를 사용해 에디터를 구현한다.</p>
+
+<h3 id="설치">설치</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">pip install django-ckeditor</pre></td></tr></table>
+</div>
+</div>
+<h3 id="설정">설정</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># settings.py</span>
+<span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="o">...</span>
+    <span class="c1"># 추가</span>
+    <span class="s1">&#39;ckeditor&#39;</span><span class="p">,</span>
+<span class="p">]</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">./manage.py collectstatic</pre></td></tr></table>
+</div>
+</div>
+<h3 id="기존-코드">기존 코드</h3>
+
+<p><img src="/images/WYSIWYG/CKEditor_before.png" alt="CKEditor_before" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># model.py</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="s1">&#39;글 내용&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># forms.py</span>
+<span class="k">class</span> <span class="nc">PostForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Post</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">]</span>
+        <span class="n">widgets</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">forms</span><span class="o">.</span><span class="n">TextInput</span><span class="p">(</span><span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;form-control&#39;</span><span class="p">}),</span>
+            <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="n">forms</span><span class="o">.</span><span class="n">Textarea</span><span class="p">(</span><span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;form-control&#39;</span><span class="p">}),</span>
+        <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># post.html</span>
+<span class="o">&lt;</span><span class="n">form</span> <span class="n">action</span><span class="o">=</span><span class="s2">&#34;&#34;</span> <span class="n">method</span><span class="o">=</span><span class="s2">&#34;POST&#34;</span><span class="o">&gt;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">csrf_token</span> <span class="o">%</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="n">h4</span><span class="o">&gt;</span><span class="err">제목</span><span class="o">&lt;/</span><span class="n">h4</span><span class="o">&gt;</span>
+    <span class="p">{{</span> <span class="n">form</span><span class="o">.</span><span class="n">title</span> <span class="p">}}</span>
+    <span class="o">&lt;</span><span class="n">br</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">h4</span><span class="o">&gt;</span><span class="err">내용</span><span class="o">&lt;/</span><span class="n">h4</span><span class="o">&gt;</span>
+    <span class="p">{{</span> <span class="n">form</span><span class="o">.</span><span class="n">content</span> <span class="p">}}</span>
+    <span class="o">&lt;</span><span class="nb">input</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&#34;submit&#34;</span> <span class="n">class</span><span class="o">=</span><span class="s2">&#34;btn btn-secondary&#34;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&#34;작성&#34;</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">form</span><span class="o">&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="수정-코드">수정 코드</h3>
+
+<p><img src="/images/WYSIWYG/CKEditor_after.png" alt="CKEditor_after" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># models.py</span>
+<span class="kn">from</span> <span class="nn">ckeditor.fields</span> <span class="kn">import</span> <span class="n">RichTextField</span>
+
+<span class="k">class</span> <span class="nc">Post</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="c1"># 기존 코드 models.TextField</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">RichTextField</span><span class="p">(</span><span class="s1">&#39;내용&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># forms.py</span>
+<span class="kn">from</span> <span class="nn">ckeditor.fields</span> <span class="kn">import</span> <span class="n">CKEditorWidget</span>
+
+<span class="k">class</span> <span class="nc">PostForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Post</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">]</span>
+        <span class="n">widgets</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">forms</span><span class="o">.</span><span class="n">TextInput</span><span class="p">(</span><span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;form-control&#39;</span><span class="p">}),</span>
+            <span class="c1"># 기존 코드 forms.Textarea(attrs={&#39;class&#39;: &#39;form-control&#39;})</span>
+            <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">widget</span><span class="o">=</span><span class="n">CKEditorWidget</span><span class="p">()),</span>
+        <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="문제-발생-및-해결법">문제 발생 및 해결법</h3>
+
+<p><img src="/images/WYSIWYG/CKEditor_problem.png" alt="CKEditor_problem" /></p>
+
+<p><img src="/images/WYSIWYG/CKEditor_problem2.png" alt="CKEditor_problem2" /></p>
+
+<p>글쓰기에서는 표, 글씨 굵기, 기울기 등 모든 게 잘 적용됐다. 하지만 해당 글에 들어가면 바로 위 사진처럼 에디터가 적용되지 않은 채 출력되는 문제가 발생했다. 다행히 스택 오버플로에서 <a href="https://stackoverflow.com/questions/17880663/ckeditor-shows-me-html-code">otaviosoares</a> 답변으로 쉽게 해결할 수 있었다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="c">&lt;!-- 수정 전 --&gt;</span>
+{{ post.content|linebreaks }}
+
+<span class="c">&lt;!-- 수정 후--&gt;</span>
+{{ post.content|safe }}</code></pre></td></tr></table>
+</div>
+</div>
+<p>여기까지 하면 문자 꾸미기나 표 입력을 할 수 있는 위지윅 에디터를 사용할 수 있고, 해당 글에서도 잘 나오는 것을 확인할 수 있다. 이제는 이미지 업로드도 할 수 있도록 해보자.</p>
+
+<p><br></p>
+
+<h2 id="파일-업로드">파일 업로드</h2>
+
+<hr />
+
+<p><code>MEDIA_URL</code>이나 <code>MEDIA_ROOT</code> 는 설정되어 있다고 보고 CKEditor 위주로 설명한다. 그리고 AWS S3 설정도 같이 한다.</p>
+
+<h3 id="코드-추가">코드 추가</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># settings.py</span>
+<span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="o">...</span>
+    <span class="s1">&#39;ckeditor&#39;</span><span class="p">,</span>
+    <span class="c1"># 추가</span>
+    <span class="s1">&#39;ckeditor_uploader&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="c1"># MEDIA_URL = &#39;/media/&#39; 설정되어 있다면 업로드 시 아래 경로를 따르게 된다.</span>
+<span class="c1"># /media/uploads/image.jpg</span>
+<span class="n">CKEDITOR_UPLOAD_PATH</span> <span class="o">=</span> <span class="s2">&#34;uploads/&#34;</span>
+
+<span class="c1"># S3를 사용하기 위해 추가</span>
+<span class="n">AWS_QUERYSTRING_AUTH</span> <span class="o">=</span> <span class="bp">False</span>
+
+<span class="c1"># 이미지만 업로드 가능</span>
+<span class="n">CKEDITOR_ALLOW_NONIMAGE_FILES</span> <span class="o">=</span> <span class="bp">False</span>
+
+<span class="c1"># 업로드한 이미지는 본인만 접근 가능</span>
+<span class="c1"># False를 주면 누구든지 내가 올린 이미지 접근 가능</span>
+<span class="n">CKEDITOR_RESTRICT_BY_USER</span> <span class="o">=</span> <span class="bp">True</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># urls.py</span>
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="o">...</span>
+    <span class="c1"># 추가</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;ckeditor/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s1">&#39;ckeditor_uploader.urls&#39;</span><span class="p">)),</span>
+<span class="p">]</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># models.py</span>
+<span class="kn">from</span> <span class="nn">ckeditor_uploader.fields</span> <span class="kn">import</span> <span class="n">RichTextUploadingField</span>
+
+<span class="k">class</span> <span class="nc">Post</span><span class="p">(</span><span class="n">modesl</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="c1">#이전 코드  RichTextField(&#39;내용&#39;)</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">RichTextUploadingField</span><span class="p">(</span><span class="s1">&#39;내용&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># forms.py</span>
+<span class="kn">from</span> <span class="nn">ckeditor_uploader.fields</span> <span class="kn">import</span> <span class="n">RichTextUploadingField</span>
+
+<span class="k">class</span> <span class="nc">PostForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Post</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">]</span>
+        <span class="n">widgets</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">forms</span><span class="o">.</span><span class="n">TextInput</span><span class="p">(</span><span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;form-control&#39;</span><span class="p">}),</span>
+            <span class="c1"># 이전 코드  forms.CharField(widget=CKEditorWidget()),</span>
+            <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">widget</span><span class="o">=</span><span class="n">RichTextUploadingField</span><span class="p">()),</span>
+        <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><code>RichTextField</code> 에서 <code>RichTextUploadingField</code> 수정했다. 이렇게 하면 인터넷 이미지 URL 또는 내 컴퓨터에 있는 이미지를 업로드하여 보여줄 수 있다. 하지만 서버로 전송하고 폴더에 이미지가 저장되는 것을 확인했는데, 왜 화면에 표시되지 않을까?</p>
+
+<p><img src="/images/WYSIWYG/CKEditor_image1.png" alt="CKEditor_image1" /></p>
+
+<p><img src="/images/WYSIWYG/CKEditor_image2.png" alt="CKEditor_image2" /></p>
+
+<p><img src="/images/WYSIWYG/CKEditor_image3.png" alt="CKEditor_image1" /></p>
+
+<p><img src="/images/WYSIWYG/CKEditor_image7.png" alt="CKEditor_image7" /></p>
+
+<p>그건 <code>. static</code> 파일과 다르게 개발서버(DEBUG=True)에서는 기본 서빙을 지원하지 않는다. 그래서 개발 편의를 위해 아래의 코드를 추가를 해주면 이제는 이미지가 제대로 나오는 것을 확인할 수 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># urls.py</span>
+<span class="o">...</span>
+<span class="n">urlpatterns</span> <span class="o">+=</span> <span class="n">static</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">MEDIA_URL</span><span class="p">,</span> <span class="n">document_root</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">MEDIA_ROOT</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><img src="/images/WYSIWYG/CKEditor_image4.png" alt="CKEditor_image4" /></p>
+
+<p><img src="/images/WYSIWYG/CKEditor_image5.png" alt="CKEditor_image5" /></p>
+
+<h3 id="admin-유저만-되는-문제-및-해결">Admin 유저만 되는 문제 및 해결</h3>
+
+<p>관리자 계정으로는 이미지를 업로드가 잘 되고 화면에도 잘 표시가 됐다. 하지만 관리자가 아닌 유저는 이미지 업로드를 하려는데 <code>잘못된 서버 응답</code> 에러가 발생하면서 안 됐다. <code>django ckeditor incorrect server response</code> 검색하고 찾는 중에  스택 오버플로 <a href="https://stackoverflow.com/questions/48809709/using-ckeditor-with-django-machina-forums">Mike Robinson</a> 답변을 찾았다. 이 답변자 말에 따르면 기본 <code>urlpatterns</code>는 스태프 전용이기에 에러가 뜬 거라고 답했다. 그리고 아래 코드의 해결책을 제시했다. 이로써 일반 유저도 이미지를 업로드할 수 있게 되었다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># urls.py</span>
+<span class="kn">from</span> <span class="nn">ckeditor_uploader</span> <span class="kn">import</span> <span class="n">views</span> <span class="k">as</span> <span class="n">uploader_views</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="o">...</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;ckeditor/upload/&#39;</span><span class="p">,</span> <span class="n">uploader_views</span><span class="o">.</span><span class="n">upload</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;ckeditor_upload&#39;</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;ckeditor/browse/&#39;</span><span class="p">,</span> <span class="n">never_cache</span><span class="p">(</span><span class="n">uploader_views</span><span class="o">.</span><span class="n">browse</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;ckeditor_browse&#39;</span><span class="p">),</span>
+<span class="p">]</span></code></pre></td></tr></table>
+</div>
+</div>
+<blockquote>
+<p>Note that by adding those URLs you add views that can upload and browse through uploaded images. Since django-ckeditor 4.4.6, those views are decorated using <code>@staff_member_required</code>. If you want a different permission decorator (<code>login_required</code>, <code>user_passes_test</code> etc.) then add views defined in <code>ckeditor.urls</code> manually to your urls.py.</p>
+
+<p>공식 Django-CKEditor 홈페이지 설명 중에서</p>
+</blockquote>
+
+<p><br></p>
+
+<h3 id="staticfiles-불러오지-못할-때">StaticFiles 불러오지 못할 때</h3>
+
+<hr />
+
+<p>로컬 환경에서는 잘 됐다 CSS 적용도 잘 되고 위지윅 에디터도 잘 됐다. 하지만 도커에서는 모든 게 안 됐다. 혹시나 해서 도커를 배포했지만 증상은 똑같았다. 개발자 도구에서는 <code>ERR_ABORTED 403(Forbidden)</code> 에러가 표시됐다. 문제를 해결하기 위해서 구글에 검색했다. 그리고 <a href="https://www.vtuallinoneresources.com/latest-blog/4/install-ckeditor-in-django-v21-with-youtube-and-code-spinet-plugin">Install CKEditor in django v2.1 with youtube and code spinet plugin</a> 글을 찾았다. 이 글 6번에 S3 설정하는 방법이 나오는데 아래와 같은 코드가 있었다. 입력하고 도커 빌드 후  확인했다. 잘 된다. 그리고 배포 환경에서도 잘 된다.</p>
+
+<blockquote>
+<p>기존에 설정한 STATIC_URL = &lsquo;/static/&rsquo; 와 무엇이 다른지 그리고 왜 이렇게 설정했는지 알아보자.</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">AWS_S3_CUSTOM_DOMAIN</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">.s3.amazonaws.com&#39;</span> <span class="o">%</span> <span class="n">AWS_STORAGE_BUCKET_NAME</span>
+<span class="n">AWS_LOCATION</span> <span class="o">=</span> <span class="s1">&#39;static&#39;</span>
+<span class="n">STATIC_URL</span> <span class="o">=</span> <span class="s1">&#39;https://</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1">/&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">AWS_S3_CUSTOM_DOMAIN</span><span class="p">,</span> <span class="n">AWS_LOCATION</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><img src="/images/WYSIWYG/CKEditor-S3-1.png" alt="CKEditor-S3-1" /></p>
+
+<p><img src="/images/WYSIWYG/CKEditor-S3-2.png" alt="CKEditor-S3-2" /></p>
+
+<p><br></p>
+
+<h2 id="참고">참고</h2>
+
+<hr />
+
+<ul>
+<li><a href="https://bookpark.github.io/2018-02-01/django-ckeditor">Django에서 WYSIWYG 에디터 사용하기</a></li>
+<li><a href="https://www.vtuallinoneresources.com/latest-blog/4/install-ckeditor-in-django-v21-with-youtube-and-code-spinet-plugin">Install CKEditor in django v2.1 with youtube and code spinet plugin</a></li>
+<li>[Integrating CKeditor in Django](</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gs2dang</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-05-17
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/wysiwyg/">WYSIWYG</a>
+          <a href="/tags/%EC%84%A4%EC%A0%95/">설정</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/travisci/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Travis CI를 이용해 자동화 배포를 하자</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/hugo-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EB%A7%8C%EB%93%A4%EA%B8%B0/">
+            <span class="next-text nav-default">Hugo 블로그 만들기</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+  <a href="https://gs2dang.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">gs2dang</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

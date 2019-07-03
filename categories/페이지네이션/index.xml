@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>페이지네이션 on 기록 저장소</title>
+    <link>https://gs2dang.github.io/categories/%ED%8E%98%EC%9D%B4%EC%A7%80%EB%84%A4%EC%9D%B4%EC%85%98/</link>
+    <description>Recent content in 페이지네이션 on 기록 저장소</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 28 Jun 2019 14:37:47 +0900</lastBuildDate>
+    
+	<atom:link href="https://gs2dang.github.io/categories/%ED%8E%98%EC%9D%B4%EC%A7%80%EB%84%A4%EC%9D%B4%EC%85%98/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Django Pagination 적용하기</title>
+      <link>https://gs2dang.github.io/post/django-pagination/</link>
+      <pubDate>Fri, 28 Jun 2019 14:37:47 +0900</pubDate>
+      
+      <guid>https://gs2dang.github.io/post/django-pagination/</guid>
+      <description>자주 이용하는 웹 페이지나 앱을 보면 페이지네이션 기능 구현을 볼 수 있다. 나 또한 이것을 구현하고 싶었기에 장고 공식문서와 구글 검색을 통해 만들어나가기로 했다. 아</description>
+    </item>
+    
+  </channel>
+</rss>

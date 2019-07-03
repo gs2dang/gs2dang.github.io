@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on 기록 저장소</title>
+    <link>https://gs2dang.github.io/post/</link>
+    <description>Recent content in Posts on 기록 저장소</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 28 Jun 2019 14:37:47 +0900</lastBuildDate>
+    
+	<atom:link href="https://gs2dang.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Django Pagination 적용하기</title>
+      <link>https://gs2dang.github.io/post/django-pagination/</link>
+      <pubDate>Fri, 28 Jun 2019 14:37:47 +0900</pubDate>
+      
+      <guid>https://gs2dang.github.io/post/django-pagination/</guid>
+      <description>자주 이용하는 웹 페이지나 앱을 보면 페이지네이션 기능 구현을 볼 수 있다. 나 또한 이것을 구현하고 싶었기에 장고 공식문서와 구글 검색을 통해 만들어나가기로 했다. 아</description>
+    </item>
+    
+    <item>
+      <title>Travis CI를 이용해 자동화 배포를 하자</title>
+      <link>https://gs2dang.github.io/post/travisci/</link>
+      <pubDate>Thu, 13 Jun 2019 07:38:40 +0900</pubDate>
+      
+      <guid>https://gs2dang.github.io/post/travisci/</guid>
+      <description>TravisCI로 Docker를 빌드/푸시 그리고 AWS ECS에 배포를 위한 코드만 간단하게 작성했습니다. 개념과 Git Push 이후의 흐름 그리고 상세한 내용들은 배우</description>
+    </item>
+    
+    <item>
+      <title>Djagno-CKEditor 적용하기</title>
+      <link>https://gs2dang.github.io/post/wysiwyg/</link>
+      <pubDate>Fri, 17 May 2019 17:28:48 +0900</pubDate>
+      
+      <guid>https://gs2dang.github.io/post/wysiwyg/</guid>
+      <description>에디터 적용하면서 바로 정리한 것이 아니며, 간단 기록용으로 작성했기에 잘못된 정보가 있을 수도 있습니다. 위즈윅 에디터를 다시 적용하게 된다면 내용 추가 및 수정하</description>
+    </item>
+    
+    <item>
+      <title>Hugo 블로그 만들기</title>
+      <link>https://gs2dang.github.io/post/hugo-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EB%A7%8C%EB%93%A4%EA%B8%B0/</link>
+      <pubDate>Fri, 17 May 2019 17:28:48 +0900</pubDate>
+      
+      <guid>https://gs2dang.github.io/post/hugo-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EB%A7%8C%EB%93%A4%EA%B8%B0/</guid>
+      <description>1. 블로그 시작 정리한 내용을 마크다운에 작성 후 내 컴퓨터에 저장하거나 에버노트 또는 노션과 같은 서비스에 정리할 수 있다. 하지만 이렇게 하면 나만 본다고 대충 정리하</description>
+    </item>
+    
+  </channel>
+</rss>
