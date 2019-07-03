@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://gs2dang.github.io/sitemap.xml
