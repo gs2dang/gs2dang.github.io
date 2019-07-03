@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>MSI노트북에 우분터 18.04 설치하기 - 기록 저장소</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gs2dang" /><meta name="description" content="처음에 MSI GS63 7RD Stealth 노트북에 우분투 듀얼 부팅했을 때 멈춤현상이 너무 심했다. 아래는 여러 삽질 끝에 해결한 과정이다. 왜 저런 방법으로 설정을 해야하는지는 잘 모른다." /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.53 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://gs2dang.github.io/post/msi-%EC%9A%B0%EB%B6%84%ED%88%AC-%EC%84%A4%EC%B9%98/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="MSI노트북에 우분터 18.04 설치하기" />
+<meta property="og:description" content="처음에 MSI GS63 7RD Stealth 노트북에 우분투 듀얼 부팅했을 때 멈춤현상이 너무 심했다. 아래는 여러 삽질 끝에 해결한 과정이다. 왜 저런 방법으로 설정을 해야하는지는 잘 모른다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gs2dang.github.io/post/msi-%EC%9A%B0%EB%B6%84%ED%88%AC-%EC%84%A4%EC%B9%98/" /><meta property="article:published_time" content="2018-09-10T17:28:48&#43;09:00"/>
+<meta property="article:modified_time" content="2018-09-10T17:28:48&#43;09:00"/>
+
+<meta itemprop="name" content="MSI노트북에 우분터 18.04 설치하기">
+<meta itemprop="description" content="처음에 MSI GS63 7RD Stealth 노트북에 우분투 듀얼 부팅했을 때 멈춤현상이 너무 심했다. 아래는 여러 삽질 끝에 해결한 과정이다. 왜 저런 방법으로 설정을 해야하는지는 잘 모른다.">
+
+
+<meta itemprop="datePublished" content="2018-09-10T17:28:48&#43;09:00" />
+<meta itemprop="dateModified" content="2018-09-10T17:28:48&#43;09:00" />
+<meta itemprop="wordCount" content="462">
+
+
+
+<meta itemprop="keywords" content="ubuntu,설치,MSI," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="MSI노트북에 우분터 18.04 설치하기"/>
+<meta name="twitter:description" content="처음에 MSI GS63 7RD Stealth 노트북에 우분투 듀얼 부팅했을 때 멈춤현상이 너무 심했다. 아래는 여러 삽질 끝에 해결한 과정이다. 왜 저런 방법으로 설정을 해야하는지는 잘 모른다."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">기록 저장소</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">기록 저장소</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">MSI노트북에 우분터 18.04 설치하기</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-09-10 </span>
+        <div class="post-category">
+            <a href="/categories/%EC%84%A4%EC%B9%98/"> 설치 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#bios-설정">BIOS 설정</a></li>
+<li><a href="#윈도우-설치">윈도우 설치</a></li>
+<li><a href="#우분투-설치-참조-https-askubuntu-com-questions-747314-is-nomodeset-still-required">우분투 설치 (<a href="https://askubuntu.com/questions/747314/is-nomodeset-still-required">참조</a>)</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<p>처음에 MSI GS63 7RD Stealth 노트북에 우분투 듀얼 부팅했을 때 멈춤현상이 너무 심했다. 아래는 여러 삽질 끝에 해결한 과정이다. 왜 저런 방법으로 설정을 해야하는지는 잘 모른다. 우분투를 재설치하면 BIOS와 우분투 설치 과정에 이미지 추가하도록 하겠다.</p>
+
+<h4 id="bios-설정">BIOS 설정</h4>
+
+<ul>
+<li>UEFI 모드</li>
+<li>Fast Boot 끄기</li>
+<li>Secure Boot 끄기</li>
+<li>Speed step  끄기</li>
+<li>부팅 순서 바꾸기</li>
+<li>저장 및 재시작</li>
+</ul>
+
+<p><br></p>
+
+<h4 id="윈도우-설치">윈도우 설치</h4>
+
+<ul>
+<li>위 BIOS 설정을 유지한 상태로 윈도우 설치</li>
+<li>diskmgmt.msc 를 입력하여 디스크 관리에 들어감</li>
+<li>용량을 적절히 나눔</li>
+<li>전원 관리 옵션 선택에 들어감</li>
+<li>전원 단추 작동 설정을 누름</li>
+<li>현재 사용할 수 없는 설정 변경</li>
+<li>종료 설정에서 빠른 시작 켜기 해제</li>
+</ul>
+
+<p><img src="/images/dualboot-win10/ubuntu001.png" alt="windows10-1" /></p>
+
+<p><img src="/images/dualboot-win10/ubuntu002.png" alt="windows10-2" /></p>
+
+<p><img src="/images/dualboot-win10/ubuntu003.png" alt="windows10-3" /></p>
+
+<p><img src="/images/dualboot-win10/ubuntu004.png" alt="windows10-4" /></p>
+
+<p><img src="/images/dualboot-win10/ubuntu005.png" alt="windows10-5" /></p>
+
+<p><img src="/images/dualboot-win10/ubuntu006.png" alt="windows10-6" /></p>
+
+<p><br></p>
+
+<h4 id="우분투-설치-참조-https-askubuntu-com-questions-747314-is-nomodeset-still-required">우분투 설치 (<a href="https://askubuntu.com/questions/747314/is-nomodeset-still-required">참조</a>)</h4>
+
+<ul>
+<li>하이라이트 표시 부분을 Try ubuntu without installing 위에 두고 <code>E</code> 키를 누르기</li>
+<li>리눅스 줄 끝 <code>---</code> 뒤에 한 칸 띄고 <code>nouveau.modeset=0</code> 을 적고 <code>F10</code> 누르기</li>
+<li>8192 (노트북 램 8gb), 논리, 시작, SWAP</li>
+<li>나머지 용량 EX4, / 설정</li>
+<li>설치가 끝나고 재시작할 때 USB 뽑지 않기</li>
+<li>BIOS에 들어가서 부팅 순서를 다시 원래대로 바꿔 주고 USB 제거</li>
+<li>부팅 순서 아래에 있는 &lsquo;UEFI Hard Disk Drive BBS Priorities&rsquo;에 들어감</li>
+<li>Boot option1을 ubuntu로 바꾸고 재시작</li>
+
+<li><p>GNU GRUB라고 아래처럼 나오면 하이라이를 Ubuntu에 두고 E 키를 누름</p>
+
+<ul>
+<li>Ubuntu</li>
+<li>Advanced options for Ubuntu</li>
+<li>&hellip;</li>
+</ul></li>
+
+<li><p>리눅스 줄 마지막에 nouveau.modeset=0 적고 F10을 누르면 끝</p></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gs2dang</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2018-09-10
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/ubuntu/">ubuntu</a>
+          <a href="/tags/%EC%84%A4%EC%B9%98/">설치</a>
+          <a href="/tags/msi/">MSI</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%EC%84%A4%EC%B9%98-%ED%9B%84-%EC%B4%88%EA%B8%B0%EC%84%A4%EC%A0%95/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">우분투 설치 후 초기 설정</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+  <a href="https://gs2dang.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">gs2dang</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-142997929-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

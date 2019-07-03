@@ -31,6 +31,20 @@
   </url>
   
   <url>
+    <loc>https://gs2dang.github.io/post/%EC%84%A4%EC%B9%98-%ED%9B%84-%EC%B4%88%EA%B8%B0%EC%84%A4%EC%A0%95/</loc>
+    <lastmod>2018-09-11T17:28:48+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://gs2dang.github.io/post/msi-%EC%9A%B0%EB%B6%84%ED%88%AC-%EC%84%A4%EC%B9%98/</loc>
+    <lastmod>2018-09-10T17:28:48+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://gs2dang.github.io/categories/</loc>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
@@ -46,6 +60,13 @@
   <url>
     <loc>https://gs2dang.github.io/categories/django/</loc>
     <lastmod>2019-06-28T14:37:47+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://gs2dang.github.io/tags/msi/</loc>
+    <lastmod>2018-09-10T17:28:48+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -128,6 +149,13 @@
   </url>
   
   <url>
+    <loc>https://gs2dang.github.io/tags/ubuntu/</loc>
+    <lastmod>2018-09-10T17:28:48+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://gs2dang.github.io/</loc>
     <lastmod>2019-06-28T14:37:47+09:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -144,6 +172,20 @@
   <url>
     <loc>https://gs2dang.github.io/categories/%EC%84%A4%EC%A0%95/</loc>
     <lastmod>2019-06-13T07:38:40+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://gs2dang.github.io/tags/%EC%84%A4%EC%B9%98/</loc>
+    <lastmod>2018-09-10T17:28:48+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://gs2dang.github.io/categories/%EC%84%A4%EC%B9%98/</loc>
+    <lastmod>2018-09-10T17:28:48+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>

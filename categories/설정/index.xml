@@ -29,5 +29,14 @@
       <description>에디터 적용하면서 바로 정리한 것이 아니며, 간단 기록용으로 작성했기에 잘못된 정보가 있을 수도 있습니다. 위즈윅 에디터를 다시 적용하게 된다면 내용 추가 및 수정하</description>
     </item>
     
+    <item>
+      <title>우분투 설치 후 초기 설정</title>
+      <link>https://gs2dang.github.io/post/%EC%84%A4%EC%B9%98-%ED%9B%84-%EC%B4%88%EA%B8%B0%EC%84%A4%EC%A0%95/</link>
+      <pubDate>Tue, 11 Sep 2018 17:28:48 +0900</pubDate>
+      
+      <guid>https://gs2dang.github.io/post/%EC%84%A4%EC%B9%98-%ED%9B%84-%EC%B4%88%EA%B8%B0%EC%84%A4%EC%A0%95/</guid>
+      <description>우분투(18.04) 설치 후에 나에게 맞는 설정들을 나열했다. 기본 설정 한글 1 2 3 4 [1] sudo apt-get update [2] sudo apt-get upgrade [3] 언어팩 설치 [4] 재부팅 Vim 1 sudo apt-get install vim Git 1 2 3 [1] sudo apt-add-repository ppa:git-core/ppa</description>
+    </item>
+    
   </channel>
 </rss>

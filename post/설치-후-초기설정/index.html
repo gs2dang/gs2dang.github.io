@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>우분투 설치 후 초기 설정 - 기록 저장소</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gs2dang" /><meta name="description" content="우분투(18.04) 설치 후에 나에게 맞는 설정들을 나열했다. 기본 설정 한글 1 2 3 4 [1] sudo apt-get update [2] sudo apt-get upgrade [3] 언어팩 설치 [4] 재부팅 Vim 1 sudo apt-get install vim Git 1 2 3 [1] sudo apt-add-repository ppa:git-core/ppa" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.53 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://gs2dang.github.io/post/%EC%84%A4%EC%B9%98-%ED%9B%84-%EC%B4%88%EA%B8%B0%EC%84%A4%EC%A0%95/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="우분투 설치 후 초기 설정" />
+<meta property="og:description" content="우분투(18.04) 설치 후에 나에게 맞는 설정들을 나열했다. 기본 설정 한글 1 2 3 4 [1] sudo apt-get update [2] sudo apt-get upgrade [3] 언어팩 설치 [4] 재부팅 Vim 1 sudo apt-get install vim Git 1 2 3 [1] sudo apt-add-repository ppa:git-core/ppa" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gs2dang.github.io/post/%EC%84%A4%EC%B9%98-%ED%9B%84-%EC%B4%88%EA%B8%B0%EC%84%A4%EC%A0%95/" /><meta property="article:published_time" content="2018-09-11T17:28:48&#43;09:00"/>
+<meta property="article:modified_time" content="2018-09-11T17:28:48&#43;09:00"/>
+
+<meta itemprop="name" content="우분투 설치 후 초기 설정">
+<meta itemprop="description" content="우분투(18.04) 설치 후에 나에게 맞는 설정들을 나열했다. 기본 설정 한글 1 2 3 4 [1] sudo apt-get update [2] sudo apt-get upgrade [3] 언어팩 설치 [4] 재부팅 Vim 1 sudo apt-get install vim Git 1 2 3 [1] sudo apt-add-repository ppa:git-core/ppa">
+
+
+<meta itemprop="datePublished" content="2018-09-11T17:28:48&#43;09:00" />
+<meta itemprop="dateModified" content="2018-09-11T17:28:48&#43;09:00" />
+<meta itemprop="wordCount" content="781">
+
+
+
+<meta itemprop="keywords" content="설정," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="우분투 설치 후 초기 설정"/>
+<meta name="twitter:description" content="우분투(18.04) 설치 후에 나에게 맞는 설정들을 나열했다. 기본 설정 한글 1 2 3 4 [1] sudo apt-get update [2] sudo apt-get upgrade [3] 언어팩 설치 [4] 재부팅 Vim 1 sudo apt-get install vim Git 1 2 3 [1] sudo apt-add-repository ppa:git-core/ppa"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">기록 저장소</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">기록 저장소</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">우분투 설치 후 초기 설정</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-09-11 </span>
+        <div class="post-category">
+            <a href="/categories/%EC%84%A4%EC%A0%95/"> 설정 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#기본-설정">기본 설정</a>
+<ul>
+<li><a href="#한글">한글</a></li>
+<li><a href="#vim">Vim</a></li>
+<li><a href="#git">Git</a></li>
+<li><a href="#zsh-oh-my-zsh-theme-font">ZSH, Oh-My-Zsh, Theme, Font</a></li>
+<li><a href="#pyenv">pyenv</a></li>
+</ul></li>
+<li><a href="#기본-설정-이후">기본 설정 이후</a>
+<ul>
+<li><a href="#atom-install">Atom install</a></li>
+<li><a href="#typora-install-마크다운">Typora install(마크다운)</a></li>
+<li><a href="#gimp-install-그림-사진-편집">GIMP install(그림/사진 편집)</a>
+<ul>
+<li><a href="#ppa-http-ubuntuhandbook-org-index-php-2018-04-how-to-install-gimp-2-10-in-ubuntu-18-04-17-10-via-ppa"><a href="http://ubuntuhandbook.org/index.php/2018/04/how-to-install-gimp-2-10-in-ubuntu-18-04-17-10-via-ppa/">PPA</a></a></li>
+<li><a href="#flatpak-https-flatpak-org-setup-ubuntu"><a href="https://flatpak.org/setup/Ubuntu/">flatpak</a></a></li>
+</ul></li>
+<li><a href="#tree">tree</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<p>우분투(18.04) 설치 후에 나에게 맞는 설정들을 나열했다.</p>
+
+<p><br></p>
+
+<h2 id="기본-설정">기본 설정</h2>
+
+<h3 id="한글">한글</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">[1] sudo apt-get update
+[2] sudo apt-get upgrade
+[3] 언어팩 설치
+[4] 재부팅</pre></td></tr></table>
+</div>
+</div>
+<p><img src="/images/ubuntu_install_base_settings/setting-korean-1.png" alt="언어팩 설치 1" /></p>
+
+<p><img src="/images/ubuntu_install_base_settings/setting-korean-2.png" alt="언어팩 설치 2" /></p>
+
+<p><img src="/images/ubuntu_install_base_settings/setting-korean-3.png" alt="언어팩 설치 3" /></p>
+
+<p><img src="/images/ubuntu_install_base_settings/setting-korean-4.png" alt="언어팩 설치 4" /></p>
+
+<hr />
+
+<h3 id="vim">Vim</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">sudo apt-get install vim</pre></td></tr></table>
+</div>
+</div>
+<p><img src="/images/ubuntu_install_base_settings/setting-vim-install-before.png" alt="설치 전" /></p>
+
+<p><img src="/images/ubuntu_install_base_settings/setting-vim-install-after.png" alt="설치 후" /></p>
+
+<hr />
+
+<h3 id="git">Git</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">[1] sudo apt-add-repository ppa:git-core/ppa
+[2] sudo apt-get update
+[3] sudo apt-get install git</pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma"># 사용자 설정
+git config --global user.name &#34;github-name&#34;
+git config --global user.email github@email.com
+git config --global core.editor vim
+
+# 설정 확인
+git config --list</pre></td></tr></table>
+</div>
+</div>
+<hr />
+
+<h3 id="zsh-oh-my-zsh-theme-font">ZSH, Oh-My-Zsh, Theme, Font</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">[1] sudo apt-get update
+[2] sudo apt-get install zsh
+[3] chsh -s `which zsh`
+[4] sudo apt install -y curl
+[5] sh -c &#34;$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&#34;</pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma"># zsh-syntax-highlighting
+(https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md)
+[1] git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+[2] vim ~/.zshrc
+
+[3] plugins=(
+      git
+      zsh-syntax-highlighting
+    )
+
+[4] source ~/.zshrc
+
+
+# zsh-autosuggestions
+(https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md)
+[1] git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+[2] vim ~/.zshrc
+
+[3] plugins=(
+      git
+      zsh-syntax-highlighting
+      zsh-autosuggestions
+    )
+
+[4] source ~/.zshrc</pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma"># Theme (pure)
+[1] sudo apt-get install -y npm
+
+[2] sudo npm install --global pure-prompt
+
+[3] vim ~/.zshrc
+    autoload -U promptinit; promptinit 입력
+
+[4] vim ~/.zshrc
+    ZSH_THEME=&#34;robbyrussell&#34; 부분을 오른쪽처럼 바꾸기 ZSH_THEME=&#34;refined&#34;
+
+[5] 재실행</pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma"># power-line fonts (https://github.com/powerline/fonts)
+[1] git clone https://github.com/powerline/fonts.git --depth=1
+[2] cd fonts
+[3] ./install.sh
+[4] cd ..
+[5] rm -rf fonts</pre></td></tr></table>
+</div>
+</div>
+<hr />
+
+<h3 id="pyenv">pyenv</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">[1] curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
+
+[2] vim ~/.zshrc
+
+[3] 아래 내용 넣기
+export PATH=&#34;$HOME/.pyenv/bin:$PATH&#34;
+eval &#34;$(pyenv init -)&#34;
+eval &#34;$(pyenv virtualenv-init -)&#34;
+
+[4] 터미널 재시작 또는 source ~/.zshrc
+
+# 파이썬 설치 전 필요 패키지
+[5] 
+sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
+libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
+xz-utils tk-dev libffi-dev liblzma-dev python-openssl
+
+# 너무 최신 버전은 사용하지 말자
+[6] pyenv install --list 를 입력하여 원하는 버전을 설치하자
+
+[7] pyenv install 3.7.2
+
+[8] pyenv versions 
+    위 내용을 입력했을 때 아래와 같이 나온다면 [10] 내용을 입력하자
+    * system (set by /home/gs/.pyenv/version)
+    3.7.2
+
+[9] python --version
+     2.x.x
+
+[10] pyenv global 3.7.2
+
+[11] 재시작
+
+[12] pyenv versions
+     system
+     * 3.7.2 (set by /home/gs/.pyenv/version)
+
+[13] pyenv --version
+     파이썬도 같이 버전업이 된 것을 확인할 수 있다
+     Python 3.7.2</pre></td></tr></table>
+</div>
+</div>
+<p><br></p>
+
+<h2 id="기본-설정-이후">기본 설정 이후</h2>
+
+<h3 id="atom-install">Atom install</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma"># packages install
+emmet
+file-icons
+sass-autocompile</pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma"># sass-autocompile 패키지 설치
+sudo apt-get install -y nodejs
+sudo apt-get install -y npm
+node -v
+
+# 버전 확인 시 v.8.?.? 같이 정상 출력인지 확인
+sudo npm install node-sass -g</pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma"># sass-autocompile 설정
+Compile with &#39;compressed&#39; output style 체크해제
+Compile with &#39;expanded&#39; output style 체크
+Filename pattern for &#39;expanded&#39; compile files 아래 적기 
+../css/$1.css </pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma"># 키바인딩 your keymap file 설정
+&#39;atom-text-editor&#39;:
+  &#39;ctrl-i&#39;:&#39;editor:auto-indent&#39;
+
+&#39;atom-text-editor:not([mini])&#39;:
+  &#39;ctrl-shift-right&#39;: &#39;emmet:next-edit-point&#39;</pre></td></tr></table>
+</div>
+</div>
+<hr>
+
+<h3 id="typora-install-마크다운">Typora install(마크다운)</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">[1] sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAE
+[2] sudo add-apt-repository &#39;deb https://typora.io/linux ./&#39;
+[3] sudo apt update
+[4] sudo apt install typora</pre></td></tr></table>
+</div>
+</div>
+<hr>
+
+<h3 id="gimp-install-그림-사진-편집">GIMP install(그림/사진 편집)</h3>
+
+<h4 id="ppa-http-ubuntuhandbook-org-index-php-2018-04-how-to-install-gimp-2-10-in-ubuntu-18-04-17-10-via-ppa"><a href="http://ubuntuhandbook.org/index.php/2018/04/how-to-install-gimp-2-10-in-ubuntu-18-04-17-10-via-ppa/">PPA</a></h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">[1] sudo add-apt-repository ppa:otto-kesselgulasch/gimp
+[2] sudo apt-get update
+[3] sudo apt-get install gimp</pre></td></tr></table>
+</div>
+</div>
+<h4 id="flatpak-https-flatpak-org-setup-ubuntu"><a href="https://flatpak.org/setup/Ubuntu/">flatpak</a></h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">$ sudo apt install flatpak
+$ sudo apt install gnome-software-plugin-flatpak
+$ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+재부팅
+$ flatpak install flathub org.gimp.GIMP 또는 GIMP downloads에서 설치</pre></td></tr></table>
+</div>
+</div>
+<hr>
+
+<h3 id="tree">tree</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">sudo apt-get install tree</pre></td></tr></table>
+</div>
+</div>
+<p><img src="/images/ubuntu_install_base_settings/setting-tree.png" alt="" /></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gs2dang</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2018-09-11
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%EC%84%A4%EC%A0%95/">설정</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/hugo-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EB%A7%8C%EB%93%A4%EA%B8%B0/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Hugo 블로그 만들기</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/msi-%EC%9A%B0%EB%B6%84%ED%88%AC-%EC%84%A4%EC%B9%98/">
+            <span class="next-text nav-default">MSI노트북에 우분터 18.04 설치하기</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+  <a href="https://gs2dang.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">gs2dang</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-142997929-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>
