@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Django 조회수 중복 - 기록 저장소</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gs2dang" /><meta name="description" content="조회수 중복 조회수 증가는 잘 작동했지만 한 가지 문제가 있었다. 중복 문제다. 조회수 올려주는 코드를 post_detail 에서 호출하게 된다. 그래서 게시글 읽으면 조회수가 1증가하" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.53 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://gs2dang.github.io/post/django-%EC%A1%B0%ED%9A%8C%EC%88%98-%EC%B2%98%EB%A6%AC/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Django 조회수 중복" />
+<meta property="og:description" content="조회수 중복 조회수 증가는 잘 작동했지만 한 가지 문제가 있었다. 중복 문제다. 조회수 올려주는 코드를 post_detail 에서 호출하게 된다. 그래서 게시글 읽으면 조회수가 1증가하" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gs2dang.github.io/post/django-%EC%A1%B0%ED%9A%8C%EC%88%98-%EC%B2%98%EB%A6%AC/" /><meta property="article:published_time" content="2019-07-05T18:32:10&#43;09:00"/>
+<meta property="article:modified_time" content="2019-07-05T18:32:10&#43;09:00"/>
+
+<meta itemprop="name" content="Django 조회수 중복">
+<meta itemprop="description" content="조회수 중복 조회수 증가는 잘 작동했지만 한 가지 문제가 있었다. 중복 문제다. 조회수 올려주는 코드를 post_detail 에서 호출하게 된다. 그래서 게시글 읽으면 조회수가 1증가하">
+
+
+<meta itemprop="datePublished" content="2019-07-05T18:32:10&#43;09:00" />
+<meta itemprop="dateModified" content="2019-07-05T18:32:10&#43;09:00" />
+<meta itemprop="wordCount" content="490">
+
+
+
+<meta itemprop="keywords" content="Django,조회수," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Django 조회수 중복"/>
+<meta name="twitter:description" content="조회수 중복 조회수 증가는 잘 작동했지만 한 가지 문제가 있었다. 중복 문제다. 조회수 올려주는 코드를 post_detail 에서 호출하게 된다. 그래서 게시글 읽으면 조회수가 1증가하"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">기록 저장소</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">홈</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">아카이브</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">태그</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">카테고리</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">기록 저장소</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">홈</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">아카이브</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">태그</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">카테고리</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Django 조회수 중복</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-07-05 </span>
+        <div class="post-category">
+            <a href="/categories/django/"> Django </a>
+            <a href="/categories/%EC%A1%B0%ED%9A%8C%EC%88%98/"> 조회수 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#조회수-중복">조회수 중복</a>
+<ul>
+<li><a href="#post-like">post_like</a></li>
+<li><a href="#post-detail">post_detail</a></li>
+<li><a href="#update-view-count">update_view_count</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h2 id="조회수-중복">조회수 중복</h2>
+
+<p><img src="/images/django-view-count/like-order.png" alt="like-order" /></p>
+
+<p>조회수 증가는 잘 작동했지만 한 가지 문제가 있었다. 중복 문제다. 조회수 올려주는 코드를 <code>post_detail</code> 에서 호출하게 된다. 그래서 게시글 읽으면 조회수가 1증가하고 좋아요 버튼을 누르면서 1이 또 증가하게 된다. 이 문제를 Django Session을 이용해 해결하기로 했다.</p>
+
+<p><br></p>
+
+<h3 id="post-like">post_like</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;view_count&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><img src="/images/django-view-count/session-dict-1.png" alt="session-dict-1" />  <img src="/images/django-view-count/session-dict-2.png" alt="session-dict-2" /></p>
+
+<p><img src="/images/django-view-count/session-dict-3.png" alt="session-dict-3" /></p>
+
+<p>좋아요 버튼을 누르면 먼저 <code>post_like</code>로 오게 된다. 여기서 세션을 설정하여 <code>post_detail</code> 에서 사용할 수 있도록 한다. 설정한 세션은 <code>request.session._session</code> 에서 확인할 수 있다.</p>
+
+<p><br></p>
+
+<h3 id="post-detail">post_detail</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># [1]</span>
+<span class="k">if</span> <span class="s1">&#39;view_count&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">_session</span><span class="p">:</span>
+    <span class="n">post</span><span class="o">.</span><span class="n">update_view_count</span>
+
+<span class="c1"># [2]</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">_session</span><span class="p">[</span><span class="s1">&#39;view_count&#39;</span><span class="p">]:</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">_session</span><span class="p">[</span><span class="s1">&#39;view_count&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">post</span><span class="o">.</span><span class="n">update_view_count</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><strong>[1]</strong> 세션에 <code>view_count</code> 없다는 것은 좋아요 버튼을 누르지 않았다는 뜻이다.</p>
+
+<p><strong>[2]</strong> else는 방금 또는 이전에 좋아요 버튼을 눌렀다는 뜻이다. 그리고 여기서 또 둘로 나뉜다.</p>
+
+<ul>
+<li><p><strong>if</strong></p>
+
+<ul>
+<li><code>post_like</code>에서 설정한 세션 값이 <code>True</code> 이기에 실행되는 조건문이다. 단순 게시글 읽을 때 조회수 증가를 위해 세션 값을 <code>False</code>로 바꿔준다. 좋아요 버튼을 누르면 False는 다시 True가 돼 if 문으로 오게 된다.</li>
+</ul></li>
+
+<li><p><strong>else</strong></p>
+
+<ul>
+<li>좋아요를 누르고 계속해서 누르지 않을 경우에 실행되는 else 문이다. 게시글 들어갈 때마다 조회수 1씩 증가한다.</li>
+</ul></li>
+</ul>
+
+<p><br></p>
+
+<h3 id="update-view-count">update_view_count</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Post</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">view_count</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">PositiveIntegerField</span><span class="p">(</span><span class="s1">&#39;조회수&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># 생략</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">update_view_count</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">view_count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><br></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gs2dang</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-07-05
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/django/">Django</a>
+          <a href="/tags/%EC%A1%B0%ED%9A%8C%EC%88%98/">조회수</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/django-pagination/">
+            <span class="next-text nav-default">Django Pagination 적용하기</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+  <a href="https://gs2dang.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">gs2dang</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-142997929-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

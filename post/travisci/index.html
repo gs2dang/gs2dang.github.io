@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-06-13T07:38:40&#43;09:00" />
 <meta itemprop="dateModified" content="2019-06-13T07:38:40&#43;09:00" />
-<meta itemprop="wordCount" content="900">
+<meta itemprop="wordCount" content="921">
 
 
 
@@ -162,15 +162,22 @@
 <p><br></p>
 
 <h2 id="travis-yml">.travis.yml</h2>
-
-<hr />
-
-<p>루트</p>
-
-<p>├── .secrets</p>
-
-<p>└── .travis.yml</p>
 <div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">루트
+
+├── .secrets
+
+└── .travis.yml</pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -230,35 +237,33 @@
 </span><span class="w">  </span>-<span class="w"> </span>bash<span class="w"> </span>.bin/deploy.sh</code></pre></td></tr></table>
 </div>
 </div>
+<p><br></p>
+
 <h3 id="secrets">.secrets</h3>
 
 <p>이 폴더 내 있는 파일들은 각 환경(개발, 제품)에 필요한 정보들이 있지만, 외부에  알려져서는 안 된다. 그래서 GitHub에도 올릴 수가 없다. 이를 위해 <a href="https://docs.travis-ci.com/user/encrypting-files/">travis encrypt-file</a> 명령어를 사용한다.</p>
 
-<ol>
-<li>위 명령어를 사용하기 전 먼저 Travis CI Command Line Client를 설치한다.</li>
-</ol>
+<p><br></p>
+
+<p>1.위 명령어를 사용하기 전 먼저 Travis CI Command Line Client를 설치한다.</p>
 
 <p><code>$ gem install travis</code></p>
 
-<ol>
-<li>그리고 Travis CI에 로그인을 한다.</li>
-</ol>
+<p>2.그리고 Travis CI에 로그인을 한다.</p>
 
 <p><code>$ travis login</code></p>
 
-<ol>
-<li>암호화할 <code>.secrets</code> 폴더를 압축한다.</li>
-</ol>
+<p>3.암호화할 <code>.secrets</code> 폴더를 압축한다.</p>
 
 <p><code>$ tar cvf secrets.tar .secrets</code></p>
 
-<ol>
-<li>tar 파일을 암호화한다.</li>
-</ol>
+<p>4.tar 파일을 암호화한다.</p>
 
 <p><code>$ travis encrypt-file secrets.tar --add</code></p>
 
 <p>명령어 뒤에 &ndash;add 옵션을 주면 .travis.yml 파일과 Travis CI settings에 있는 Environment Variables에 자동으로 아래 내용들이 입력된다.</p>
+
+<p><br></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt">1
@@ -266,16 +271,14 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="w">   </span>before_install<span class="p">:</span><span class="w">
-</span><span class="w">   </span>-<span class="w"> </span>openssl<span class="w"> </span>aes-<span class="m">256</span>-cbc<span class="w"> </span>-K<span class="w"> </span>$encrypted_19fabbf9472d_key<span class="w"> </span>-iv<span class="w"> </span>$encrypted_19fabbf9472d_iv<span class="w">
-</span><span class="w">     </span>-in<span class="w"> </span>secrets.tar.enc<span class="w"> </span>-out<span class="w"> </span>secrets.tar<span class="w"> </span>-d</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-yaml" data-lang="yaml">before_install<span class="p">:</span><span class="w">
+</span><span class="w"></span>-<span class="w"> </span>openssl<span class="w"> </span>aes-<span class="m">256</span>-cbc<span class="w"> </span>-K<span class="w"> </span>$encrypted_19fabbf9472d_key<span class="w"> </span>-iv<span class="w"> </span>$encrypted_19fabbf9472d_iv<span class="w">
+</span><span class="w">  </span>-in<span class="w"> </span>secrets.tar.enc<span class="w"> </span>-out<span class="w"> </span>secrets.tar<span class="w"> </span>-d</code></pre></td></tr></table>
 </div>
 </div>
 <p><img src="/images/Travis/travis-encrypted.png" alt="travis-encrtpted" /></p>
 
-<ol>
-<li>secrets.tar 외에도 <code>secrets.tar.enc</code> 생긴 것을 확인할 수 있다. 여기서 secrets.tar은 암호화를 위해 압축한 파일이니 <code>.gitignore</code>에 추가하고 <code>secrets.tar.enc</code>는 GitHub 레포에 올린다.</li>
-</ol>
+<p>1.secrets.tar 외에도 <code>secrets.tar.enc</code> 생긴 것을 확인할 수 있다. 여기서 secrets.tar은 암호화를 위해 압축한 파일이니 <code>.gitignore</code>에 추가하고 <code>secrets.tar.enc</code>는 GitHub 레포에 올린다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
@@ -283,14 +286,12 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">   <span class="c1"># .gitignore</span>
-   /.secrets
-   secrets.tar</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># .gitignore</span>
+/.secrets
+secrets.tar</code></pre></td></tr></table>
 </div>
 </div>
-<ol>
-<li>암호화한 파일을 풀어주기 위해 before_install에 명령어를 추가한다.</li>
-</ol>
+<p>2.암호화한 파일을 풀어주기 위해 before_install에 명령어를 추가한다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt">1
@@ -299,26 +300,37 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="w">   </span>before_install<span class="p">:</span><span class="w">
-</span><span class="w">   </span>-<span class="w"> </span>openssl<span class="w"> </span>aes-<span class="m">256</span>-cbc<span class="w"> </span>-K<span class="w"> </span>$encrypted_19fabbf9472d_key<span class="w"> </span>-iv<span class="w"> </span>$encrypted_19fabbf9472d_iv<span class="w">
-</span><span class="w">     </span>-in<span class="w"> </span>secrets.tar.enc<span class="w"> </span>-out<span class="w"> </span>secrets.tar<span class="w"> </span>-d<span class="w">
-</span><span class="w">   </span>-<span class="w"> </span>tar<span class="w"> </span>xvf<span class="w"> </span>secrets.tar</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-yaml" data-lang="yaml">before_install<span class="p">:</span><span class="w">
+</span><span class="w"></span>-<span class="w"> </span>openssl<span class="w"> </span>aes-<span class="m">256</span>-cbc<span class="w"> </span>-K<span class="w"> </span>$encrypted_19fabbf9472d_key<span class="w"> </span>-iv<span class="w"> </span>$encrypted_19fabbf9472d_iv<span class="w">
+</span><span class="w">  </span>-in<span class="w"> </span>secrets.tar.enc<span class="w"> </span>-out<span class="w"> </span>secrets.tar<span class="w"> </span>-d<span class="w">
+</span><span class="w"></span>-<span class="w"> </span>tar<span class="w"> </span>xvf<span class="w"> </span>secrets.tar</code></pre></td></tr></table>
 </div>
 </div>
 <p><br></p>
 
-<h2 id="docker-sh">docker.sh</h2>
-
 <hr />
 
-<p>루트</p>
-
-<p>├── .bin</p>
-
-<p>│       └── docker.sh</p>
-
-<p>└── .travis.yml</p>
+<h2 id="docker-sh">docker.sh</h2>
 <div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">루트
+
+├── .bin 
+
+│     └── docker.sh
+
+└── .travis.yml</pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
 </span><span class="lnt">2
@@ -338,20 +350,33 @@ docker push <span class="nv">$DOCKER_USERNAME</span>/<span class="nv">$REPO_NAME
 
 <p><br></p>
 
-<h2 id="deplosy-sh">deplosy.sh</h2>
-
 <hr />
 
-<p>루트</p>
-
-<p>├── .bin</p>
-
-<p>│        ├── deploy.sh</p>
-
-<p>│       └── docker.sh</p>
-
-<p>└── .travis.yml</p>
+<h2 id="deplosy-sh">deplosy.sh</h2>
 <div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">루트
+
+├── .bin 
+
+│    ├── deploy.sh
+
+│    └── docker.sh
+
+└── .travis.yml</pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -398,15 +423,15 @@ ecs-deploy -c <span class="nv">$CLUSTER_NAME</span> -n <span class="nv">$SERVICE
 
 <p><br></p>
 
-<h2 id="environment-variables">Environment Variables</h2>
-
 <hr />
+
+<h2 id="environment-variables">Environment Variables</h2>
 
 <p><img src="/images/Travis/travis-settings.png" alt="travis-settings" /></p>
 
 <p><img src="/images/Travis/travis-Environment-Variables.png" alt="travis-Environment-Variables" /></p>
 
-<p>위 파일 설명에서 <code>$DOCKER_USERNAME</code> <code>$CLUSTER_NAME</code>과 같이  <code>$</code>로 시작하는 것들을 볼 수 있다. <code>deploy.sh</code>에서 <code>PAYH</code>와 <code>HOME</code>을 제외한 나머지는 Travis $ gem install travisCI setting에 있는 Environment Variables에 있는 내용을 참조하기 위해 $를 사용한다.</p>
+<p>위 파일 설명에서 <code>$DOCKER_USERNAME</code> <code>$CLUSTER_NAME</code>과 같이  <code>$</code>로 시작하는 것들을 볼 수 있다. <code>deploy.sh</code>에서 두 번째 줄에 있는 <code>PATH</code>와 <code>HOME</code>을 제외한 나머지는 Environment Variables에 있는 내용을 참조하기 위해 <code>$</code>를 사용한다.</p>
 
 <p><code>$DOCKER_USERNAME</code>은 Environment Variables의 <code>DOCKER_USERNAME</code>을 참조하겠다는 뜻이다. 그리고 sh 파일에는 없지만 <code>AWS_ACCESS_KEY_ID</code>, <code>AWS_SECRET_ACCESS_KEY</code> 그리고 <code>AWS_DEFAULT_REGION</code>을 추가로 입력해 줘야 한다.</p>
 

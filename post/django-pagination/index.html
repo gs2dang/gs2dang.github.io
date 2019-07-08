@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-06-28T14:37:47&#43;09:00" />
 <meta itemprop="dateModified" content="2019-06-28T14:37:47&#43;09:00" />
-<meta itemprop="wordCount" content="1572">
+<meta itemprop="wordCount" content="1567">
 
 
 
@@ -165,7 +165,7 @@
     <div class="post-content">
       
 
-<p>자주 이용하는 웹 페이지나 앱을 보면 페이지네이션 기능 구현을 볼 수 있다. 나 또한 이것을 구현하고 싶었기에 장고 공식문서와 구글 검색을 통해 만들어나가기로 했다. 아래 첫 번째 이미지는 처음 구현했을 때 모습이다. 내가 원하던 모습은 일정 범위만 보여주는 것이지 아래처럼 모든 페이지를 다 보여주는 것이 아니었다.</p>
+<p>자주 이용하는 웹 페이지나 앱을 보면 페이지네이션 기능 구현을 볼 수 있다. 나 또한 이것을 구현하고 싶었기에 장고 공식문서와 구글 검색을 통해 만들어나가기로 했다. 아래 첫 번째 이미지는 처음 구현했을 때 같은 모습이다. 내가 원하던 모습은 일정 범위만 보여주는 것이지 아래처럼 모든 페이지를 다 보여주는 것이 아니었다.</p>
 
 <p><img src="https://miro.medium.com/max/700/1*eIRJ_gPgprwHNRitHPgLRg.png" alt="https://medium.com/@sumitlni/paginate-properly-please-93e7ca776432" /></p>
 
@@ -177,7 +177,7 @@
 
 <p><img src="/images/Pagination/pagination-02.png" alt="pagination-02" /></p>
 
-<p>이제 일정 범위의 페이지만 보여준다. 나름 괜찮은 모습이다. 하지만 이 페이지네이션은 이동할 때 마다 범위가 고정이 되지 않았다. 화살표를 누르면 한 칸씩 왼/오른쪽으로 이동한다. 그럼 페이지 범위도 같이 바뀐다. 예를 들어 11페이지에서 12페이지로 이동을 하면 <code>7~15</code> 페이지가 고정되는 게 아니라 <code>8~16</code> 범위가 된다.</p>
+<p>이제 일정 범위의 페이지만 보여준다. 나름 괜찮은 모습이다. 하지만 이 페이지네이션은 범위가 고정되지 않았다. 화살표를 누르거나 숫자를 누르면 이동한다. 그럼 페이지 범위도 같이 바뀐다. 예를 들어 11페이지에서 12페이지로 이동을 하면 <code>7~15</code> 페이지가 고정되는 게 아니라 <code>8~16</code> 범위가 된다.</p>
 
 <p>여기서 좀 더 개선하고 싶었다. 일반 웹 사이트처럼 보여주고 싶었다. <code>1~10</code> 페이지라는 범위가 있다면 이 범위 내 어느 페이지를 이동하더라도 <code>1~10</code> 페이지 모습을 보여주고 싶었다.</p>
 
@@ -378,7 +378,7 @@
 </div>
 </div>
 <ul>
-<li>페이지 범위를 10으로 하기 위해 설정한다.</li>
+<li>페이지 범위를 <code>1~10</code>  <code>11~20</code> 처럼 하기 위해서 10으로 설정한다.</li>
 </ul>
 
 <h4 id="3">[3]</h4>
@@ -421,7 +421,7 @@
 <p><img src="/images/Pagination/pagination-update-03.png" alt="pagination-update-03" /></p>
 
 <ul>
-<li><p>전체 30 페이지가 있는데 현재 위치가 7페이지라면 end_index는 10이 된다. 그러면 if 조건이 맞지 않아 start_index는 0 end_index는 10이 되어 결국 1~10 페이지가 된다.</p></li>
+<li><p>전체 30 페이지가 있는데 현재 위치가 7페이지라면 end_index는 10이 된다. 그러면 if 조건이 맞지 않아 start_index는 0 end_index는 10이 되어 <code>1~10</code> 페이지가 된다.</p></li>
 
 <li><p>하지만 계산 결과(40)가 전체 페이지 수(34)보다 더 큰 경우에느 max_index 값을 end_index에 할당함으로써 실제 존재하는 페이지까지만 보여주도록 한다.</p></li>
 </ul>
@@ -579,7 +579,11 @@
           <a href="/tags/%ED%8E%98%EC%9D%B4%EC%A7%80%EB%84%A4%EC%9D%B4%EC%85%98/">페이지네이션</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/django-%EC%A1%B0%ED%9A%8C%EC%88%98-%EC%B2%98%EB%A6%AC/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Django 조회수 중복</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
         <a class="next" href="/post/travisci/">
             <span class="next-text nav-default">Travis CI를 이용해 자동화 배포를 하자</span>
             <span class="next-text nav-mobile">Next</span>
