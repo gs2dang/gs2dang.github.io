@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>마크다운 on 기록 저장소</title>
+    <link>https://gs2dang.github.io/tags/%EB%A7%88%ED%81%AC%EB%8B%A4%EC%9A%B4/</link>
+    <description>Recent content in 마크다운 on 기록 저장소</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 16 Jul 2019 01:56:10 +0900</lastBuildDate>
+    
+	<atom:link href="https://gs2dang.github.io/tags/%EB%A7%88%ED%81%AC%EB%8B%A4%EC%9A%B4/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>마크다운 정리</title>
+      <link>https://gs2dang.github.io/post/%EB%A7%88%ED%81%AC%EB%8B%A4%EC%9A%B4/</link>
+      <pubDate>Tue, 16 Jul 2019 01:56:10 +0900</pubDate>
+      
+      <guid>https://gs2dang.github.io/post/%EB%A7%88%ED%81%AC%EB%8B%A4%EC%9A%B4/</guid>
+      <description>목차 만들기 목차 만들기 가운데 위치 위와 같이 마크다운 내 목차를 만들기 위해서는 아래처럼 작성하면 된다. 1 2 1. [목차 만들기](#목차-만들기) 2. [가운데 위</description>
+    </item>
+    
+  </channel>
+</rss>

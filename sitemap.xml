@@ -3,6 +3,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://gs2dang.github.io/post/%EB%A7%88%ED%81%AC%EB%8B%A4%EC%9A%B4/</loc>
+    <lastmod>2019-07-16T01:56:10+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://gs2dang.github.io/post/django-%EC%A1%B0%ED%9A%8C%EC%88%98-%EC%B2%98%EB%A6%AC/</loc>
     <lastmod>2019-07-05T18:32:10+09:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -94,7 +101,7 @@
   
   <url>
     <loc>https://gs2dang.github.io/post/</loc>
-    <lastmod>2019-07-05T18:32:10+09:00</lastmod>
+    <lastmod>2019-07-16T01:56:10+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -164,7 +171,21 @@
   
   <url>
     <loc>https://gs2dang.github.io/</loc>
-    <lastmod>2019-07-05T18:32:10+09:00</lastmod>
+    <lastmod>2019-07-16T01:56:10+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://gs2dang.github.io/tags/%EB%A7%88%ED%81%AC%EB%8B%A4%EC%9A%B4/</loc>
+    <lastmod>2019-07-16T01:56:10+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://gs2dang.github.io/categories/%EB%A7%88%ED%81%AC%EB%8B%A4%EC%9A%B4/</loc>
+    <lastmod>2019-07-16T01:56:10+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -193,6 +214,20 @@
   <url>
     <loc>https://gs2dang.github.io/categories/%EC%84%A4%EC%B9%98/</loc>
     <lastmod>2018-09-10T17:28:48+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://gs2dang.github.io/tags/%EC%A0%95%EB%A6%AC/</loc>
+    <lastmod>2019-07-16T01:56:10+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://gs2dang.github.io/categories/%EC%A0%95%EB%A6%AC/</loc>
+    <lastmod>2019-07-16T01:56:10+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>

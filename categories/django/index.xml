@@ -17,7 +17,7 @@
       <pubDate>Fri, 05 Jul 2019 18:32:10 +0900</pubDate>
       
       <guid>https://gs2dang.github.io/post/django-%EC%A1%B0%ED%9A%8C%EC%88%98-%EC%B2%98%EB%A6%AC/</guid>
-      <description>조회수 중복 조회수 증가는 잘 작동했지만 한 가지 문제가 있었다. 중복 문제다. 조회수 올려주는 코드를 post_detail 에서 호출하게 된다. 그래서 게시글 읽으면 조회수가 1증가하</description>
+      <description>조회수 중복 조회수 증가는 잘 작동했지만 한 가지 문제가 있었다. 중복 문제다. 조회수 올려주는 코드는 post_detail 에서 호출하게 된다. 그래서 게시글 읽으면 조회수가 1 증가하</description>
     </item>
     
     <item>
