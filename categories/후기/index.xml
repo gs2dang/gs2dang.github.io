@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>후기 on 기록 저장소</title>
+    <link>https://gs2dang.github.io/categories/%ED%9B%84%EA%B8%B0/</link>
+    <description>Recent content in 후기 on 기록 저장소</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 24 Jul 2019 02:53:37 +0900</lastBuildDate>
+    
+	<atom:link href="https://gs2dang.github.io/categories/%ED%9B%84%EA%B8%B0/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>무작위 영단어 후기</title>
+      <link>https://gs2dang.github.io/post/%EB%AC%B4%EC%9E%91%EC%9C%84-%EC%98%81%EB%8B%A8%EC%96%B4-%ED%9B%84%EA%B8%B0/</link>
+      <pubDate>Wed, 24 Jul 2019 02:53:37 +0900</pubDate>
+      
+      <guid>https://gs2dang.github.io/post/%EB%AC%B4%EC%9E%91%EC%9C%84-%EC%98%81%EB%8B%A8%EC%96%B4-%ED%9B%84%EA%B8%B0/</guid>
+      <description>어떻게 만들게 됐는가 공무원 준비할 때다. 영어 공부를 하고 모르는 것은 단어장에 저장한다. 그리고 매일 아침에 개수를 정해서 단어 시험을 치른다. 하지만 매번 같은 위</description>
+    </item>
+    
+  </channel>
+</rss>

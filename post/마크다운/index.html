@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-07-16T01:56:10&#43;09:00" />
 <meta itemprop="dateModified" content="2019-07-16T01:56:10&#43;09:00" />
-<meta itemprop="wordCount" content="309">
+<meta itemprop="wordCount" content="393">
 
 
 
@@ -139,8 +139,9 @@
 <ul>
 <li><a href="#목차-만들기">목차 만들기</a></li>
 <li><a href="#가운데-위치">가운데 위치</a></li>
-<li><a href="#리스트-목록을-하고-싶을-때">리스트 목록을 - 하고 싶을 때</a></li>
+<li><a href="#리스트-목록으로-하고-싶을-때">리스트 목록으로 -하고 싶을 때</a></li>
 <li><a href="#이모지-사용">이모지 사용</a></li>
+<li><a href="#체크-박스">체크 박스</a></li>
 </ul>
 </nav>
   </div>
@@ -191,7 +192,7 @@
 <pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">center</span><span class="p">&gt;</span>반복 연습<span class="p">&lt;/</span><span class="nt">center</span><span class="p">&gt;</span></code></pre></td></tr></table>
 </div>
 </div>
-<h1 align="center">반복 연습</h1>
+<p><h1 align="center">반복 연습</h1></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-html" data-lang="html"><span class="lnt">1
@@ -204,10 +205,10 @@
 
 <hr />
 
-<h1 id="리스트-목록을-하고-싶을-때">리스트 목록을 - 하고 싶을 때</h1>
+<h1 id="리스트-목록으로-하고-싶을-때">리스트 목록으로 -하고 싶을 때</h1>
 
 <ul>
-<li>왼쪽 기호 대신에 <code>-</code> 기호를 사용하고 싶으면 <code>\-</code> 이렇게 하자.</li>
+<li>왼쪽 기호 대신에 <code>-</code> 기호를 사용하고 싶으면 <code>\-</code> 이렇게 입력하자.</li>
 </ul>
 
 <p>- 첫 번째</p>
@@ -227,6 +228,27 @@
 <p>😍</p>
 
 <p>☀️</p>
+
+<p><br></p>
+
+<hr />
+
+<h1 id="체크-박스">체크 박스</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">- [ ] 체크 박스</pre></td></tr></table>
+</div>
+</div>
+<ul class="task-list">
+<li><label><input type="checkbox" disabled class="task-list-item"> 체크 박스</label></li>
+
+<li><p>[x] 체크 박스</p></li>
+
+<li><p><code>-</code> 이거 하나만 입력하고 한 칸 띄면 맨 왼쪽의 동그라미가 나타난다. 여기서 <code>[</code> 입력 후 한 칸 띄고 <code>]</code> 입력 그리고 한 번 더 띄면 체크박스가 나타난다.</p></li>
+</ul>
 
 <p><br></p>
 
@@ -253,7 +275,11 @@
           <a href="/tags/%EC%A0%95%EB%A6%AC/">정리</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/%EB%AC%B4%EC%9E%91%EC%9C%84-%EC%98%81%EB%8B%A8%EC%96%B4-%ED%9B%84%EA%B8%B0/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">무작위 영단어 후기</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
         <a class="next" href="/post/django-%EC%A1%B0%ED%9A%8C%EC%88%98-%EC%B2%98%EB%A6%AC/">
             <span class="next-text nav-default">Django 조회수 중복</span>
             <span class="next-text nav-mobile">Next</span>
@@ -263,7 +289,20 @@
     </footer>
   </article>
         </div>
-        
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'gs2dang07';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   
   
 
@@ -274,6 +313,7 @@
 
     <footer id="footer" class="footer">
       <div class="social-links">
+      <a href="https://github.com/gs2dang" class="iconfont icon-github" title="github"></a>
   <a href="https://gs2dang.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 

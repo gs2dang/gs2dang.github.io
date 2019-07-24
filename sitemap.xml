@@ -3,6 +3,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://gs2dang.github.io/post/%EB%AC%B4%EC%9E%91%EC%9C%84-%EC%98%81%EB%8B%A8%EC%96%B4-%ED%9B%84%EA%B8%B0/</loc>
+    <lastmod>2019-07-24T02:53:37+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://gs2dang.github.io/post/%EB%A7%88%ED%81%AC%EB%8B%A4%EC%9A%B4/</loc>
     <lastmod>2019-07-16T01:56:10+09:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -101,7 +108,7 @@
   
   <url>
     <loc>https://gs2dang.github.io/post/</loc>
-    <lastmod>2019-07-16T01:56:10+09:00</lastmod>
+    <lastmod>2019-07-24T02:53:37+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -171,7 +178,7 @@
   
   <url>
     <loc>https://gs2dang.github.io/</loc>
-    <lastmod>2019-07-16T01:56:10+09:00</lastmod>
+    <lastmod>2019-07-24T02:53:37+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -256,6 +263,20 @@
   <url>
     <loc>https://gs2dang.github.io/categories/%ED%8E%98%EC%9D%B4%EC%A7%80%EB%84%A4%EC%9D%B4%EC%85%98/</loc>
     <lastmod>2019-06-28T14:37:47+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://gs2dang.github.io/tags/%ED%9B%84%EA%B8%B0/</loc>
+    <lastmod>2019-07-24T02:53:37+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://gs2dang.github.io/categories/%ED%9B%84%EA%B8%B0/</loc>
+    <lastmod>2019-07-24T02:53:37+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
