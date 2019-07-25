@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>[1] Scrapy를 이용해 네이버 뉴스 가져오기 - 기록 저장소</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gs2dang" /><meta name="description" content="Scrapy를 이용해 네이버 뉴스 가져오기 Scrapy란 웹 사이트에서 필요한 데이터를 가져올 수 있도록 도와주는 프레임워크다. Python 3.6.8과 함께 네이버 뉴" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.53 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://gs2dang.github.io/post/scrapy-1/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="[1] Scrapy를 이용해 네이버 뉴스 가져오기" />
+<meta property="og:description" content="Scrapy를 이용해 네이버 뉴스 가져오기 Scrapy란 웹 사이트에서 필요한 데이터를 가져올 수 있도록 도와주는 프레임워크다. Python 3.6.8과 함께 네이버 뉴" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gs2dang.github.io/post/scrapy-1/" /><meta property="article:published_time" content="2019-07-25T01:18:22&#43;09:00"/>
+<meta property="article:modified_time" content="2019-07-25T01:18:22&#43;09:00"/>
+
+<meta itemprop="name" content="[1] Scrapy를 이용해 네이버 뉴스 가져오기">
+<meta itemprop="description" content="Scrapy를 이용해 네이버 뉴스 가져오기 Scrapy란 웹 사이트에서 필요한 데이터를 가져올 수 있도록 도와주는 프레임워크다. Python 3.6.8과 함께 네이버 뉴">
+
+
+<meta itemprop="datePublished" content="2019-07-25T01:18:22&#43;09:00" />
+<meta itemprop="dateModified" content="2019-07-25T01:18:22&#43;09:00" />
+<meta itemprop="wordCount" content="1526">
+
+
+
+<meta itemprop="keywords" content="scrapy,crawling,정리," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="[1] Scrapy를 이용해 네이버 뉴스 가져오기"/>
+<meta name="twitter:description" content="Scrapy를 이용해 네이버 뉴스 가져오기 Scrapy란 웹 사이트에서 필요한 데이터를 가져올 수 있도록 도와주는 프레임워크다. Python 3.6.8과 함께 네이버 뉴"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">기록 저장소</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">홈</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">아카이브</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">태그</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">카테고리</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">기록 저장소</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">홈</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">아카이브</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">태그</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">카테고리</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">[1] Scrapy를 이용해 네이버 뉴스 가져오기</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-07-25 </span>
+        <div class="post-category">
+            <a href="/categories/scrapy/"> scrapy </a>
+            <a href="/categories/crawling/"> crawling </a>
+            <a href="/categories/%EC%A0%95%EB%A6%AC/"> 정리 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#scrapy를-이용해-네이버-뉴스-가져오기">Scrapy를 이용해 네이버 뉴스 가져오기</a>
+<ul>
+<li><a href="#설치">설치</a></li>
+<li><a href="#시작">시작</a>
+<ul>
+<li><a href="#새-프로젝트-만들기">새 프로젝트 만들기</a></li>
+<li><a href="#scrapy-shell">Scrapy Shell</a></li>
+<li><a href="#실행">실행</a></li>
+<li><a href="#span-text-그리고-small-author-데이터-가져오기">span.text 그리고 small.author 데이터 가져오기</a></li>
+<li><a href="#div-tags-안에-있는-태그들-가져오기">div.tags 안에 있는 태그들 가져오기</a></li>
+<li><a href="#하나로-합치기">하나로 합치기</a></li>
+<li><a href="#json-형식으로-저장하기">json 형식으로 저장하기</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h1 id="scrapy를-이용해-네이버-뉴스-가져오기">Scrapy를 이용해 네이버 뉴스 가져오기</h1>
+
+<p>Scrapy란 웹 사이트에서 필요한 데이터를 가져올 수 있도록 도와주는 프레임워크다. Python 3.6.8과 함께 네이버 뉴스 크롤링을 해본다.</p>
+
+<p><br></p>
+
+<h2 id="설치">설치</h2>
+
+<p><img src="/images/scrapy/install-scrapy.png" alt="install-scrapy" /></p>
+
+<p><br></p>
+
+<h2 id="시작">시작</h2>
+
+<h3 id="새-프로젝트-만들기">새 프로젝트 만들기</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">$ scrapy startproject &lt;project-name&gt;
+
+New Scrapy project &#39;newscrawling&#39;, using template directory &#39;/home/feynman/.pyenv/versions/3.6.8/envs/crawler/lib/python3.6/site-packages/scrapy/templates/project&#39;, created in:
+    /home/feynman/Projects/crawler/newscrawling
+
+You can start your first spider with:
+    cd newscrawling
+    scrapy genspider example example.com</pre></td></tr></table>
+</div>
+</div>
+<p>새 Scrapy 프로젝트를 설정한다. 여기서는 <code>newscrawling</code>를 입력한다. 그러면 현재 디렉터리에 newscrawling 폴더가 생성되는 것을 확인할 수 있다.</p>
+
+<p><br></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">.
+├── newscrawling
+│   ├── newscrawling		# project&#39;s Python module, you&#39;ll import your code from here
+│   │   ├── __init__.py
+│   │   ├── items.py		# project items definition file
+│   │   ├── middlewares.py	# project middlewares file
+│   │   ├── pipelines.py	# project pipelines file
+│   │   ├── __pycache__
+│   │   ├── settings.py		# project settings file
+│   │   └── spiders			# a directory where you&#39;ll later put your spiders
+│   │       ├── __init__.py
+│   │       └── __pycache__
+│   └── scrapy.cfg 			# deploy configuration file</pre></td></tr></table>
+</div>
+</div>
+<p><br></p>
+
+<h3 id="scrapy-shell">Scrapy Shell</h3>
+
+<p>Scrapy Shell은 프로젝트 없이 빠르게 데이터를 가져올 수 있도록 해준다. 방금 생성한 프로젝트로 네이버 뉴스를 가져오기 전에 먼저 <a href="https://docs.scrapy.org/en/latest/topics/shell.html#scrapy-shell">Scrapy Shell</a>로 간단한 <a href="https://docs.scrapy.org/en/latest/intro/tutorial.html#extracting-quotes-and-authors">예제</a>부터 따라한다. 지금부터 아래 HTML에 있는 데이터를 가져오도록 한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">&lt;div class=&#34;quote&#34;&gt;
+    &lt;span class=&#34;text&#34;&gt;“The world as we have created it is a process of our
+    thinking. It cannot be changed without changing our thinking.”&lt;/span&gt;
+    &lt;span&gt;
+        by &lt;small class=&#34;author&#34;&gt;Albert Einstein&lt;/small&gt;
+        &lt;a href=&#34;/author/Albert-Einstein&#34;&gt;(about)&lt;/a&gt;
+    &lt;/span&gt;
+    &lt;div class=&#34;tags&#34;&gt;
+        Tags:
+        &lt;a class=&#34;tag&#34; href=&#34;/tag/change/page/1/&#34;&gt;change&lt;/a&gt;
+        &lt;a class=&#34;tag&#34; href=&#34;/tag/deep-thoughts/page/1/&#34;&gt;deep-thoughts&lt;/a&gt;
+        &lt;a class=&#34;tag&#34; href=&#34;/tag/thinking/page/1/&#34;&gt;thinking&lt;/a&gt;
+        &lt;a class=&#34;tag&#34; href=&#34;/tag/world/page/1/&#34;&gt;world&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</pre></td></tr></table>
+</div>
+</div>
+<p><br></p>
+
+<h3 id="실행">실행</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">$ scrapy shell &#39;http://quotes.toscrape.com&#39;</pre></td></tr></table>
+</div>
+</div>
+<p><br></p>
+
+<h3 id="span-text-그리고-small-author-데이터-가져오기">span.text 그리고 small.author 데이터 가져오기</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">&gt;&gt;&gt; response.css(&#34;span.text::text&#34;).get()
+
+&#39;“The world as we have created it is a process of our thinking. It cannot be changed without changing our thinking.”&#39;</pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">&gt;&gt;&gt; response.css(&#34;small.author::text&#34;).get()
+
+&#39;Albert Einstein&#39;</pre></td></tr></table>
+</div>
+</div>
+<p><br></p>
+
+<h3 id="div-tags-안에-있는-태그들-가져오기">div.tags 안에 있는 태그들 가져오기</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">&gt;&gt;&gt; response.css(&#39;div.tags a.tag::text&#39;).getall()
+
+[&#39;change&#39;,
+ &#39;deep-thoughts&#39;,
+ &#39;thinking&#39;,
+ ---생략---
+ &#39;humor&#39;,
+ &#39;obvious&#39;,
+ &#39;simile&#39;]</pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">&gt;&gt;&gt; response.css(&#39;div.tags a.tag::text&#39;).get()
+
+change</pre></td></tr></table>
+</div>
+</div>
+<p>두 가지 확인할 게 있다. 첫 번째는 위 HTML에 있는 <code>a.tag</code> 내용과 다르게 더 많은 데이터가 출력되는 거다. 그 이유는 데이터 가져올 범위를 전체(<code>response.css()</code>)로 잡았기 때문이다.  특정 범위에 있는 데이터를 가져오고 싶다면 아래처럼 입력하자.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">&gt;&gt;&gt; quote = response.css(&#34;div.quote&#34;)[0]
+
+&gt;&gt;&gt; quote.css(&#39;div.tags a.tag::text&#39;).getall()
+[&#39;change&#39;, &#39;deep-thoughts&#39;, &#39;thinking&#39;, &#39;world&#39;]</pre></td></tr></table>
+</div>
+</div>
+<p><br></p>
+
+<p><code>response.css(&quot;div.quote&quot;)</code>를 입력하면 <code>quote</code> HTML 선택자 리스트를 얻는다. [0]은 이 리스트의 0번 요소 선택자다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">[&lt;Selector xpath=&#34;descendant-or-self::div[@class and contains(concat(&#39; &#39;, normalize-space(@class), &#39; &#39;), &#39; quote &#39;)]&#34; data=&#39;&lt;div class=&#34;quote&#34; itemscope itemtype=&#34;h&#39;&gt;,
+ &lt;Selector xpath=&#34;descendant-or-self::div[@class and contains(concat(&#39; &#39;, normalize-space(@class), &#39; &#39;), &#39; quote &#39;)]&#34; data=&#39;&lt;div class=&#34;quote&#34; itemscope itemtype=&#34;h&#39;&gt;,
+ &lt;Selector xpath=&#34;descendant-or-self::div[@class and contains(concat(&#39; &#39;, normalize-space(@class), &#39; &#39;), &#39; quote &#39;)]&#34; data=&#39;&lt;div class=&#34;quote&#34; itemscope itemtype=&#34;h&#39;&gt;,
+ &lt;Selector xpath=&#34;descendant-or-self::div[@class and contains(concat(&#39; &#39;, normalize-space(@class), &#39; &#39;), &#39; quote &#39;)]&#34; data=&#39;&lt;div class=&#34;quote&#34; itemscope itemtype=&#34;h&#39;&gt;,
+ &lt;Selector xpath=&#34;descendant-or-self::div[@class and contains(concat(&#39; &#39;, normalize-space(@class), &#39; &#39;), &#39; quote &#39;)]&#34; data=&#39;&lt;div class=&#34;quote&#34; itemscope itemtype=&#34;h&#39;&gt;,
+ &lt;Selector xpath=&#34;descendant-or-self::div[@class and contains(concat(&#39; &#39;, normalize-space(@class), &#39; &#39;), &#39; quote &#39;)]&#34; data=&#39;&lt;div class=&#34;quote&#34; itemscope itemtype=&#34;h&#39;&gt;,
+ &lt;Selector xpath=&#34;descendant-or-self::div[@class and contains(concat(&#39; &#39;, normalize-space(@class), &#39; &#39;), &#39; quote &#39;)]&#34; data=&#39;&lt;div class=&#34;quote&#34; itemscope itemtype=&#34;h&#39;&gt;,
+ &lt;Selector xpath=&#34;descendant-or-self::div[@class and contains(concat(&#39; &#39;, normalize-space(@class), &#39; &#39;), &#39; quote &#39;)]&#34; data=&#39;&lt;div class=&#34;quote&#34; itemscope itemtype=&#34;h&#39;&gt;,
+ &lt;Selector xpath=&#34;descendant-or-self::div[@class and contains(concat(&#39; &#39;, normalize-space(@class), &#39; &#39;), &#39; quote &#39;)]&#34; data=&#39;&lt;div class=&#34;quote&#34; itemscope itemtype=&#34;h&#39;&gt;,
+ &lt;Selector xpath=&#34;descendant-or-self::div[@class and contains(concat(&#39; &#39;, normalize-space(@class), &#39; &#39;), &#39; quote &#39;)]&#34; data=&#39;&lt;div class=&#34;quote&#34; itemscope itemtype=&#34;h&#39;&gt;]</pre></td></tr></table>
+</div>
+</div>
+<p><br></p>
+
+<p>두 번째는 <code>getall()</code> 과 <code>get()</code>이다.</p>
+
+<ul>
+<li><code>getall()</code>은 하나 이상의 데이터를 리스트에 담아 모두 보여주고 담을 데이터가 없다면 빈 리스트를 반환한다.</li>
+<li><code>get()</code>은 조건에 맞는 데이터가 여러 개가 있다면 첫 번째 데이터를 반환한다. 그리고 조건에 맞는 데이터가 하나도 없다면 <code>None</code>을 반환한다. 특정 위치에 있는 데이터를 가져오고 싶다면 css() 뒤에 <code>[인덱스]</code> 를 넣는다.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">&gt;&gt;&gt; response.css(&#39;div.tags a.tag::text&#39;)[1].get()
+
+&#39;deep-thoughts&#39;
+
+&gt;&gt;&gt; response.css(&#39;div.tags a.tag::text&#39;)[-1].get()                         
+&#39;simile&#39;</pre></td></tr></table>
+</div>
+</div>
+<p><br></p>
+
+<h3 id="하나로-합치기">하나로 합치기</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">quote</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&#34;div.quote&#34;</span><span class="p">):</span> 
+    <span class="n">text</span> <span class="o">=</span> <span class="n">quote</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&#34;span.text::text&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> 
+    <span class="n">author</span> <span class="o">=</span> <span class="n">quote</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&#34;small.author::text&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> 
+    <span class="n">tags</span> <span class="o">=</span> <span class="n">quote</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&#34;div.tags a.tag::text&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">getall</span><span class="p">()</span> 
+    <span class="k">print</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="p">,</span> <span class="n">author</span><span class="o">=</span><span class="n">author</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="n">tags</span><span class="p">))</span> 
+
+<span class="p">{</span><span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="s1">&#39;“The world as we have created it is a process of our thinking. It cannot be changed without changing our thinking.”&#39;</span><span class="p">,</span> <span class="s1">&#39;author&#39;</span><span class="p">:</span> <span class="s1">&#39;Albert Einstein&#39;</span><span class="p">,</span> <span class="s1">&#39;tags&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="s1">&#39;deep-thoughts&#39;</span><span class="p">,</span> <span class="s1">&#39;thinking&#39;</span><span class="p">,</span> <span class="s1">&#39;world&#39;</span><span class="p">]}</span>
+<span class="o">...</span><span class="err">생략</span><span class="o">...</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><br></p>
+
+<h3 id="json-형식으로-저장하기">json 형식으로 저장하기</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># newscrawling/spiders/quotes.py</span>
+<span class="kn">import</span> <span class="nn">scrapy</span>
+
+<span class="k">class</span> <span class="nc">NewsSpider</span><span class="p">(</span><span class="n">scrapy</span><span class="o">.</span><span class="n">Spider</span><span class="p">):</span>
+    <span class="c1"># spider 식별. 하나의 프로젝트에서 똑같은 이름을 가진 spider가 있으면 안 된다.</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&#34;quotes&#34;</span>
+    <span class="n">start_urls</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;http://quotes.toscrape.com&#39;</span>
+    <span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">quote</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&#34;div.quote&#34;</span><span class="p">):</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">quote</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&#34;span.text::text&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+            <span class="n">author</span> <span class="o">=</span> <span class="n">quote</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&#34;small.author::text&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+            <span class="n">tags</span> <span class="o">=</span> <span class="n">quote</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&#34;div.tags a.tag::text&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">getall</span><span class="p">()</span>
+            <span class="k">yield</span> <span class="p">{</span>
+                <span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span>
+                <span class="s1">&#39;author&#39;</span><span class="p">:</span> <span class="n">author</span><span class="p">,</span>
+                <span class="s1">&#39;tags&#39;</span><span class="p">:</span> <span class="n">tags</span>
+            <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>이전에 만든 프로젝트에 코드를 입력한다. 그리고 Scrapy프로젝트의 최상단 디렉터리로 이동해 명령어를 입력한다. 그러면 quotes.json 파일이 생성되는 것을 확인할 수 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">.
+├── newscrawling # 여기 위치에서 입력
+│   ├── newscrawling 
+│   │   ├── __init__.py
+│   │   ├── ...생략...    
+│   ├── quotes.json
+│   └── scrapy.cfg</pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">scrapy crawl quotes -o quotes.json</pre></td></tr></table>
+</div>
+</div>
+<p><img src="/images/scrapy/json.png" alt="json" /></p>
+
+<p><br></p>
+
+<p>다음에는 위 내용을 가지고 네이버 뉴스 제목을 가져오도록 한다.</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gs2dang</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-07-25
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/scrapy/">scrapy</a>
+          <a href="/tags/crawling/">crawling</a>
+          <a href="/tags/%EC%A0%95%EB%A6%AC/">정리</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/%EB%AC%B4%EC%9E%91%EC%9C%84-%EC%98%81%EB%8B%A8%EC%96%B4-%ED%9B%84%EA%B8%B0/">
+            <span class="next-text nav-default">무작위 영단어 후기</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'gs2dang07';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/gs2dang" class="iconfont icon-github" title="github"></a>
+  <a href="https://gs2dang.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">gs2dang</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-142997929-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

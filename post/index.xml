@@ -6,10 +6,19 @@
     <description>Recent content in Posts on 기록 저장소</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 24 Jul 2019 02:53:37 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 25 Jul 2019 01:18:22 +0900</lastBuildDate>
     
 	<atom:link href="https://gs2dang.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[1] Scrapy를 이용해 네이버 뉴스 가져오기</title>
+      <link>https://gs2dang.github.io/post/scrapy-1/</link>
+      <pubDate>Thu, 25 Jul 2019 01:18:22 +0900</pubDate>
+      
+      <guid>https://gs2dang.github.io/post/scrapy-1/</guid>
+      <description>Scrapy를 이용해 네이버 뉴스 가져오기 Scrapy란 웹 사이트에서 필요한 데이터를 가져올 수 있도록 도와주는 프레임워크다. Python 3.6.8과 함께 네이버 뉴</description>
+    </item>
     
     <item>
       <title>무작위 영단어 후기</title>

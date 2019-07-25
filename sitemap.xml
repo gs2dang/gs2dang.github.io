@@ -3,6 +3,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://gs2dang.github.io/post/scrapy-1/</loc>
+    <lastmod>2019-07-25T01:18:22+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://gs2dang.github.io/post/%EB%AC%B4%EC%9E%91%EC%9C%84-%EC%98%81%EB%8B%A8%EC%96%B4-%ED%9B%84%EA%B8%B0/</loc>
     <lastmod>2019-07-24T02:53:37+09:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -108,7 +115,7 @@
   
   <url>
     <loc>https://gs2dang.github.io/post/</loc>
-    <lastmod>2019-07-24T02:53:37+09:00</lastmod>
+    <lastmod>2019-07-25T01:18:22+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -156,6 +163,20 @@
   </url>
   
   <url>
+    <loc>https://gs2dang.github.io/tags/crawling/</loc>
+    <lastmod>2019-07-25T01:18:22+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://gs2dang.github.io/categories/crawling/</loc>
+    <lastmod>2019-07-25T01:18:22+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://gs2dang.github.io/tags/hugo/</loc>
     <lastmod>2019-05-17T17:28:48+09:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -170,6 +191,20 @@
   </url>
   
   <url>
+    <loc>https://gs2dang.github.io/tags/scrapy/</loc>
+    <lastmod>2019-07-25T01:18:22+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://gs2dang.github.io/categories/scrapy/</loc>
+    <lastmod>2019-07-25T01:18:22+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://gs2dang.github.io/tags/ubuntu/</loc>
     <lastmod>2018-09-10T17:28:48+09:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -178,7 +213,7 @@
   
   <url>
     <loc>https://gs2dang.github.io/</loc>
-    <lastmod>2019-07-24T02:53:37+09:00</lastmod>
+    <lastmod>2019-07-25T01:18:22+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -227,14 +262,14 @@
   
   <url>
     <loc>https://gs2dang.github.io/tags/%EC%A0%95%EB%A6%AC/</loc>
-    <lastmod>2019-07-16T01:56:10+09:00</lastmod>
+    <lastmod>2019-07-25T01:18:22+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://gs2dang.github.io/categories/%EC%A0%95%EB%A6%AC/</loc>
-    <lastmod>2019-07-16T01:56:10+09:00</lastmod>
+    <lastmod>2019-07-25T01:18:22+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
