@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>[2/2] Scrapy를 이용해 네이버 뉴스 제목 가져오기 - 기록 저장소</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gs2dang" /><meta name="description" content="네이버 뉴스에서 헤드라인 뉴스, 정치, 경제 &amp;hellip; IT/과학 항목에 나열되어 있는 뉴스 제목을 크롤링한다. 크롤링을 시작하기 전에 먼저 F12 개발자 도구를 확인한다. 각" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.53 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://gs2dang.github.io/post/scrapy-2/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="[2/2] Scrapy를 이용해 네이버 뉴스 제목 가져오기" />
+<meta property="og:description" content="네이버 뉴스에서 헤드라인 뉴스, 정치, 경제 &hellip; IT/과학 항목에 나열되어 있는 뉴스 제목을 크롤링한다. 크롤링을 시작하기 전에 먼저 F12 개발자 도구를 확인한다. 각" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gs2dang.github.io/post/scrapy-2/" /><meta property="article:published_time" content="2019-07-27T01:24:07&#43;09:00"/>
+<meta property="article:modified_time" content="2019-07-27T01:24:07&#43;09:00"/>
+
+<meta itemprop="name" content="[2/2] Scrapy를 이용해 네이버 뉴스 제목 가져오기">
+<meta itemprop="description" content="네이버 뉴스에서 헤드라인 뉴스, 정치, 경제 &hellip; IT/과학 항목에 나열되어 있는 뉴스 제목을 크롤링한다. 크롤링을 시작하기 전에 먼저 F12 개발자 도구를 확인한다. 각">
+
+
+<meta itemprop="datePublished" content="2019-07-27T01:24:07&#43;09:00" />
+<meta itemprop="dateModified" content="2019-07-27T01:24:07&#43;09:00" />
+<meta itemprop="wordCount" content="1866">
+
+
+
+<meta itemprop="keywords" content="scrapy,crawling,정리," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="[2/2] Scrapy를 이용해 네이버 뉴스 제목 가져오기"/>
+<meta name="twitter:description" content="네이버 뉴스에서 헤드라인 뉴스, 정치, 경제 &hellip; IT/과학 항목에 나열되어 있는 뉴스 제목을 크롤링한다. 크롤링을 시작하기 전에 먼저 F12 개발자 도구를 확인한다. 각"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">기록 저장소</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">홈</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">아카이브</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">태그</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">카테고리</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">기록 저장소</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">홈</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">아카이브</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">태그</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">카테고리</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">[2/2] Scrapy를 이용해 네이버 뉴스 제목 가져오기</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-07-27 </span>
+        <div class="post-category">
+            <a href="/categories/scrapy/"> scrapy </a>
+            <a href="/categories/crawling/"> crawling </a>
+            <a href="/categories/%EC%A0%95%EB%A6%AC/"> 정리 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#scrapy-shell로-확인">Scrapy shell로 확인</a></li>
+<li><a href="#헤드라인-기사-제목-가져오기">헤드라인 기사 제목 가져오기</a></li>
+<li><a href="#다른-기사-제목-가져오기">다른 기사 제목 가져오기</a></li>
+<li><a href="#모든-기사-제목-가져오도록-두-코드-합치기">모든 기사 제목 가져오도록 두 코드 합치기</a></li>
+<li><a href="#후기">후기</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<p><img src="/images/scrapy/naver-news-main.png" alt="naver-news-main" /></p>
+
+<p><a href="https://news.naver.com/main/home.nhn">네이버 뉴스</a>에서 헤드라인 뉴스, 정치, 경제 &hellip; IT/과학 항목에 나열되어 있는 뉴스 제목을 크롤링한다. 크롤링을 시작하기 전에 먼저 <code>F12</code> 개발자 도구를 확인한다.</p>
+
+<p><br></p>
+
+<p><img src="/images/scrapy/html-1.png" alt="" /></p>
+
+<p>각 주제들은 <code>div#container -&gt; div#main_content 밑에 여러 div.main_component</code>까지는 똑같다. 하지만 헤드라인과 정치, 경제 &hellip; IT/과학 주제는 다른 위치에 있다. 그래서 헤드라인과 그 외 주제를 나눠서 크롤링한다. 바로 프로젝트에 코드를 적기 보다는 Scrapy shell로 먼저 데이터를 가져와 본다.</p>
+
+<p><br></p>
+
+<h3 id="scrapy-shell로-확인">Scrapy shell로 확인</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">scrapy shell &#39;https://news.naver.com/main/home.nhn&#39;</pre></td></tr></table>
+</div>
+</div>
+<p><br></p>
+
+<h3 id="헤드라인-기사-제목-가져오기">헤드라인 기사 제목 가져오기</h3>
+
+<p><img src="/images/scrapy/headline-1.png" alt="headline-1" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">[1] headline = response.css(&#34;div#main_content div.main_component&#34;)[0]
+[2] headline.css(&#34;ul.hdline_article_list div.hdline_article_tit a::text&#34;).getall()</pre></td></tr></table>
+</div>
+</div>
+<p><strong>[1]</strong>  div.main_component까지 입력하면 해당 범위에 있는 모든 내용들을 리스트에 담겨서 나온다. 헤드라인 정보가 필요하니 헤드라인이 위치한 [0]을 마지막에 적어준다.</p>
+
+<p><strong>[2]</strong> 제목이 있는 곳에 이동하여 문자만 출력하도록 ::text 옵션을 주고 모든 기사를 불러오기 위해서 getall()을 입력한다.</p>
+
+<p>공백 제거할 때는 <code>strip()</code> 옵션을 주는데 [2] 뒤에 붙여주면 에러가 발생한다.</p>
+
+<blockquote>
+<p>AttributeError: &lsquo;list&rsquo; object has no attribute &lsquo;strip&rsquo;</p>
+</blockquote>
+
+<p>for문을 이용해 리스트 각 요소에 strip() 옵션을 주자.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">titles = headline.css(&#34;ul.hdline_article_list div.hdline_article_tit a.lnk_hdline_article::text&#34;).getall()
+
+for title in titles:
+	print(title.strip())
+	
+“대성, ‘불법영업 적발되면 책임진다’는 각서 썼다”
+헛간에 신생아 버린 &#39;비정한 엄마&#39; 검거…&#34;죄책감에 마음 아팠다&#34;
+美 2분기 경제성장률 2.1%…시장예상 웃돌아
+40대 남성 쇠파이프 난동…7명 다쳐
+신용카드 정보 57만건 유출됐다</pre></td></tr></table>
+</div>
+</div>
+<p>잘 나오는 것을 확인할 수 있다. 그러면 위 내용들을 spiders에 적고 Scrapy 프로젝트의 최상단 디렉터리에서 실행한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># newscrawling/spiders/quotes.py</span>
+<span class="kn">import</span> <span class="nn">scrapy</span>
+
+<span class="k">class</span> <span class="nc">NaverNewsSpider</span><span class="p">(</span><span class="n">scrapy</span><span class="o">.</span><span class="n">Spider</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&#34;navernews&#34;</span>
+    <span class="n">start_urls</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;https://news.naver.com/main/home.nhn&#39;</span>
+    <span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+        <span class="n">headline</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&#34;div#main_content div.main_component&#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">titles</span> <span class="o">=</span> <span class="n">headline</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&#34;ul.hdline_article_list div.hdline_article_tit a.lnk_hdline_article::text&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">getall</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">title</span> <span class="ow">in</span> <span class="n">titles</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="p">{</span>
+                <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">title</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">scrapy crawl navernews -o news.json</pre></td></tr></table>
+</div>
+</div>
+<p><br></p>
+
+<p>news.json 파일이 생성되지만 안에 내용은 비어있다. 분명 scrapy shell에서는 잘 나오는 것을 확인했는데 왜 안 될까?</p>
+
+<p><img src="/images/scrapy/result-1.png" alt="result-1" /></p>
+
+<p><br></p>
+
+<p>이유는 robots.txt 때문이다. <a href="[https://ko.wikipedia.org/wiki/%EB%A1%9C%EB%B4%87_%EB%B0%B0%EC%A0%9C_%ED%91%9C%EC%A4%80](https://ko.wikipedia.org/wiki/로봇_배제_표준)">위키피디아</a>에 이렇게 설명되어 있다.</p>
+
+<blockquote>
+<p><strong>로봇 배제 표준</strong>은 <a href="https://ko.wikipedia.org/wiki/웹_사이트">웹 사이트</a>에 로봇이 접근하는 것을 방지하기 위한 규약으로, 일반적으로 접근 제한에 대한 설명을 <strong>robots.txt</strong>에 기술한다.</p>
+
+<p>이 규약은 <a href="https://ko.wikipedia.org/wiki/1994년">1994년</a> 6월에 처음 만들어졌고, 아직 이 규약에 대한 <a href="https://ko.wikipedia.org/wiki/RFC">RFC</a>는 없다.</p>
+
+<p>이 규약은 권고안이며, 로봇이 robots.txt 파일을 읽고 접근을 중지하는 것을 목적으로 한다. 따라서, 접근 방지 설정을 하였다고 해도, 다른 사람들이 그 파일에 접근할 수 있다. <a href="https://www.twinword.co.kr/blog/basic-technical-seo/">robots.txt 파일은 항상 사이트의 루트 디렉토리에 위치</a>해야 한다.</p>
+</blockquote>
+
+<p><code>https://news.naver.com/robots.txt</code>로 확인하면 네이버 뉴스 모든 문서에 대한 접근을 차단했다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">User-agent: Yeti
+Allow: /main/imagemontage
+Disallow: /
+User-agent: *
+Disallow: /</pre></td></tr></table>
+</div>
+</div>
+<p><br></p>
+
+<p>그러면 제목을 가져올 수 없는 것일까? Scrapy 프로젝트 settings.py를 보면 이 설정을 볼 수 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># Obey robots.txt rules</span>
+<span class="n">ROBOTSTXT_OBEY</span> <span class="o">=</span> <span class="bp">True</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>robots 규칙을 따를 것인지 무시할 것인지 설정하는 것이 나오는데, 여기서 <code>False</code>를 주면 네이버가 정한 규칙을 무시하고 제목을 가져올 수 있다. False를 주고 터미널에 명령어를 다시 입력하자.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">scrapy crawl navernews -o news.json</pre></td></tr></table>
+</div>
+</div>
+<p><br></p>
+
+<p>파일이 만들어지고 안에 내용이 있기는 하다. 근데 다른 결과가 나왔다.</p>
+
+<p><img src="/images/scrapy/result-2.png" alt="result-2" /></p>
+
+<blockquote>
+<p>왜 유니코드로 나오는지 확인해야 한다. 꼭! 알아보자.</p>
+</blockquote>
+
+<p><br></p>
+
+<p>구글에 scarapy unicode 라 입력하면 <a href="https://stackoverflow.com/questions/39582409/how-can-i-get-an-output-in-utf-8-encoded-unicode-from-scrapy?rq=1">스택오버플로</a> 질문이 나오는데, 여기서 <a href="https://stackoverflow.com/users/114795/mikhail-korobov">Mikhail Korobov</a>님이 답변한 옵션 <code>FEED_EXPORT_ENCODING = &quot;utf-8&quot;</code> 을 settings.py에 넣어준다. 그리고 다시 터미널에 명령어를 입력하자. 이번에는 제대로 된 문자열을 볼 수가 있을 것이다. 이와 같은 방식으로 헤드라인 외 나머지 기사 제목들을 가져온다.</p>
+
+<p><img src="/images/scrapy/result-3.png" alt="result-3" /></p>
+
+<p><br></p>
+
+<h3 id="다른-기사-제목-가져오기">다른 기사 제목 가져오기</h3>
+
+<p>다시 Scrapy shell을 이용해 제목을 가져오도록 한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">scrapy shell &#39;https://news.naver.com/main/home.nhn&#39;</pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">news</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&#34;div#main_content div.main_component div.com_list&#34;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">title</span> <span class="ow">in</span> <span class="n">news</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&#34;ul.mlist2 a strong::text&#34;</span><span class="p">):</span>
+    <span class="k">yield</span> <span class="p">{</span>
+        <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">title</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+    <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><img src="/images/scrapy/result-4.png" alt="" /></p>
+
+<p><br></p>
+
+<h3 id="모든-기사-제목-가져오도록-두-코드-합치기">모든 기사 제목 가져오도록 두 코드 합치기</h3>
+
+<p>헤드라인 기사 제목과 그 외 기사 제목 모두 잘 가져오는 것을 확인 했다면 이제 하나로 합친다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">scrapy</span>
+
+<span class="k">class</span> <span class="nc">NaverNewsSpider</span><span class="p">(</span><span class="n">scrapy</span><span class="o">.</span><span class="n">Spider</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&#34;navernews&#34;</span>
+    <span class="n">start_urls</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;https://news.naver.com/main/home.nhn&#39;</span>
+    <span class="p">]</span>
+	
+    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&#34;div#main_content div.main_component&#34;</span><span class="p">)):</span>
+            <span class="c1"># 헤드라인</span>
+            <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">titles</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&#34;ul.hdline_article_list div.hdline_article_tit a.lnk_hdline_article::text&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">getall</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">title</span> <span class="ow">in</span> <span class="n">titles</span><span class="p">:</span>
+                    <span class="k">yield</span> <span class="p">{</span>
+                        <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">title</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                    <span class="p">}</span>
+
+            <span class="c1"># 헤드라인 외</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">titles</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s2">&#34;ul.mlist2 a strong::text&#34;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">title</span> <span class="ow">in</span> <span class="n">titles</span><span class="p">:</span>
+                    <span class="k">yield</span> <span class="p">{</span>
+                        <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">title</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+                    <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><strong>[1]</strong> 각 주제들은 <code>div#main_content div.main_component</code> 위치에 공통적으로 있다. 그다음 헤드라인이냐 아니냐에 따라 나뉜다. <code>enumerate</code> 옵션을 준 이유는 index와 데이터로 조건문에 사용하고 범위를 한정 지을 것이다.</p>
+
+<p><strong>[2]</strong> 헤드라인 기사와 그 외 기사들의 위치는 다르다. 조건을 index로 하고 다른 코드 처리를 한다. 그리고 response.css 보다는 data.css를 사용해 범위를 줄이도록 한다.</p>
+
+<p><strong>[3]</strong> 한 번 더 for문으로 리스트에 있는 내용을 하나씩 가져온다.</p>
+
+<p><br></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">scrapy crawl navernews -o news.json </pre></td></tr></table>
+</div>
+</div>
+<p>마지막으로 터미널에 위 명령어를 입력하면 아래와 같은 결과를 볼 수 있다.</p>
+
+<p><img src="/images/scrapy/result-5.png" alt="result-5" /></p>
+
+<p><br></p>
+
+<h3 id="후기">후기</h3>
+
+<p>이번에 Scrapy 하기 전, BeautifulSoup4를 사용한 적이 있다. 두 개다 많이 사용하지 않았기에 비교는 못 하겠다. 굳이 말한다면 bs4가 배우기 좀 더 쉽고 간단하게 사용하기 좋은 것 같다.</p>
+
+<p>그리고 제목만 뽑아낸 이유는 네이버에서 로봇을 원하지 않기 때문에 최소한만 할 수 있도록 했다.</p>
+
+<p><br></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gs2dang</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-07-27
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/scrapy/">scrapy</a>
+          <a href="/tags/crawling/">crawling</a>
+          <a href="/tags/%EC%A0%95%EB%A6%AC/">정리</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/scrapy-1/">
+            <span class="next-text nav-default">[1/2] Scrapy를 이용해 네이버 뉴스 제목 가져오기</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'gs2dang07';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/gs2dang" class="iconfont icon-github" title="github"></a>
+  <a href="https://gs2dang.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">gs2dang</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-142997929-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

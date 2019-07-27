@@ -6,13 +6,22 @@
     <description>Recent content in 정리 on 기록 저장소</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 25 Jul 2019 01:18:22 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 27 Jul 2019 01:24:07 +0900</lastBuildDate>
     
 	<atom:link href="https://gs2dang.github.io/tags/%EC%A0%95%EB%A6%AC/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>[1] Scrapy를 이용해 네이버 뉴스 가져오기</title>
+      <title>[2/2] Scrapy를 이용해 네이버 뉴스 제목 가져오기</title>
+      <link>https://gs2dang.github.io/post/scrapy-2/</link>
+      <pubDate>Sat, 27 Jul 2019 01:24:07 +0900</pubDate>
+      
+      <guid>https://gs2dang.github.io/post/scrapy-2/</guid>
+      <description>네이버 뉴스에서 헤드라인 뉴스, 정치, 경제 &amp;hellip; IT/과학 항목에 나열되어 있는 뉴스 제목을 크롤링한다. 크롤링을 시작하기 전에 먼저 F12 개발자 도구를 확인한다. 각</description>
+    </item>
+    
+    <item>
+      <title>[1/2] Scrapy를 이용해 네이버 뉴스 제목 가져오기</title>
       <link>https://gs2dang.github.io/post/scrapy-1/</link>
       <pubDate>Thu, 25 Jul 2019 01:18:22 +0900</pubDate>
       
