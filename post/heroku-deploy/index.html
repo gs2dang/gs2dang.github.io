@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2019-10-08T12:34:07&#43;09:00" />
 <meta itemprop="dateModified" content="2019-10-08T12:34:07&#43;09:00" />
-<meta itemprop="wordCount" content="2273">
+<meta itemprop="wordCount" content="2272">
 
 
 
@@ -156,14 +156,14 @@
 <ul>
 <li><a href="#1-헤로쿠-cli-설치">1. 헤로쿠 CLI 설치</a></li>
 <li><a href="#2-헤로쿠-로그인">2. 헤로쿠 로그인</a></li>
-<li><a href="#3-procfile-파일-https-devcenter-heroku-com-articles-django-app-configuration-the-basics">3. <a href="https://devcenter.heroku.com/articles/django-app-configuration#the-basics">Procfile 파일</a></a></li>
+<li><a href="#3-procfile-파일">3. Procfile 파일</a></li>
 <li><a href="#4-runtime-txt-파일">4. runtime.txt 파일</a></li>
 <li><a href="#5-settings-py">5.  settings.py</a>
 <ul>
-<li><a href="#5-1-django-heroku-https-devcenter-heroku-com-articles-django-app-configuration-settings-py-changes">5-1. <a href="https://devcenter.heroku.com/articles/django-app-configuration#settings-py-changes">django-heroku</a></a></li>
-<li><a href="#5-2-staticfiles-https-devcenter-heroku-com-articles-django-assets">5-2. <a href="https://devcenter.heroku.com/articles/django-assets">Staticfiles</a></a></li>
-<li><a href="#5-3-whitenoise-https-devcenter-heroku-com-articles-django-assets-whitenoise">5-3. <a href="https://devcenter.heroku.com/articles/django-assets#whitenoise">Whitenoise</a></a></li>
-<li><a href="#5-4-dj-database-url-https-devcenter-heroku-com-articles-python-concurrency-and-database-connections-persistent-connections">5-4. <a href="https://devcenter.heroku.com/articles/python-concurrency-and-database-connections#persistent-connections">dj_database_url</a></a></li>
+<li><a href="#5-1-django-heroku">5-1. django-heroku</a></li>
+<li><a href="#5-2-staticfiles">5-2. Staticfiles</a></li>
+<li><a href="#5-3-whitenoise">5-3. Whitenoise</a></li>
+<li><a href="#5-4-dj-database-url">5-4. dj_database_url</a></li>
 </ul></li>
 </ul></li>
 <li><a href="#헤로쿠-배포">헤로쿠 배포</a>
@@ -375,9 +375,9 @@ Logged in as me@example.com</pre></td></tr></table>
 
 <p><br></p>
 
-<h3 id="3-procfile-파일-https-devcenter-heroku-com-articles-django-app-configuration-the-basics">3. <a href="https://devcenter.heroku.com/articles/django-app-configuration#the-basics">Procfile 파일</a></h3>
+<h3 id="3-procfile-파일">3. Procfile 파일</h3>
 
-<p><code>manage.py</code> 있는 위치에 <code>Procfile</code> 파일을 추가한다. <code>&lt;dir&gt;</code>은 wsgi 파일이 있는 폴더를 입력한다. 여기서는 세 번째 레벨이 있는인 설정 루트 <code>djangoheroku</code>를 입력했다. 그리고 Procfile는 Gunicorn이 필요하다. Gunicorn을 설치해 준다.</p>
+<p><code>manage.py</code> 있는 위치에 <code>Procfile</code> 파일을 추가한다. <code>&lt;dir&gt;</code>은 wsgi 파일이 있는 폴더를 입력한다. 여기서는 세 번째 레벨이 있는 설정 루트 <code>djangoheroku</code>를 입력했다. 그리고 Procfile는 Gunicorn이 필요하다. Gunicorn을 설치해 준다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt">1
@@ -434,7 +434,7 @@ gunicorn==19.9.0</pre></td></tr></table>
 
 <h3 id="5-settings-py">5.  settings.py</h3>
 
-<h4 id="5-1-django-heroku-https-devcenter-heroku-com-articles-django-app-configuration-settings-py-changes">5-1. <a href="https://devcenter.heroku.com/articles/django-app-configuration#settings-py-changes">django-heroku</a></h4>
+<h4 id="5-1-django-heroku">5-1. django-heroku</h4>
 
 <p>django-heroku 패키지는 Django 애플리케이션이 헤로쿠에서 작동하도록 해준다. 그리고 Django 2.0과 호환된다. 설치하고 requirements.txt에 추가한다.</p>
 <div class="highlight"><div class="chroma">
@@ -467,7 +467,7 @@ gunicorn==19.9.0</pre></td></tr></table>
 </div>
 <p><br></p>
 
-<h4 id="5-2-staticfiles-https-devcenter-heroku-com-articles-django-assets">5-2. <a href="https://devcenter.heroku.com/articles/django-assets">Staticfiles</a></h4>
+<h4 id="5-2-staticfiles">5-2. Staticfiles</h4>
 
 <p>settings.py 파일을 열어 아래 내용을 추가한다.</p>
 <div class="highlight"><div class="chroma">
@@ -482,7 +482,7 @@ gunicorn==19.9.0</pre></td></tr></table>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># settings.py</span>
 <span class="n">STATIC_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE_DIR</span><span class="p">,</span> <span class="s1">&#39;static&#39;</span><span class="p">)</span>
-<span class="n">STATIC_ROOT</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">PROJECT_ROOT</span><span class="p">,</span> <span class="s1">&#39;staticfiles&#39;</span><span class="p">)</span>
+<span class="n">STATIC_ROOT</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE_DIR</span><span class="p">,</span> <span class="s1">&#39;staticfiles&#39;</span><span class="p">)</span>
 <span class="n">STATICFILES_DIRS</span> <span class="o">=</span> <span class="p">[</span>
     <span class="n">STATIC_DIR</span>
 <span class="p">]</span></code></pre></td></tr></table>
@@ -490,7 +490,7 @@ gunicorn==19.9.0</pre></td></tr></table>
 </div>
 <p><br></p>
 
-<h4 id="5-3-whitenoise-https-devcenter-heroku-com-articles-django-assets-whitenoise">5-3. <a href="https://devcenter.heroku.com/articles/django-assets#whitenoise">Whitenoise</a></h4>
+<h4 id="5-3-whitenoise">5-3. Whitenoise</h4>
 
 <p><code>pip install django-heroku</code> 를 하면 같이 설치가 되나, 혹시 설치가 안 됐다면 설치를 하고 requirements.txt에 넣어주면 된다. 그리고 settings.py에 아래 내용을 추가한다.</p>
 <div class="highlight"><div class="chroma">
@@ -522,7 +522,7 @@ gunicorn==19.9.0</pre></td></tr></table>
 </div>
 <p><br></p>
 
-<h4 id="5-4-dj-database-url-https-devcenter-heroku-com-articles-python-concurrency-and-database-connections-persistent-connections">5-4. <a href="https://devcenter.heroku.com/articles/python-concurrency-and-database-connections#persistent-connections">dj_database_url</a></h4>
+<h4 id="5-4-dj-database-url">5-4. dj_database_url</h4>
 
 <p>dj-database-url 모듈을 사용할 것이니 settings.py에 아래 내용을 추가한다.</p>
 <div class="highlight"><div class="chroma">
@@ -761,7 +761,11 @@ $ git commit -m &#34;Initial commit&#34;</pre></td></tr></table>
           <a href="/tags/%EC%A0%95%EB%A6%AC/">정리</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/heroku-deploy-2/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">헤로쿠(Heroku)로 장고(Django) 프로젝트 배포하기[내용 추가]</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
         <a class="next" href="/post/scrapy-2/">
             <span class="next-text nav-default">[2/2] Scrapy를 이용해 네이버 뉴스 제목 가져오기</span>
             <span class="next-text nav-mobile">Next</span>

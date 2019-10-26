@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>헤로쿠(Heroku)로 장고(Django) 프로젝트 배포하기[내용 추가] - 기록 저장소</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="gs2dang" /><meta name="description" content="이전 글에서는 간단히 Heroku에 Django를 배포하는 거라면 이번에는 settings.py 분리, 비밀 키 분리 등 내용을 좀 더 추가해서 배포를 한다. 디렉터리 구조 1 2 3 4 5" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.53 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://gs2dang.github.io/post/heroku-deploy-2/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="헤로쿠(Heroku)로 장고(Django) 프로젝트 배포하기[내용 추가]" />
+<meta property="og:description" content="이전 글에서는 간단히 Heroku에 Django를 배포하는 거라면 이번에는 settings.py 분리, 비밀 키 분리 등 내용을 좀 더 추가해서 배포를 한다. 디렉터리 구조 1 2 3 4 5" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gs2dang.github.io/post/heroku-deploy-2/" /><meta property="article:published_time" content="2019-10-25T03:01:18&#43;09:00"/>
+<meta property="article:modified_time" content="2019-10-25T03:01:18&#43;09:00"/>
+
+<meta itemprop="name" content="헤로쿠(Heroku)로 장고(Django) 프로젝트 배포하기[내용 추가]">
+<meta itemprop="description" content="이전 글에서는 간단히 Heroku에 Django를 배포하는 거라면 이번에는 settings.py 분리, 비밀 키 분리 등 내용을 좀 더 추가해서 배포를 한다. 디렉터리 구조 1 2 3 4 5">
+
+
+<meta itemprop="datePublished" content="2019-10-25T03:01:18&#43;09:00" />
+<meta itemprop="dateModified" content="2019-10-25T03:01:18&#43;09:00" />
+<meta itemprop="wordCount" content="5026">
+
+
+
+<meta itemprop="keywords" content="헤로쿠,배포연습,정리," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="헤로쿠(Heroku)로 장고(Django) 프로젝트 배포하기[내용 추가]"/>
+<meta name="twitter:description" content="이전 글에서는 간단히 Heroku에 Django를 배포하는 거라면 이번에는 settings.py 분리, 비밀 키 분리 등 내용을 좀 더 추가해서 배포를 한다. 디렉터리 구조 1 2 3 4 5"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">기록 저장소</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">홈</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">아카이브</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">태그</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">카테고리</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">기록 저장소</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">홈</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">아카이브</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">태그</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">카테고리</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">헤로쿠(Heroku)로 장고(Django) 프로젝트 배포하기[내용 추가]</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-10-25 </span>
+        <div class="post-category">
+            <a href="/categories/%ED%97%A4%EB%A1%9C%EC%BF%A0/"> 헤로쿠 </a>
+            <a href="/categories/%EC%A0%95%EB%A6%AC/"> 정리 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#디렉터리-구조">디렉터리 구조</a></li>
+<li><a href="#django-설정">Django 설정</a>
+<ul>
+<li><a href="#1-settings-py-분리">1. settings.py 분리</a>
+<ul>
+<li><a href="#1-1-base-dir-경로">1-1. BASE_DIR 경로</a></li>
+<li><a href="#1-2-설정-분리">1-2. 설정 분리</a></li>
+</ul></li>
+<li><a href="#2-wsgi-분리">2. WSGI 분리</a>
+<ul>
+<li><a href="#2-1-wsgi">2-1. wsgi</a></li>
+<li><a href="#2-2-settings-파일-내-wsgi-설정">2-2. settings 파일 내 WSGI 설정</a></li>
+<li><a href="#2-3-manage-py">2-3. manage.py</a></li>
+</ul></li>
+<li><a href="#3-secret-key-분리">3.  SECRET_KEY 분리</a>
+<ul>
+<li><a href="#3-1-환경-변수">3-1. 환경 변수</a></li>
+<li><a href="#3-2-json-파일">3-2. JSON 파일</a>
+<ul>
+<li><a href="#1-secrets-폴더-만들기">1) secrets 폴더 만들기</a></li>
+<li><a href="#2-json-파일-만들기">2) JSON 파일 만들기</a></li>
+<li><a href="#3-settings-파일에-추가">3) settings 파일에 추가</a></li>
+<li><a href="#4-gitignore-추가하기">4) .gitignore 추가하기</a></li>
+</ul></li>
+<li><a href="#3-3-운영-환경">3-3. 운영 환경</a></li>
+</ul></li>
+<li><a href="#4-requirements-txt">4. requirements.txt</a></li>
+<li><a href="#5-db">5. DB</a>
+<ul>
+<li><a href="#5-1-로컬-환경">5-1. 로컬 환경</a>
+<ul>
+<li><a href="#1-postgresql-install">1) PostgreSQL install</a></li>
+<li><a href="#2-postgresql-들어가기">2) PostgreSQL 들어가기</a></li>
+<li><a href="#3-database-생성">3) DATABASE 생성</a></li>
+<li><a href="#4-user-생성">4) User 생성</a></li>
+<li><a href="#5-인코딩-isolation-timezone-설정">5) 인코딩, isolation, timezone 설정</a></li>
+<li><a href="#6-db-접근-권한">6) DB 접근 권한</a></li>
+<li><a href="#7-psycopg2-설치">7) psycopg2 설치</a></li>
+<li><a href="#8-settings-py">8) settings.py</a></li>
+</ul></li>
+<li><a href="#5-2-운영-환경">5-2. 운영 환경</a>
+<ul>
+<li><a href="#1-app-app-name-추가">1) &ndash;app app-name 추가</a></li>
+<li><a href="#2-git-init">2) git init</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#6-static">6. Static</a></li>
+<li><a href="#7-django-heroku">7. django_heroku</a></li>
+<li><a href="#배포-준비">배포 준비</a>
+<ul>
+<li><a href="#1-procfile">1. Procfile</a></li>
+<li><a href="#2-runtime-txt">2. runtime.txt</a></li>
+<li><a href="#3-heroku-config-set-django-settings-module">3. heroku config:set DJANGO_SETTINGS_MODULE</a></li>
+</ul></li>
+<li><a href="#배포">배포</a></li>
+</ul></li>
+<li><a href="#참고">참고</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<p>이전 글에서는 간단히 Heroku에 Django를 배포하는 거라면 이번에는 settings.py 분리, 비밀 키 분리 등 내용을 좀 더 추가해서 배포를 한다.</p>
+
+<p><br></p>
+
+<h1 id="디렉터리-구조">디렉터리 구조</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">. &lt;&lt; 최상위 레벨: 저장소 루트
+└── src &lt;&lt; 두 번째 레벨: 프로젝트 루트
+    ├── config &lt;&lt; 세 번재 레벨: 설정 루트
+    │   ├── __init__.py
+    │   ├── settings.py
+    │   ├── urls.py
+    │   └── wsgi.py
+    └── manage.py</pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>최상위 레벨은 프로젝트 폴더다.</li>
+<li>두 번째 레벨은 <code>django-admin startproject</code>로 만들어진 폴더다.</li>
+<li>Github 저장소를 이용하게 된다면 최상위 레벨에서 <code>git init</code>을 하고 .gitignore, requirements.txt 파일들을 이곳에 위치했겠지만, Heroku 저장소는 두 번째 레벨을 포함해 그 밑에 있는 파일들을 올린다. 뒤에 나오는 Procfile, runtime.txt, .gitignore, requirements.txt 등 파일들은 이 위치에 있어야 한다.</li>
+</ul>
+
+<p><br></p>
+
+<hr />
+
+<h1 id="django-설정">Django 설정</h1>
+
+<h2 id="1-settings-py-분리">1. settings.py 분리</h2>
+
+<p>settings.py를 패키지로 만들어서 환경에 맞는 설정 파일을 추가한다. 분리하면 <code>__init__</code>에 있는 코드들은 base.py로 옮긴다. 공통되는 설정은 <code>base.py</code>에 놔두고, 그 외는 해당 설정 파일에 작성한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">settings</span><span class="o">/</span>
+    <span class="fm">__init__</span><span class="o">.</span><span class="n">py</span> <span class="c1"># 비어있는 파일</span>
+    <span class="n">base</span><span class="o">.</span><span class="n">py</span> <span class="c1"># 공통되는 설정</span>
+    <span class="n">local</span><span class="o">.</span><span class="n">py</span> <span class="c1"># 개발 환경</span>
+    <span class="n">production</span><span class="o">.</span><span class="n">py</span> <span class="c1"># 운영 환경</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">. &lt;&lt; 최상위 레벨: 저장소 루트
+└── src &lt;&lt; 두 번째 레벨: 프로젝트 루트
+    └── config &lt;&lt; 세 번재 레벨: 설정 루트
+        ├── __init__.py
+        └── settings &lt;&lt; 네 번째 레벨
+    	    ├── __init__.py
+      	    ├── base.py
+      	    ├── local.py
+    	    └── production.py</pre></td></tr></table>
+</div>
+</div>
+<p><br></p>
+
+<h3 id="1-1-base-dir-경로">1-1. BASE_DIR 경로</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma"># 기존
+BASE_DIR = #1 os.path.dirname(#2 os.path.dirname(os.path.abspath(__file__)))</pre></td></tr></table>
+</div>
+</div>
+<p>기존 BASE_DIR 설정대로라면 #2 위치는 settings 디렉터리(네 번째 레벨), #1 위치는 config 디렉터리(세 번째 레벨)가 된다. <code>os.path.dirname</code>을 하나 더 추가해 BASE_DIR 변수가 src 디렉터리(두 번째 레벨)가 되도록 한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma"># 수정
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))</pre></td></tr></table>
+</div>
+</div>
+<p><br></p>
+
+<h3 id="1-2-설정-분리">1-2. 설정 분리</h3>
+
+<p><code>DEBUG</code> 설정은 개발 환경에서는 True로 설정하나, 운영 환경에서는 False로 설정한다. 환경에 따라 DB, ALLOWED_HOSTS 등 설정 값이 다르기에 각 환경에 맞게 해당 파일에 설정을 적어주면 된다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># settings/local.py</span>
+<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">DEBUG</span> <span class="o">=</span> <span class="bp">True</span>
+
+<span class="n">ALLOWED_HOSTS</span> <span class="o">=</span> <span class="p">[]</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># settings/production.py</span>
+<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">DEBUG</span> <span class="o">=</span> <span class="bp">False</span>
+
+<span class="n">ALLOWED_HOSTS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;*.herokuapp.com&#39;</span><span class="p">]</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><br></p>
+
+<hr />
+
+<h2 id="2-wsgi-분리">2. WSGI 분리</h2>
+
+<p>settings.py를 분리한 것처럼 기존 wsgi.py 파일을 <code>local</code> <code>production</code>으로 만든다. <code>__init__</code> 파일에 있는 내용은 local, production으로 옮기고 각 파일에 바뀐 settings 경로를 적어준다.</p>
+
+<p><br></p>
+
+<h3 id="2-1-wsgi">2-1. wsgi</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">. &lt;&lt; 최상위 레벨: 저장소 루트
+└── src &lt;&lt; 두 번째 레벨: 프로젝트 루트
+    └── config &lt;&lt; 세 번재 레벨: 설정 루트
+        ├── __init__.py
+        └── wsgi &lt;&lt; 네 번째 레벨
+    	    ├── __init__.py
+      	    ├── local.py
+    	    └── production.py</pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 기존 WSGI 코드</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">django.core.wsgi</span> <span class="kn">import</span> <span class="n">get_wsgi_application</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;DJANGO_SETTINGS_MODULE&#39;</span><span class="p">,</span> <span class="s1">&#39;config.settings&#39;</span><span class="p">)</span>
+
+<span class="n">application</span> <span class="o">=</span> <span class="n">get_wsgi_application</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># wsgi/local.py</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">django.core.wsgi</span> <span class="kn">import</span> <span class="n">get_wsgi_application</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;DJANGO_SETTINGS_MODULE&#39;</span><span class="p">,</span> <span class="s1">&#39;config.settings.local&#39;</span><span class="p">)</span> <span class="c1"># 수정</span>
+
+<span class="n">application</span> <span class="o">=</span> <span class="n">get_wsgi_application</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># wsgi/production.py</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">django.core.wsgi</span> <span class="kn">import</span> <span class="n">get_wsgi_application</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;DJANGO_SETTINGS_MODULE&#39;</span><span class="p">,</span> <span class="s1">&#39;config.settings.production&#39;</span><span class="p">)</span> <span class="c1"># 수정</span>
+
+<span class="n">application</span> <span class="o">=</span> <span class="n">get_wsgi_application</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><br></p>
+
+<h3 id="2-2-settings-파일-내-wsgi-설정">2-2. settings 파일 내 WSGI 설정</h3>
+
+<p><code>settings/base.py</code> 파일에 있는 <code>WSGI_APPLICATION</code> 설정을 settings 폴더에 있는 local과 production 파일로 옮긴다. 그리고 바뀐 wsgi 경로를 적어준다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># settings/local.py</span>
+
+<span class="n">WSGI_APPLICATION</span> <span class="o">=</span> <span class="s1">&#39;config.wsgi.local.application&#39;</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># settings/production.py</span>
+
+<span class="n">WSGI_APPLICATION</span> <span class="o">=</span> <span class="s1">&#39;config.wsgi.production.application&#39;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><br></p>
+
+<h3 id="2-3-manage-py">2-3. manage.py</h3>
+
+<p>settings/local.py 파일을 이용해 로컬 개발 서버를 구동하려면 아래의 명령어를 입력해야 한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">$ python manage.py runserver --settings=config.settings.local</pre></td></tr></table>
+</div>
+</div>
+<p>다른 방법으로는 아래의 방법이 있다. 이렇게 하면 runserver 할 때 뒤에 따로 적어줄 필요가 없다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">$ export DJANGO_SETTINGS_MODULE=config.settings.local
+$ python manage.py runserver</pre></td></tr></table>
+</div>
+</div>
+<p>manage.py 파일의 설정에 바뀐 settings/local 파일의 경로로 수정할 수도 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;DJANGO_SETTINGS_MODULE&#39;</span><span class="p">,</span> <span class="s1">&#39;config.settings.local&#39;</span><span class="p">)</span> <span class="c1"># 수정</span>
+    <span class="err">생략</span><span class="o">...</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><br></p>
+
+<hr />
+
+<h2 id="3-secret-key-분리">3.  SECRET_KEY 분리</h2>
+
+<p>상대방이 내 비밀 값들을 볼 수 없도록 해야한다. 만약 노출이 된다면 누구든지 내 코드에 접근할 수 있게 된다. 로컬 환경에서는 환경 변수 또는 JSON 방식으로 비밀 키를 참조하고, 운영 환경에서는 Heroku에 설정을 추가한다.</p>
+
+<p><br></p>
+
+<h3 id="3-1-환경-변수">3-1. 환경 변수</h3>
+
+<p><a href="https://ko.wikipedia.org/wiki/환경_변수">위키피디아</a>에서는 환경 변수를 &lsquo;프로세스가 컴퓨터에서 동작하는 방식에 영향을 미치는, 동적인 값들의 모임이다&rsquo;라고 설명한다. 무슨 말인지 잘 모르겠다&hellip;</p>
+
+<p>환경 변수를 설정하려면 bashrc, .bash_profile 또는 .profile의 뒷부분에 추가하면 된다. bash가 아닌 zsh를 사용하기 때문에 .zshrc 파일에 SECRET_KEY를 입력한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-p" data-lang="p"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-p" data-lang="p">$ vim ~/.zshrc
+
+# .zshrc 맨 밑에 export 키=&#34;값&#34; 형태로 추가한다.
+export TUTORIAL_SECRET_KEY=&#34;비밀 키 입력&#34;</code></pre></td></tr></table>
+</div>
+</div>
+<p>터미널에서 파이썬을 열어 아래의 코드를 입력하면 정상적으로 값이 출력되는 것을 확인할 수 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;</span> <span class="kn">import</span> <span class="nn">os</span>
+<span class="o">&gt;&gt;</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&#34;TUTORIAL_SECRET_KEY&#34;</span><span class="p">]</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>그리고 local.py 파일에 아래 내용을 적는다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># settings/base.txt</span>
+
+<span class="n">SECRET_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&#34;TUTORIAL_SECRET_KEY&#34;</span><span class="p">]</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>만약 runserver를 했는데 KeyError가 발생한다면 실행 중인 IDE를 재시작 한다.</p>
+
+<p><br></p>
+
+<h3 id="3-2-json-파일">3-2. JSON 파일</h3>
+
+<p>여기서는 환경 변수 방법 대신에 JSON 방식을 사용한다. 프로젝트 루트에 <code>.secrets</code> 폴더를 만든다.</p>
+
+<h4 id="1-secrets-폴더-만들기">1) secrets 폴더 만들기</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">. &lt;&lt; 최상위 레벨: 저장소 루트
+└── src &lt;&lt; 두 번째 레벨: 프로젝트 루트
+    ├── config 
+    └── .secrets </pre></td></tr></table>
+</div>
+</div>
+<h4 id="2-json-파일-만들기">2) JSON 파일 만들기</h4>
+
+<p>이 폴더 안에 <code>base.json</code> 파일을 만들고 아래의 내용을 추가한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&#34;SECRET_KEY&#34;</span><span class="p">:</span><span class="s2">&#34;비밀 키&#34;</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h4 id="3-settings-파일에-추가">3) settings 파일에 추가</h4>
+
+<p>아래의 내용들을 추가한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># settings/base.py</span>
+
+<span class="n">SECRET_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE_DIR</span><span class="p">,</span> <span class="s1">&#39;.secrets&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># settings/local.py</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">SECRETS</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">SECRET_DIR</span><span class="p">,</span> <span class="s1">&#39;base.json&#39;</span><span class="p">)))</span>
+<span class="n">SECRET_KEY</span> <span class="o">=</span> <span class="n">SECRETS</span><span class="p">[</span><span class="s1">&#39;SECRET_KEY&#39;</span><span class="p">]</span></code></pre></td></tr></table>
+</div>
+</div>
+<ol>
+<li>파일을 먼저 열어야 한다. &ldquo;.secrets&rsquo; 폴더에 있는 base.json 파일을 불러온다.</li>
+<li>파일 객체를 json.load를 이용해 파이썬 객체로 만들어 주는 디코딩을 한다.</li>
+<li>SECRETS 변수는 <code>{&quot;SECRET_KEY&quot;: &quot;비밀 키&quot;}</code> 가 저장되어 있다.</li>
+<li>딕셔너리 값을 가져오는 방식을 이용해 SECRET_KEY 변수에 저장한다.</li>
+</ol>
+
+<h4 id="4-gitignore-추가하기">4) .gitignore 추가하기</h4>
+
+<p>분리한 이유는 상대방이 내 비밀 키를 볼 수 없도록 하기 위해서다. 그래서 이 파일 또한 상대방에게 보여주지 않기 위해 .gitignore에 추가하여 커밋에 제외시킨다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma"># .gitignore
+
+.secrets/</pre></td></tr></table>
+</div>
+</div>
+<p><br></p>
+
+<h3 id="3-3-운영-환경">3-3. 운영 환경</h3>
+
+<p>git push를 할 때 비밀 값들이 포함된 파일들은 제외되기 때문에 Heroku에서 알 수 있도록 다른 설정을 해줘야 한다. 여기서는 <code>heroku config:set</code> 또는 <code>heroku 대시보드</code>를 이용해 설정을 저장한다.</p>
+
+<p>Heroku에 설정을 저장하기 위해 먼저 Heroku에 로그인을 하고 앱을 만들어 준다. <code>&lt;app-name&gt;.herokuapp.com</code> 주소를 사용하기에 app-name은 다른 사람이 사용하지 않는 이름으로 지어야 한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">$ heroku login
+
+$ heroku create &lt;app-name&gt;</pre></td></tr></table>
+</div>
+</div>
+<p>1) Heroku CLI를 이용해 설정 저장</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">$ heroku config:set SECRET_KEY=&#39;비밀 키&#39;</pre></td></tr></table>
+</div>
+</div>
+<p>큰따옴표가 아닌 작은따옴표 안에 내용을 넣어야 한다. 그러면 해당 앱 Settings에서 설정이 저장된다.</p>
+
+<p>2) Heroku 대시보드</p>
+
+<p>헤로쿠 대시보드에서 <code>Settings</code>으로 이동하면 Config Vars 부분이 보인다. Revel Config Vars를 눌러 키와 값을 입력할 수 있다. 두 곳 모두 따옴표 없이 그냥 입력한다.</p>
+
+<p><img src="https://devcenter1.assets.heroku.com/article-images/321-imported-1443570183-321-imported-1443554644-389-original.jpg" alt="" /></p>
+
+<p><br></p>
+
+<hr />
+
+<h2 id="4-requirements-txt">4. requirements.txt</h2>
+
+<p>Django처럼 어느 환경에서나 공통으로 이용하는 것이 있는 반면 django-debug-toolbar와 같은 개발 환경에서만 이용하는 경우가 있다. 이렇게 환경에 따라 설치하는 것이 다르다. 그래서 <code>pip freeze &gt; requirements.txt</code> 명령어를 입력하기 보다는 <code>pip list</code>를 입력해 환경에 맞게 나누고 적는 것이 좋다.</p>
+
+<p>프로젝트 루트에 여러 파일을 만들기보다는 requirements 폴더를 만들고 이 안에 파일을 만드는 것이 보기도 좋고 관리하기도 쉽다. Heroku 저장소에 올린다면 requirements.txt 파일은 프로젝트 루트(manage.py가 있는 위치)에 있어야 한다. 이 파일을  requirements/production.txt로 연결시켜주자.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">requirements</span><span class="o">/</span>
+	<span class="n">base</span><span class="o">.</span><span class="n">txt</span> <span class="c1"># 공통으로 사용 </span>
+	<span class="n">local</span><span class="o">.</span><span class="n">txt</span> <span class="c1"># 개발 환경</span>
+	<span class="n">production</span><span class="o">.</span><span class="n">txt</span> <span class="c1"># 운영 환경</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># requirements.txt</span>
+
+<span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">/</span><span class="n">production</span><span class="o">.</span><span class="n">txt</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># requirements/base.txt</span>
+
+<span class="n">Django</span><span class="o">==</span><span class="mf">2.2</span><span class="o">.</span><span class="mi">6</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># requirements/local.txt</span>
+
+<span class="o">-</span><span class="n">r</span> <span class="n">base</span><span class="o">.</span><span class="n">txt</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># requirements/production.txt</span>
+
+<span class="o">-</span><span class="n">r</span> <span class="n">base</span><span class="o">.</span><span class="n">txt</span>
+
+<span class="n">django</span><span class="o">-</span><span class="n">heroku</span><span class="o">==</span><span class="mf">0.3</span><span class="o">.</span><span class="mi">1</span>
+<span class="n">gunicorn</span><span class="o">==</span><span class="mf">19.9</span><span class="o">.</span><span class="mi">0</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><br></p>
+
+<hr />
+
+<h2 id="5-db">5. DB</h2>
+
+<p>Django 기본 데이터 베이스는 sqlite3를 사용한다. 하지만 Heroku에서는 sqlite3를 사용하지 않고 PostgreSQL을 사용한다. 로컬 환경에서 sqlite3는 사용해도 되긴 하지만 두 환경 모두 같은 데이터베이스 사용하는 것을 권장한다.</p>
+
+<p><br></p>
+
+<h3 id="5-1-로컬-환경">5-1. 로컬 환경</h3>
+
+<h4 id="1-postgresql-install">1) PostgreSQL install</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">$ sudo apt update
+$ sudo apt install postgresql postgresql-contrib</pre></td></tr></table>
+</div>
+</div>
+<h4 id="2-postgresql-들어가기">2) PostgreSQL 들어가기</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">$ sudo -u postgres psql
+$ sudo -u postgres psql 데이터베이스_이름</pre></td></tr></table>
+</div>
+</div>
+<h4 id="3-database-생성">3) DATABASE 생성</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">$ sudo -u postgres createdb 데이터베이스_이름
+또는
+postgres=# CREATE DATABASE db_name;</pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>sudo -u postgres psql 들어가면 postgres=# 가 나타난다.</li>
+<li>db_name은 Django DB settings에서 <code>NAME</code>에 해당된다.</li>
+</ul>
+
+<h4 id="4-user-생성">4) User 생성</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">postgres=# CREATE USER user_name WITH PASSWORD &#39;user_password&#39;;</pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>&lsquo;user_password&rsquo; 적을 때, 작은따옴표(&rsquo; &lsquo;) 안에 적어줘야 한다.</li>
+<li>user_name은 Django DB settings에서 <code>USER</code>에 해당된다.</li>
+<li>user_password는 Django DB settings에서 <code>PASSWORD</code>에 해당된다.</li>
+</ul>
+
+<h4 id="5-인코딩-isolation-timezone-설정">5) 인코딩, isolation, timezone 설정</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">postgres=# ALTER ROLE user_name SET client_encoding TO &#39;utf-8&#39;;
+postgres=# ALTER ROLE user_name SET default_transaction_isolation TO &#39;read committed&#39;;
+postgres=# ALTER ROLE user_name SET timezone TO &#39;UTC&#39;;</pre></td></tr></table>
+</div>
+</div>
+<h4 id="6-db-접근-권한">6) DB 접근 권한</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">postgres=# GRANT ALL PRIVILEGES ON DATABASE db_name TO db_user;</pre></td></tr></table>
+</div>
+</div>
+<p><br></p>
+
+<h4 id="7-psycopg2-설치">7) psycopg2 설치</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">$ pip install psycopg2 psycopg2-binary</pre></td></tr></table>
+</div>
+</div>
+<h4 id="8-settings-py">8) settings.py</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># settings/local.py</span>
+
+<span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ENGINE&#39;</span><span class="p">:</span> <span class="s1">&#39;django.db.backends.postgresql&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="s1">&#39;db_name&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;USER&#39;</span><span class="p">:</span> <span class="s1">&#39;db_user&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PASSWORD&#39;</span><span class="p">:</span> <span class="s1">&#39;db_user_password&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;HOST&#39;</span><span class="p">:</span> <span class="s1">&#39;localhost&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PORT&#39;</span><span class="p">:</span> <span class="s1">&#39;db_port_number&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>ENGINE 이름 <code>django.db.backends.postgresql_psycopg2</code>  넣어도 된다. 1.9부터는 뒷부분에 <code>_psycopg2</code>를 생략하고 적는다.</li>
+</ul>
+
+<p><br></p>
+
+<h3 id="5-2-운영-환경">5-2. 운영 환경</h3>
+
+<p>Heroku 대시보드에서도 만들 수 있지만 여기서는 CLI를 이용해 만든다. 먼저 <code>django-heroku</code> 패키지를 설치한다. DB 관련 패키지와 정적 파일 관련 패키지가 설치된다. 패키지를 설치하면 pip list를 참조하여 <code>requirements/production.txt</code> 에 입력한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">$ pip install django-heroku</pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">$ vim requrements/production.txt
+
+django-heroku==0.3.1</pre></td></tr></table>
+</div>
+</div>
+<p>PostgreSQL를 생성하지 않았다면, 다음 명령어를 입력했을 때 <code>No add-ons for app &lt;app-name&gt;</code> 가 나타난다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">$ heroku addons
+
+No add-ons for app &lt;app-name&gt;</pre></td></tr></table>
+</div>
+</div>
+<p>다음 명령어로 postgresql을 만들어 준다. Heroku Postgres에는 성능에 따라 다양한 요금이 존재한다. <a href="https://elements.heroku.com/addons/heroku-postgresql">이곳</a> 아래쪽에 보면 Plans&amp;Pricing가 있는데 참조하면 된다. 여기서는 공부 및 취미용으로 만드는 것이기에 <code>&lt;PLAN-NAME&gt;</code>에 hobby-dev를 입력합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">$ heroku addons:create heroku-postgresql:&lt;PLAN-NAME&gt;
+
+$ heroku addons:create heroku-postgresql:hobby-dev
+Database has been created and is available
+ ! This database is empty. If upgrading, you can transfer
+ ! data from another database with pg:copy
+Created postgresql-shaped-93679 as DATABASE_URL
+Use heroku addons:docs heroku-postgresql to view documentation</pre></td></tr></table>
+</div>
+</div>
+<p>만약 특정 버전의 Postgres를 사용하고 싶다면 <code>--version</code>을 덧붙이면 된다. 어느 버전을 지원하는지는 <a href="https://devcenter.heroku.com/articles/heroku-postgresql#version-support">이곳</a>을 참조한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">$ heroku addons:create heroku-postgresql:&lt;PLAN_NAME&gt; --version=9.5</pre></td></tr></table>
+</div>
+</div>
+<p><code>git init</code>을 먼저 했다면 Heroku 앱을 만들 때 자동으로 Heroku 저장소로 연결되어 아래와 같은 에러는 보지 않을 것이다. 하지만 그게 아니라면 에러를 보게 될 것이다. 해결법에는 두 가지가 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma"> ›   Error: Missing required flag:
+ ›     -a, --app APP  app to run command against
+ ›   See more help with --help</pre></td></tr></table>
+</div>
+</div>
+<h4 id="1-app-app-name-추가">1) &ndash;app app-name 추가</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">$ heroku addons:create heroku-postgresql:hobby-dev -a &lt;app-name&gt;
+$ heroku addons:create heroku-postgresql:hobby-dev --app &lt;app-name&gt;</pre></td></tr></table>
+</div>
+</div>
+<p>기존 명령어 뒤에 <code>-a[--app] &lt;app-name&gt;</code>를 추가한 명령어를 입력한다.</p>
+
+<h4 id="2-git-init">2) git init</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">$ git init
+$ heroku git:remote -a &lt;app-name&gt;
+$ heroku addons:create heroku-postgresql:hobby-dev</pre></td></tr></table>
+</div>
+</div>
+<p>git init은 두 번째 레벨에서 해준다. 그리고 Heroku 저장소와 연결시켜준다. 그러면 <code>-a &lt;app-name&gt;</code> 없이도 DB 생성이 가능하다.</p>
+
+<p>postgresql을 만들게 되면 Heroku 대시보드 Settings/Config Vars에 <code>DATABASE_URL</code>키와 값이 생성되는 것을 확인할 수 있다. 그리고 <code>heroku addons</code> 명령어를 다시 입력하면 No add-ons 대신 <code>heroku-postgresql</code>가 있다는 것도 볼 수 있다.</p>
+
+<p><img src="/images/heroku-1/dashboard-config-postgresql.png" alt="" /></p>
+
+<p>운영 환경 설정 파일에서는 <code>DATABASES</code> 설정을 {}로만 해준다. 기존 DB 설정 그대로 놔두어도 된다. <code>dj_database_url</code>을 사용해 Heroku의 DB를 사용할 것이기 때문이다. DB를 만들면 내 앱의 Resources 탭에서 확인할 수 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># settings/production.py</span>
+<span class="kn">import</span> <span class="nn">dj_database_url</span>
+
+<span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">DATABASES</span><span class="p">[</span><span class="s1">&#39;default&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dj_database_url</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">conn_max_age</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">ssl_require</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><img src="/images/heroku-1/db-1.png" alt="" /></p>
+
+<p>DB를 클릭해 들어가면 아래 화면의 Overview로 가게 된다. 여기서 Settings/Database Credentials로 들어가면 Heroku CLI가 있는데, 이 명령어를 터미널에 입력하면 DB에 접속할 수 있다.</p>
+
+<p><img src="/images/heroku-1/db-2.png" alt="" /></p>
+
+<p><img src="/images/heroku-1/db-3.png" alt="" /></p>
+
+<p><br></p>
+
+<hr />
+
+<h2 id="6-static">6. Static</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">. &lt;&lt; 최상위 레벨: 저장소 루트
+└── src &lt;&lt; 두 번째 레벨: 프로젝트 루트
+    └── config &lt;&lt; 세 번재 레벨: 설정 루트
+        ├── __init__.py
+        └── static</pre></td></tr></table>
+</div>
+</div>
+<p>config 폴더 내 static 폴더를 만들고 아래의 내용들을 추가한다. static 폴더가 비어있다면 <code>No such file or directory</code> 에러가 발생할 수 있으니, 간단한 md 파일을 만들어 둔다. 또는 git push 하면 자동으로 <code>collectstatic</code> 작업을 해주는 설정을 끄는 <code>heroku config:set DISABLE_COLLECTSTATIC=1</code> 명령어를 입력할 수도 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># settings/base.py</span>
+
+<span class="n">STATIC_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE_DIR</span><span class="p">,</span> <span class="s1">&#39;config&#39;</span><span class="p">,</span> <span class="s1">&#39;static&#39;</span><span class="p">)</span>
+
+<span class="n">MIDDLEWARE</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;whitenoise.middleware.WhiteNoiseMiddleware&#39;</span><span class="p">,</span> <span class="c1"># 추가</span>
+    <span class="err">생략</span><span class="o">...</span>
+<span class="p">]</span>
+<span class="n">STATIC_ROOT</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE_DIR</span><span class="p">,</span> <span class="s1">&#39;staticfiles&#39;</span><span class="p">)</span>
+<span class="n">STATICFILES_DIRS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">STATIC_DIR</span>
+<span class="p">]</span>
+<span class="n">STATICFILES_STORAGE</span> <span class="o">=</span> <span class="s1">&#39;whitenoise.storage.CompressedManifestStaticFilesStorage&#39;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><br></p>
+
+<hr />
+
+<h2 id="7-django-heroku">7. django_heroku</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># settings/production.py</span>
+
+<span class="kn">import</span> <span class="nn">django_heroku</span>
+
+<span class="n">django_heroku</span><span class="o">.</span><span class="n">settings</span><span class="p">(</span><span class="nb">locals</span><span class="p">())</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><br></p>
+
+<hr />
+
+<h2 id="배포-준비">배포 준비</h2>
+
+<p>여기 파일들은 manage.py가 있는 위치인 두 번째 레벨에 만든다.</p>
+
+<p><br></p>
+
+<h3 id="1-procfile">1. Procfile</h3>
+
+<p>manage.py 있는 위치에 Procfile 파일을 추가한다. <dir>은 wsgi 파일이 있는 디렉터리를 입력한다. 그리고 Procfile는 Gunicorn이 필요하다. Gunicorn을 설치하고 requirements/production.txt 에 입력한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">. &lt;&lt; 최상위 레벨: 저장소 루트
+└── src &lt;&lt; 두 번째 레벨: 프로젝트 루트
+    └── config &lt;&lt; 세 번재 레벨: 설정 루트
+        ├── __init__.py
+        └── wsgi &lt;&lt; 네 번째 레벨
+    	    ├── __init__.py
+      	    ├── local.py
+    	    └── production.py</pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">$ vim Procfile
+
+web: gunicorn config.wsgi.production --log-file -</pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">$ pip install gunicorn
+
+$ vim requirements/production.txt
+
+gunicorn==19.9.0</pre></td></tr></table>
+</div>
+</div>
+<p><br></p>
+
+<h3 id="2-runtime-txt">2. runtime.txt</h3>
+
+<p>프로젝트 루트(manage.py가 있는 위치)에 runtime.txt 파일을 추가한다. 프로젝트 파이썬 버전을 입력한다. <code>python -V</code> 입력하면 확인할 수 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">$ vim runtime.txt
+
+python-3.7.2</pre></td></tr></table>
+</div>
+</div>
+<p><br></p>
+
+<h3 id="3-heroku-config-set-django-settings-module">3. heroku config:set DJANGO_SETTINGS_MODULE</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">$ heroku config:set DJANGO_SETTINGS_MODULE=config.settings.production</pre></td></tr></table>
+</div>
+</div>
+<p>명령어를 입력해도 되고 Heroku 대시보드 Settings/Config에서 입력할 수도 있다. DB 운영 환경에서 봤던 에러가 다시 나타나면 위 명령어에서 <code>-a &lt;app-name&gt;</code>을 추가하자.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">›   Error: Missing required flag:
+›     -a, --app APP  app to run command against
+›   See more help with --help</pre></td></tr></table>
+</div>
+</div>
+<p><br></p>
+
+<hr />
+
+<h2 id="배포">배포</h2>
+
+<p><code>db.sqlite3</code>나 비밀 키가 있는 <code>.secrets</code>처럼 불필요하거나 외부에 알려서는 안 되는 파일이나 폴더를 <code>.gitignore</code>에 적어둔다. 그리고 <code>add</code> <code>commit</code> <code>push</code>를 한다. 배포가 됐다면 사이트에 들어가보자. 그러면 읽어올 HTML이 없기에 Not Found가 뜬다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># .gitignore</span>
+
+<span class="o">*.</span><span class="n">pyc</span>
+<span class="n">db</span><span class="o">.</span><span class="n">sqlite3</span>
+<span class="o">.</span><span class="n">secrets</span><span class="o">/</span>
+<span class="n">__pycache__</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">$ git status
+$ git add .
+$ git status
+$ git commit
+$ git push heroku master</pre></td></tr></table>
+</div>
+</div>
+<p><code>git status</code> 입력했는데, 이 같은 말이 나온다면 git init을 하자. 그리고 Heroku 저장소에 연결한다. 그리고 다시 위 명령어들을 입력한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">fatal: not a git repository (or any of the parent directories): .git</pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">$ heroku git:remote -a &lt;app-name&gt;</pre></td></tr></table>
+</div>
+</div>
+<p>잘 됐는지 확인하고 싶으면 <code>DEBUG=True</code>를 해서 로켓을 보거나, migrate를 하고 주소 뒤에 <code>/admin</code>을 붙여서 Django 관리창이 잘 나오는지 보자.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">$ heroku run python manage.py migrate</pre></td></tr></table>
+</div>
+</div>
+<p><br></p>
+
+<h1 id="참고">참고</h1>
+
+<ul>
+<li><a href="https://medium.com/@BennettGarner/deploying-django-to-heroku-procfile-static-root-other-pitfalls-e7ab8b2ba33b">Deploying Django to Heroku: Procfile, STATIC_ROOT, &amp; Other Pitfalls</a></li>
+<li><a href="https://medium.com/@BennettGarner/deploying-django-to-heroku-connecting-heroku-postgres-fcc960d290d1">Deploying Django to Heroku: Connecting Heroku Postgres</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">gs2dang</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-10-25
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%ED%97%A4%EB%A1%9C%EC%BF%A0/">헤로쿠</a>
+          <a href="/tags/%EB%B0%B0%ED%8F%AC%EC%97%B0%EC%8A%B5/">배포연습</a>
+          <a href="/tags/%EC%A0%95%EB%A6%AC/">정리</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/heroku-deploy/">
+            <span class="next-text nav-default">헤로쿠(Heroku)로 장고(Django) 프로젝트 배포하기</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'gs2dang07';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/gs2dang" class="iconfont icon-github" title="github"></a>
+  <a href="https://gs2dang.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">gs2dang</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-142997929-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>
