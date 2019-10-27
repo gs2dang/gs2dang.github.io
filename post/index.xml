@@ -116,7 +116,7 @@
       <pubDate>Tue, 11 Sep 2018 17:28:48 +0900</pubDate>
       
       <guid>https://gs2dang.github.io/post/%EC%84%A4%EC%B9%98-%ED%9B%84-%EC%B4%88%EA%B8%B0%EC%84%A4%EC%A0%95/</guid>
-      <description>우분투(18.04) 설치 후에 나에게 맞는 설정들을 나열했다. 기본 설정 한글 1 2 3 4 [1] sudo apt-get update [2] sudo apt-get upgrade [3] 언어팩 설치 [4] 재부팅 Vim 1 sudo apt-get install vim Git 1 2 3 [1] sudo apt-add-repository ppa:git-core/ppa</description>
+      <description>우분투(18.04) 설치 후에 나에게 맞는 설정들을 나열했다. 기본 설정 한글 1 2 3 4 5 [1] sudo apt-get update [2] sudo apt-get upgrade [3] 언어팩 설치 [4] 재부팅 [5] Korean (Hangul) 선택 Vim 1 sudo apt install vim Git 1</description>
     </item>
     
     <item>
@@ -125,7 +125,7 @@
       <pubDate>Mon, 10 Sep 2018 17:28:48 +0900</pubDate>
       
       <guid>https://gs2dang.github.io/post/msi-%EC%9A%B0%EB%B6%84%ED%88%AC-%EC%84%A4%EC%B9%98/</guid>
-      <description>처음에 MSI GS63 7RD Stealth 노트북에 우분투 듀얼 부팅했을 때 멈춤현상이 너무 심했다. 아래는 여러 삽질 끝에 해결한 과정이다. 왜 저런 방법으로 설정을 해야하는지는 잘 모른다.</description>
+      <description>처음 MSI GS63 7RD Stealth 노트북에 우분투 듀얼 부팅했을 때 멈춤현상이 너무 심했다. 아래는 여러 삽질 끝에 해결한 과정이다. 왜 저런 방법으로 설정을 해야하는지는 잘 모른다. ####</description>
     </item>
     
   </channel>

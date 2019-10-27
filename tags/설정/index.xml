@@ -35,7 +35,7 @@
       <pubDate>Tue, 11 Sep 2018 17:28:48 +0900</pubDate>
       
       <guid>https://gs2dang.github.io/post/%EC%84%A4%EC%B9%98-%ED%9B%84-%EC%B4%88%EA%B8%B0%EC%84%A4%EC%A0%95/</guid>
-      <description>우분투(18.04) 설치 후에 나에게 맞는 설정들을 나열했다. 기본 설정 한글 1 2 3 4 [1] sudo apt-get update [2] sudo apt-get upgrade [3] 언어팩 설치 [4] 재부팅 Vim 1 sudo apt-get install vim Git 1 2 3 [1] sudo apt-add-repository ppa:git-core/ppa</description>
+      <description>우분투(18.04) 설치 후에 나에게 맞는 설정들을 나열했다. 기본 설정 한글 1 2 3 4 5 [1] sudo apt-get update [2] sudo apt-get upgrade [3] 언어팩 설치 [4] 재부팅 [5] Korean (Hangul) 선택 Vim 1 sudo apt install vim Git 1</description>
     </item>
     
   </channel>

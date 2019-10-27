@@ -16,14 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="gs2dang" /><meta name="description" content="우분투(18.04) 설치 후에 나에게 맞는 설정들을 나열했다. 기본 설정 한글 1 2 3 4 [1] sudo apt-get update [2] sudo apt-get upgrade [3] 언어팩 설치 [4] 재부팅 Vim 1 sudo apt-get install vim Git 1 2 3 [1] sudo apt-add-repository ppa:git-core/ppa" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="gs2dang" /><meta name="description" content="우분투(18.04) 설치 후에 나에게 맞는 설정들을 나열했다. 기본 설정 한글 1 2 3 4 5 [1] sudo apt-get update [2] sudo apt-get upgrade [3] 언어팩 설치 [4] 재부팅 [5] Korean (Hangul) 선택 Vim 1 sudo apt install vim Git 1" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.53 with even 4.0.0" />
+<meta name="generator" content="Hugo 0.53 with theme even" />
 
 
 <link rel="canonical" href="https://gs2dang.github.io/post/%EC%84%A4%EC%B9%98-%ED%9B%84-%EC%B4%88%EA%B8%B0%EC%84%A4%EC%A0%95/" />
@@ -39,25 +39,25 @@
 
 
 <meta property="og:title" content="우분투 설치 후 초기 설정" />
-<meta property="og:description" content="우분투(18.04) 설치 후에 나에게 맞는 설정들을 나열했다. 기본 설정 한글 1 2 3 4 [1] sudo apt-get update [2] sudo apt-get upgrade [3] 언어팩 설치 [4] 재부팅 Vim 1 sudo apt-get install vim Git 1 2 3 [1] sudo apt-add-repository ppa:git-core/ppa" />
+<meta property="og:description" content="우분투(18.04) 설치 후에 나에게 맞는 설정들을 나열했다. 기본 설정 한글 1 2 3 4 5 [1] sudo apt-get update [2] sudo apt-get upgrade [3] 언어팩 설치 [4] 재부팅 [5] Korean (Hangul) 선택 Vim 1 sudo apt install vim Git 1" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://gs2dang.github.io/post/%EC%84%A4%EC%B9%98-%ED%9B%84-%EC%B4%88%EA%B8%B0%EC%84%A4%EC%A0%95/" /><meta property="article:published_time" content="2018-09-11T17:28:48&#43;09:00"/>
 <meta property="article:modified_time" content="2018-09-11T17:28:48&#43;09:00"/>
 
 <meta itemprop="name" content="우분투 설치 후 초기 설정">
-<meta itemprop="description" content="우분투(18.04) 설치 후에 나에게 맞는 설정들을 나열했다. 기본 설정 한글 1 2 3 4 [1] sudo apt-get update [2] sudo apt-get upgrade [3] 언어팩 설치 [4] 재부팅 Vim 1 sudo apt-get install vim Git 1 2 3 [1] sudo apt-add-repository ppa:git-core/ppa">
+<meta itemprop="description" content="우분투(18.04) 설치 후에 나에게 맞는 설정들을 나열했다. 기본 설정 한글 1 2 3 4 5 [1] sudo apt-get update [2] sudo apt-get upgrade [3] 언어팩 설치 [4] 재부팅 [5] Korean (Hangul) 선택 Vim 1 sudo apt install vim Git 1">
 
 
 <meta itemprop="datePublished" content="2018-09-11T17:28:48&#43;09:00" />
 <meta itemprop="dateModified" content="2018-09-11T17:28:48&#43;09:00" />
-<meta itemprop="wordCount" content="781">
+<meta itemprop="wordCount" content="998">
 
 
 
 <meta itemprop="keywords" content="설정," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="우분투 설치 후 초기 설정"/>
-<meta name="twitter:description" content="우분투(18.04) 설치 후에 나에게 맞는 설정들을 나열했다. 기본 설정 한글 1 2 3 4 [1] sudo apt-get update [2] sudo apt-get upgrade [3] 언어팩 설치 [4] 재부팅 Vim 1 sudo apt-get install vim Git 1 2 3 [1] sudo apt-add-repository ppa:git-core/ppa"/>
+<meta name="twitter:description" content="우분투(18.04) 설치 후에 나에게 맞는 설정들을 나열했다. 기본 설정 한글 1 2 3 4 5 [1] sudo apt-get update [2] sudo apt-get upgrade [3] 언어팩 설치 [4] 재부팅 [5] Korean (Hangul) 선택 Vim 1 sudo apt install vim Git 1"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -143,15 +143,20 @@
 <li><a href="#한글">한글</a></li>
 <li><a href="#vim">Vim</a></li>
 <li><a href="#git">Git</a></li>
-<li><a href="#zsh-oh-my-zsh-theme-font">ZSH, Oh-My-Zsh, Theme, Font</a></li>
+<li><a href="#zsh">ZSH</a></li>
+<li><a href="#oh-my-zsh">Oh-My-Zsh</a></li>
+<li><a href="#oh-my-zsh-plugin">Oh-My-Zsh Plugin</a></li>
+<li><a href="#pure-style-theme-powerlevel10k-https-gist-github-com-romkatv-7cbab80dcbc639003066bb68b9ae0bbf"><a href="https://gist.github.com/romkatv/7cbab80dcbc639003066bb68b9ae0bbf">Pure Style Theme Powerlevel10k</a></a></li>
+<li><a href="#font">Font</a></li>
 <li><a href="#pyenv">pyenv</a></li>
 </ul></li>
 <li><a href="#기본-설정-이후">기본 설정 이후</a>
 <ul>
-<li><a href="#atom-install">Atom install</a></li>
-<li><a href="#typora-install-마크다운">Typora install(마크다운)</a></li>
-<li><a href="#gimp-install-그림-사진-편집">GIMP install(그림/사진 편집)</a>
+<li><a href="#atom">Atom</a></li>
+<li><a href="#typora-마크다운">Typora(마크다운)</a></li>
+<li><a href="#gimp-그림-사진-편집">GIMP(그림/사진 편집)</a>
 <ul>
+<li><a href="#snap-https-snapcraft-io-gimp"><a href="https://snapcraft.io/gimp">snap</a></a></li>
 <li><a href="#ppa-http-ubuntuhandbook-org-index-php-2018-04-how-to-install-gimp-2-10-in-ubuntu-18-04-17-10-via-ppa"><a href="http://ubuntuhandbook.org/index.php/2018/04/how-to-install-gimp-2-10-in-ubuntu-18-04-17-10-via-ppa/">PPA</a></a></li>
 <li><a href="#flatpak-https-flatpak-org-setup-ubuntu"><a href="https://flatpak.org/setup/Ubuntu/">flatpak</a></a></li>
 </ul></li>
@@ -178,12 +183,14 @@
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
+</span><span class="lnt">5
 </span></pre></td>
 <td class="lntd">
 <pre class="chroma">[1] sudo apt-get update
 [2] sudo apt-get upgrade
 [3] 언어팩 설치
-[4] 재부팅</pre></td></tr></table>
+[4] 재부팅
+[5] Korean (Hangul) 선택</pre></td></tr></table>
 </div>
 </div>
 <p><img src="/images/ubuntu_install_base_settings/setting-korean-1.png" alt="언어팩 설치 1" /></p>
@@ -194,6 +201,8 @@
 
 <p><img src="/images/ubuntu_install_base_settings/setting-korean-4.png" alt="언어팩 설치 4" /></p>
 
+<p><br></p>
+
 <hr />
 
 <h3 id="vim">Vim</h3>
@@ -202,12 +211,14 @@
 <pre class="chroma"><span class="lnt">1
 </span></pre></td>
 <td class="lntd">
-<pre class="chroma">sudo apt-get install vim</pre></td></tr></table>
+<pre class="chroma">sudo apt install vim</pre></td></tr></table>
 </div>
 </div>
 <p><img src="/images/ubuntu_install_base_settings/setting-vim-install-before.png" alt="설치 전" /></p>
 
 <p><img src="/images/ubuntu_install_base_settings/setting-vim-install-after.png" alt="설치 후" /></p>
+
+<p><br></p>
 
 <hr />
 
@@ -219,9 +230,9 @@
 </span><span class="lnt">3
 </span></pre></td>
 <td class="lntd">
-<pre class="chroma">[1] sudo apt-add-repository ppa:git-core/ppa
-[2] sudo apt-get update
-[3] sudo apt-get install git</pre></td></tr></table>
+<pre class="chroma">[1] sudo add-apt-repository ppa:git-core/ppa
+[2] sudo apt update
+[3] sudo apt install git</pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -243,9 +254,11 @@ git config --global core.editor vim
 git config --list</pre></td></tr></table>
 </div>
 </div>
+<p><br></p>
+
 <hr />
 
-<h3 id="zsh-oh-my-zsh-theme-font">ZSH, Oh-My-Zsh, Theme, Font</h3>
+<h3 id="zsh">ZSH</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt">1
@@ -255,13 +268,91 @@ git config --list</pre></td></tr></table>
 </span><span class="lnt">5
 </span></pre></td>
 <td class="lntd">
-<pre class="chroma">[1] sudo apt-get update
-[2] sudo apt-get install zsh
-[3] chsh -s `which zsh`
-[4] sudo apt install -y curl
-[5] sh -c &#34;$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&#34;</pre></td></tr></table>
+<pre class="chroma">[1] sudo apt update
+[2] sudo apt install zsh
+[3] zsh --version
+    설치 됐는지 확인
+[4] chsh -s $(which zsh)</pre></td></tr></table>
+</div>
+</div>
+<p>재시작을 하면 아래 내용이 나온다. 여기서 <code>2번</code>을 누른다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">This is the Z Shell configuration function for new users,
+zsh-newuser-install.
+You are seeing this message because you have no zsh startup files
+(the files .zshenv, .zprofile, .zshrc, .zlogin in the directory
+~).  This function can help you with a few settings that should
+make your use of the shell easier.
+
+You can:
+
+(q)  Quit and do nothing.  The function will be run again next time.
+
+(0)  Exit, creating the file ~/.zshrc containing just a comment.
+     That will prevent this function being run again.
+
+(1)  Continue to the main menu.
+
+(2)  Populate your ~/.zshrc with the configuration recommended
+     by the system administrator and exit (you will need to edit
+     the file by hand, if so desired).</pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">[5] echo $SHELL</pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">[6] $SHELL --version</pre></td></tr></table>
+</div>
+</div>
+<p><code>zsh --version</code>와 같은 버전으로 출력되는지 확인한다.</p>
+
+<p><br></p>
+
+<h3 id="oh-my-zsh">Oh-My-Zsh</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">[1] sudo apt install -y curl
+[2] sh -c &#34;$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&#34;</pre></td></tr></table>
+</div>
+</div>
+<p><br></p>
+
+<h3 id="oh-my-zsh-plugin">Oh-My-Zsh Plugin</h3>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -290,10 +381,13 @@ git config --list</pre></td></tr></table>
 </span><span class="lnt">25
 </span><span class="lnt">26
 </span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
 </span></pre></td>
 <td class="lntd">
 <pre class="chroma"># zsh-syntax-highlighting
 (https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md)
+
 [1] git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
 [2] vim ~/.zshrc
@@ -308,6 +402,7 @@ git config --list</pre></td></tr></table>
 
 # zsh-autosuggestions
 (https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md)
+
 [1] git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 [2] vim ~/.zshrc
@@ -320,53 +415,32 @@ git config --list</pre></td></tr></table>
 
 [4] source ~/.zshrc</pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma"># Theme (pure)
-[1] sudo apt-get install -y npm
-
-[2] sudo npm install --global pure-prompt
-
-[3] vim ~/.zshrc
-    autoload -U promptinit; promptinit 입력
-
-[4] vim ~/.zshrc
-    ZSH_THEME=&#34;robbyrussell&#34; 부분을 오른쪽처럼 바꾸기 ZSH_THEME=&#34;refined&#34;
-
-[5] 재실행</pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+<p><br></p>
+
+<h3 id="pure-style-theme-powerlevel10k-https-gist-github-com-romkatv-7cbab80dcbc639003066bb68b9ae0bbf"><a href="https://gist.github.com/romkatv/7cbab80dcbc639003066bb68b9ae0bbf">Pure Style Theme Powerlevel10k</a></h3>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
 </span></pre></td>
 <td class="lntd">
-<pre class="chroma"># power-line fonts (https://github.com/powerline/fonts)
-[1] git clone https://github.com/powerline/fonts.git --depth=1
-[2] cd fonts
-[3] ./install.sh
-[4] cd ..
-[5] rm -rf fonts</pre></td></tr></table>
+<pre class="chroma">$ git clone https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+$ echo &#39;source ~/powerlevel10k/powerlevel10k.zsh-theme&#39; &gt;&gt;! ~/.zshrc
+$ echo &#39;source ~/powerlevel10k/config/p10k-pure.zsh&#39; &gt;&gt;! ~/.zshrc</pre></td></tr></table>
 </div>
 </div>
+<p>명령어를 하나씩 다 실행하고 터미널 재시작하면 적용된다.</p>
+
+<p><br></p>
+
+<h3 id="font">Font</h3>
+
+<p>테마 제작자는 <code>Meslo Nerd Font</code>를 추천한다. 필요하다면 <a href="https://github.com/romkatv/powerlevel10k#oh-my-zsh">테마 GIt 저장소</a> <strong>Fonts</strong>로 가서 각 파일을 다운받고 실행하여 설치한다. 그리고 터미널 환경 설정에서 글꼴을 바꿔준다.</p>
+
+<p><br></p>
+
 <hr />
 
 <h3 id="pyenv">pyenv</h3>
@@ -408,11 +482,6 @@ git config --list</pre></td></tr></table>
 </span><span class="lnt">34
 </span><span class="lnt">35
 </span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
 </span></pre></td>
 <td class="lntd">
 <pre class="chroma">[1] curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
@@ -432,28 +501,23 @@ sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
 libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
 xz-utils tk-dev libffi-dev liblzma-dev python-openssl
 
-# 너무 최신 버전은 사용하지 말자
 [6] pyenv install --list 를 입력하여 원하는 버전을 설치하자
 
 [7] pyenv install 3.7.2
 
 [8] pyenv versions 
-    위 내용을 입력했을 때 아래와 같이 나온다면 [10] 내용을 입력하자
     * system (set by /home/gs/.pyenv/version)
     3.7.2
 
-[9] python --version
-     2.x.x
+[9] pyenv global 3.7.2
 
-[10] pyenv global 3.7.2
+[10] 터미널 재시작
 
-[11] 재시작
-
-[12] pyenv versions
+[11] pyenv versions
      system
      * 3.7.2 (set by /home/gs/.pyenv/version)
 
-[13] pyenv --version
+[12] python --version
      파이썬도 같이 버전업이 된 것을 확인할 수 있다
      Python 3.7.2</pre></td></tr></table>
 </div>
@@ -462,7 +526,7 @@ xz-utils tk-dev libffi-dev liblzma-dev python-openssl
 
 <h2 id="기본-설정-이후">기본 설정 이후</h2>
 
-<h3 id="atom-install">Atom install</h3>
+<h3 id="atom">Atom</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt">1
@@ -488,12 +552,12 @@ sass-autocompile</pre></td></tr></table>
 </span></pre></td>
 <td class="lntd">
 <pre class="chroma"># sass-autocompile 패키지 설치
-sudo apt-get install -y nodejs
-sudo apt-get install -y npm
-node -v
+$ sudo apt-get install -y nodejs
+$ sudo apt-get install -y npm
+$ node -v
 
 # 버전 확인 시 v.8.?.? 같이 정상 출력인지 확인
-sudo npm install node-sass -g</pre></td></tr></table>
+$ sudo npm install node-sass -g</pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -528,9 +592,11 @@ Filename pattern for &#39;expanded&#39; compile files 아래 적기
   &#39;ctrl-shift-right&#39;: &#39;emmet:next-edit-point&#39;</pre></td></tr></table>
 </div>
 </div>
+<p><br></p>
+
 <hr>
 
-<h3 id="typora-install-마크다운">Typora install(마크다운)</h3>
+<h3 id="typora-마크다운">Typora(마크다운)</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt">1
@@ -539,16 +605,27 @@ Filename pattern for &#39;expanded&#39; compile files 아래 적기
 </span><span class="lnt">4
 </span></pre></td>
 <td class="lntd">
-<pre class="chroma">[1] sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAE
+<pre class="chroma">[1] wget -qO - https://typora.io/linux/public-key.asc | sudo apt-key add -
 [2] sudo add-apt-repository &#39;deb https://typora.io/linux ./&#39;
 [3] sudo apt update
 [4] sudo apt install typora</pre></td></tr></table>
 </div>
 </div>
-<hr>
+<p><br></p>
 
-<h3 id="gimp-install-그림-사진-편집">GIMP install(그림/사진 편집)</h3>
+<hr />
 
+<h3 id="gimp-그림-사진-편집">GIMP(그림/사진 편집)</h3>
+
+<h4 id="snap-https-snapcraft-io-gimp"><a href="https://snapcraft.io/gimp">snap</a></h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">$ sudo snap install gimp</pre></td></tr></table>
+</div>
+</div>
 <h4 id="ppa-http-ubuntuhandbook-org-index-php-2018-04-how-to-install-gimp-2-10-in-ubuntu-18-04-17-10-via-ppa"><a href="http://ubuntuhandbook.org/index.php/2018/04/how-to-install-gimp-2-10-in-ubuntu-18-04-17-10-via-ppa/">PPA</a></h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -557,9 +634,9 @@ Filename pattern for &#39;expanded&#39; compile files 아래 적기
 </span><span class="lnt">3
 </span></pre></td>
 <td class="lntd">
-<pre class="chroma">[1] sudo add-apt-repository ppa:otto-kesselgulasch/gimp
-[2] sudo apt-get update
-[3] sudo apt-get install gimp</pre></td></tr></table>
+<pre class="chroma">$ sudo add-apt-repository ppa:otto-kesselgulasch/gimp
+$ sudo apt-get update
+$ sudo apt-get install gimp</pre></td></tr></table>
 </div>
 </div>
 <h4 id="flatpak-https-flatpak-org-setup-ubuntu"><a href="https://flatpak.org/setup/Ubuntu/">flatpak</a></h4>
@@ -579,6 +656,8 @@ $ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.fl
 $ flatpak install flathub org.gimp.GIMP 또는 GIMP downloads에서 설치</pre></td></tr></table>
 </div>
 </div>
+<p><br></p>
+
 <hr>
 
 <h3 id="tree">tree</h3>
@@ -587,7 +666,7 @@ $ flatpak install flathub org.gimp.GIMP 또는 GIMP downloads에서 설치</pre>
 <pre class="chroma"><span class="lnt">1
 </span></pre></td>
 <td class="lntd">
-<pre class="chroma">sudo apt-get install tree</pre></td></tr></table>
+<pre class="chroma">$ sudo apt-get install tree</pre></td></tr></table>
 </div>
 </div>
 <p><img src="/images/ubuntu_install_base_settings/setting-tree.png" alt="" /></p>
@@ -642,7 +721,7 @@ $ flatpak install flathub org.gimp.GIMP 또는 GIMP downloads에서 설치</pre>
     })();
     </script>
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  
+
   
 
   
