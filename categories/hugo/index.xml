@@ -6,10 +6,19 @@
     <description>Recent content in hugo on 기록 저장소</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 17 May 2019 17:28:48 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 28 Oct 2019 11:40:23 +0900</lastBuildDate>
     
 	<atom:link href="https://gs2dang.github.io/categories/hugo/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>포맷하고 Hugo 재설치</title>
+      <link>https://gs2dang.github.io/post/%ED%9C%B4%EA%B3%A0-%EC%9E%AC%EC%84%A4%EC%B9%98/</link>
+      <pubDate>Mon, 28 Oct 2019 11:40:23 +0900</pubDate>
+      
+      <guid>https://gs2dang.github.io/post/%ED%9C%B4%EA%B3%A0-%EC%9E%AC%EC%84%A4%EC%B9%98/</guid>
+      <description>Hugo 블로그 만들기를 해봤다면, 이번에는 Ubuntu 재설치하고 Github에 올린 Hugo 블로그를 계속 사용하는 방법에 대해 글을 쓴다. Hugo는 Github 저장소를 두 개 사용한다.</description>
+    </item>
     
     <item>
       <title>Hugo 블로그 만들기</title>
